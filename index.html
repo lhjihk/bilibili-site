@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>踏破腐朽 | 影像·音乐·旅行</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 鼠标跟随光效 -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+    
+    <!-- 粒子画布 -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand">
+            <span class="brand-cn">踏破腐朽</span>
+        </div>
+        <div class="nav-links">
+            <a href="#hero" class="nav-link active" data-section="hero">首页</a>
+            <a href="#videos" class="nav-link" data-section="videos">影像</a>
+            <a href="#music" class="nav-link" data-section="music">音乐</a>
+            <a href="#travel" class="nav-link" data-section="travel">旅行志</a>
+            <a href="#about" class="nav-link" data-section="about">关于</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+            <span class="toggle-icon">🌙</span>
+        </button>
+    </nav>
+
+    <!-- 首屏 Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">踏破腐朽</h1>
+            <p class="hero-subtitle typewriter" id="typewriter"></p>
+            <p class="hero-desc">吉他手 · 创作者 · 旅行者</p>
+        </div>
+        <div class="scroll-hint">
+            <span>↓</span>
+        </div>
+    </section>
+
+    <!-- 影像区 -->
+    <section class="section" id="videos">
+        <div class="section-header">
+            <h2 class="section-title">影 像</h2>
+            <p class="section-subtitle">每一帧都是时光的注脚</p>
+        </div>
+        <div class="video-filters">
+            <button class="filter-btn active" data-filter="all">全部</button>
+            <button class="filter-btn" data-filter="original">原创音乐</button>
+            <button class="filter-btn" data-filter="cover">翻弹</button>
+            <button class="filter-btn" data-filter="gear">器材</button>
+            <button class="filter-btn" data-filter="travel">旅行</button>
+        </div>
+        <div class="video-grid" id="videoGrid">
+            <!-- Videos injected by JS -->
+        </div>
+    </section>
+
+    <!-- 音乐区 -->
+    <section class="section" id="music">
+        <div class="section-header">
+            <h2 class="section-title">音 乐</h2>
+            <p class="section-subtitle">弦上流年，曲中山河</p>
+        </div>
+        <div class="music-showcase">
+            <div class="music-card" data-bvid="BV1tkvSB6E6U">
+                <div class="music-cover">
+                    <img src="https://i2.hdslb.com/bfs/archive/d29b90cc25e5e887545fdbb539a8de4bb72f6a0a.jpg" alt="故曲如风">
+                    <div class="play-overlay">▶</div>
+                </div>
+                <div class="music-info">
+                    <h3>故曲如风 · 编曲版二</h3>
+                    <p>2025 · 原创</p>
+                </div>
+            </div>
+            <div class="music-card" data-bvid="BV1ypetehEe4">
+                <div class="music-cover">
+                    <img src="https://i1.hdslb.com/bfs/archive/6e016569e588b543edeea5959b2c1caeb41eedea.jpg" alt="九州同">
+                    <div class="play-overlay">▶</div>
+                </div>
+                <div class="music-info">
+                    <h3>九州同</h3>
+                    <p>2024 · 原创</p>
+                </div>
+            </div>
+            <div class="music-card" data-bvid="BV1cFeseSERJ">
+                <div class="music-cover">
+                    <img src="https://i0.hdslb.com/bfs/archive/ae7d6b9f2d710758f213a5e22c13f209e765cd4d.jpg" alt="故曲如风">
+                    <div class="play-overlay">▶</div>
+                </div>
+                <div class="music-info">
+                    <h3>故曲如风 · 初版</h3>
+                    <p>2024 · 原创</p>
+                </div>
+            </div>
+            <div class="music-card" data-bvid="BV1pA411X7wr">
+                <div class="music-cover">
+                    <img src="https://i0.hdslb.com/bfs/archive/ba2f2d54fe7f8fe609c6562d8ed0c0c831f4726a.jpg" alt="相忘于天涯">
+                    <div class="play-overlay">▶</div>
+                </div>
+                <div class="music-info">
+                    <h3>相忘于天涯</h3>
+                    <p>2022 · 原创</p>
+                </div>
+            </div>
+            <div class="music-card" data-bvid="BV1EP4y1J7zb">
+                <div class="music-cover">
+                    <img src="https://i1.hdslb.com/bfs/archive/38cad7b794fc53498d71a3d9cd78dde2c15b0ade.jpg" alt="孤灯照剑">
+                    <div class="play-overlay">▶</div>
+                </div>
+                <div class="music-info">
+                    <h3>孤灯照剑</h3>
+                    <p>2021 · 原创</p>
+                </div>
+            </div>
+            <div class="music-card" data-bvid="BV1Ps411w7LY">
+                <div class="music-cover">
+                    <img src="https://i2.hdslb.com/bfs/archive/514b7e0a5ed1b46516393e6b559058f00bb43604.jpg" alt="过去心">
+                    <div class="play-overlay">▶</div>
+                </div>
+                <div class="music-info">
+                    <h3>过去心</h3>
+                    <p>2018 · 原创</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 旅行志 -->
+    <section class="section" id="travel">
+        <div class="section-header">
+            <h2 class="section-title">旅 行 志</h2>
+            <p class="section-subtitle">车轮碾过的每一寸土地，都是诗</p>
+        </div>
+        <div class="travel-timeline">
+            <div class="travel-item" data-bvid="BV1Yg411d7n3">
+                <div class="travel-cover">
+                    <img src="https://i1.hdslb.com/bfs/archive/9e540be0172383f5e07db60b79c5dea4dac84ec8.jpg" alt="北京-西藏 第二集">
+                </div>
+                <div class="travel-info">
+                    <span class="travel-date">2022</span>
+                    <h3>北京至西藏 · 雨拜丞相</h3>
+                    <p>难忘的冬季，难忘的旅行</p>
+                </div>
+            </div>
+            <div class="travel-item" data-bvid="BV1KZ4y1h7Z4">
+                <div class="travel-cover">
+                    <img src="https://i0.hdslb.com/bfs/archive/cbf305cf28c509709feb397db5d0d5e5d087cc2a.jpg" alt="北京-西藏 第一集">
+                </div>
+                <div class="travel-info">
+                    <span class="travel-date">2022</span>
+                    <h3>北京至西藏 · 风陵渡口</h3>
+                    <p>观山陕雄景，过风陵渡心</p>
+                </div>
+            </div>
+            <div class="travel-item" data-bvid="BV1b54y1C722">
+                <div class="travel-cover">
+                    <img src="https://i2.hdslb.com/bfs/archive/b85b8e8b6798d32602c1545cf414ff6978bd582d.jpg" alt="西藏骑行">
+                </div>
+                <div class="travel-info">
+                    <span class="travel-date">2020</span>
+                    <h3>鑫源400 · 西藏骑行</h3>
+                    <p>GoPro 剪辑</p>
+                </div>
+            </div>
+            <div class="travel-item" data-bvid="BV1Yt411e74f">
+                <div class="travel-cover">
+                    <img src="https://i2.hdslb.com/bfs/archive/6a9aad98c0e19e9cb0d8983c8e23d66d14be6baf.jpg" alt="GoPro骑行">
+                </div>
+                <div class="travel-info">
+                    <span class="travel-date">2018</span>
+                    <h3>GoPro Hero7 · 骑行撸琴</h3>
+                    <p>路上的吉他与风</p>
+                </div>
+            </div>
+            <div class="travel-item" data-bvid="BV1rt411f7fJ">
+                <div class="travel-cover">
+                    <img src="https://i0.hdslb.com/bfs/archive/accb17624236e3d75ef9f00b1f2d1b6cb4341436.jpg" alt="北京旅行">
+                </div>
+                <div class="travel-info">
+                    <span class="travel-date">2018</span>
+                    <h3>山西·北京·终南山</h3>
+                    <p>故宫、古北水镇、西安</p>
+                </div>
+            </div>
+            <div class="travel-item" data-bvid="BV1tp411R7bo">
+                <div class="travel-cover">
+                    <img src="https://i1.hdslb.com/bfs/archive/693fb7b64eeac6bb92b8777195ca9b85485bf1b6.jpg" alt="哈雷X48">
+                </div>
+                <div class="travel-info">
+                    <span class="travel-date">2018</span>
+                    <h3>哈雷 Forty-Eight · 归途</h3>
+                    <p>HARLEY-DAVIDSON X48 回家骑行</p>
+                </div>
+            </div>
+            <div class="travel-item" data-bvid="BV1wx411g7yu">
+                <div class="travel-cover">
+                    <img src="https://i1.hdslb.com/bfs/archive/b36634766769e98f1c852f2cd8e297d95ca4c11a.jpg" alt="东南亚骑行二">
+                </div>
+                <div class="travel-info">
+                    <span class="travel-date">2017</span>
+                    <h3>东南亚骑行 · 曼谷华欣</h3>
+                    <p>鑫源400 摩托旅行（二）</p>
+                </div>
+            </div>
+            <div class="travel-item" data-bvid="BV1wx411g72y">
+                <div class="travel-cover">
+                    <img src="https://i1.hdslb.com/bfs/archive/342ecc6914129972b20f4bdaf56003f46a0542b0.jpg" alt="东南亚骑行一">
+                </div>
+                <div class="travel-info">
+                    <span class="travel-date">2017</span>
+                    <h3>东南亚骑行 · 启程</h3>
+                    <p>鑫源400 摩托旅行（一）</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于 -->
+    <section class="section" id="about">
+        <div class="section-header">
+            <h2 class="section-title">关 于</h2>
+            <p class="section-subtitle">一个弹琴的人，一个在路上的人</p>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <p>85后吉他手，发点生活音乐类视频，随缘更新。</p>
+                <p>骑摩托穿越东南亚，骑哈雷回家，骑鑫源进藏。弹金属、写原创、录Demo。</p>
+                <p>用音乐记录时间，用车轮丈量世界。</p>
+                <div class="about-links">
+                    <a href="https://space.bilibili.com/107127158" target="_blank" class="about-link">
+                        <span class="link-icon">📺</span> Bilibili
+                    </a>
+                </div>
+            </div>
+            <div class="about-avatar">
+                <img src="https://i2.hdslb.com/bfs/face/055258520bb074cb7f476712aace1d37c8cb1f8d.jpg" alt="踏破腐朽" class="avatar-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="footer">
+        <p>© 2025 踏破腐朽 · 影像与音乐</p>
+    </footer>
+
+    <!-- 底部音乐播放器 -->
+    <div class="mini-player" id="miniPlayer">
+        <div class="player-info">
+            <span class="player-title" id="playerTitle">点击任意音乐卡片播放</span>
+        </div>
+        <div class="player-controls">
+            <button class="player-btn" id="prevBtn">⏮</button>
+            <button class="player-btn" id="playBtn">▶</button>
+            <button class="player-btn" id="nextBtn">⏭</button>
+        </div>
+        <div class="player-progress">
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
