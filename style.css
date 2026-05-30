@@ -170,27 +170,47 @@ body:hover .cursor-glow {
 .hero-bg {
     position: absolute;
     inset: 0;
+}
+
+.hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.4) saturate(0.8);
+    transform: scale(1.05);
+    animation: heroZoom 20s ease-in-out infinite alternate;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
     background: 
-        radial-gradient(ellipse at 30% 50%, rgba(232, 115, 74, 0.06) 0%, transparent 50%),
-        radial-gradient(ellipse at 70% 30%, rgba(212, 165, 116, 0.04) 0%, transparent 50%);
+        linear-gradient(to bottom, rgba(15, 20, 25, 0.3) 0%, rgba(15, 20, 25, 0.7) 60%, rgba(15, 20, 25, 1) 100%),
+        radial-gradient(ellipse at 50% 40%, rgba(232, 115, 74, 0.08) 0%, transparent 60%);
+}
+
+@keyframes heroZoom {
+    from { transform: scale(1.05); }
+    to { transform: scale(1.12); }
 }
 
 .hero-content {
     text-align: center;
     z-index: 1;
-    animation: fadeInUp 1.2s ease;
+    animation: fadeInUp 1.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hero-title {
     font-family: 'Noto Serif SC', serif;
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(3.5rem, 10vw, 7rem);
     font-weight: 900;
-    letter-spacing: 8px;
-    background: linear-gradient(135deg, var(--text) 0%, var(--gold) 50%, var(--primary) 100%);
+    letter-spacing: 12px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, var(--gold) 40%, var(--primary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 1.5rem;
+    text-shadow: 0 0 80px rgba(232, 115, 74, 0.15);
 }
 
 .hero-subtitle {
@@ -230,30 +250,57 @@ body:hover .cursor-glow {
 
 /* ===== 通用 Section ===== */
 .section {
-    padding: 6rem 3rem;
+    padding: 8rem 3rem;
     max-width: 1400px;
     margin: 0 auto;
+    position: relative;
+}
+
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--border), transparent);
 }
 
 .section-header {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
 }
 
 .section-title {
     font-family: 'Noto Serif SC', serif;
     font-size: 2.5rem;
     font-weight: 700;
-    letter-spacing: 8px;
+    letter-spacing: 10px;
     color: var(--text);
     margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
 }
 
 .section-subtitle {
     font-size: 1rem;
     color: var(--text-muted);
     font-family: 'Noto Serif SC', serif;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
+    margin-top: 1.5rem;
+    opacity: 0.7;
 }
 
 /* ===== 视频筛选 ===== */
@@ -293,14 +340,15 @@ body:hover .cursor-glow {
 
 .video-card {
     position: relative;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
     background: var(--bg-card);
     border: 1px solid var(--border);
-    transition: var(--transition);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
     opacity: 0;
     transform: translateY(30px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 
 .video-card.visible {
@@ -309,9 +357,9 @@ body:hover .cursor-glow {
 }
 
 .video-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
     border-color: var(--primary);
-    box-shadow: 0 20px 60px rgba(232, 115, 74, 0.1);
+    box-shadow: 0 30px 80px rgba(232, 115, 74, 0.12), 0 10px 30px rgba(0,0,0,0.3);
 }
 
 .video-card .card-cover {
