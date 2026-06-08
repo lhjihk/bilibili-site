@@ -185,8 +185,30 @@ body:hover .cursor-glow {
     position: absolute;
     inset: 0;
     background: 
-        linear-gradient(to bottom, rgba(15, 20, 25, 0.3) 0%, rgba(15, 20, 25, 0.7) 60%, rgba(15, 20, 25, 1) 100%),
-        radial-gradient(ellipse at 50% 40%, rgba(232, 115, 74, 0.08) 0%, transparent 60%);
+        linear-gradient(to bottom, rgba(15, 20, 25, 0.45) 0%, rgba(15, 20, 25, 0.78) 55%, rgba(15, 20, 25, 1) 100%),
+        radial-gradient(ellipse at 50% 38%, rgba(232, 115, 74, 0.06) 0%, transparent 62%);
+}
+
+/* 颗粒质感 + 雾化（高级杂志封面感）*/
+.hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.10;
+    mix-blend-mode: overlay;
+}
+
+.hero-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 50% 60%, transparent 30%, rgba(15,20,25,0.55) 100%);
+    backdrop-filter: blur(0.5px);
 }
 
 @keyframes heroZoom {
@@ -196,8 +218,33 @@ body:hover .cursor-glow {
 
 .hero-content {
     text-align: center;
-    z-index: 1;
+    z-index: 3;
     animation: fadeInUp 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 0 1.5rem;
+}
+
+.hero-eyebrow {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.55em;
+    text-indent: 0.55em;
+    color: var(--primary);
+    margin-bottom: 1.8rem;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+.hero-subtitle-en {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(0.85rem, 1.6vw, 1.1rem);
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    text-indent: 0.35em;
+    color: var(--text-muted);
+    margin-top: 1.4rem;
+    text-transform: uppercase;
 }
 
 .hero-title {
@@ -232,20 +279,25 @@ body:hover .cursor-glow {
 }
 
 .hero-desc {
-    margin-top: 2rem;
+    margin-top: 1.6rem;
     font-size: 0.95rem;
     color: var(--text-dim);
     letter-spacing: 4px;
+    font-family: 'Noto Serif SC', serif;
 }
 
 .scroll-hint {
     position: absolute;
-    bottom: 3rem;
+    bottom: 2.5rem;
     left: 50%;
     transform: translateX(-50%);
     animation: float 2s ease-in-out infinite;
     color: var(--text-dim);
-    font-size: 1.5rem;
+    font-size: 0.7rem;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.4em;
+    text-indent: 0.4em;
+    z-index: 3;
 }
 
 /* ===== 通用 Section ===== */
@@ -270,6 +322,19 @@ body:hover .cursor-glow {
 .section-header {
     text-align: center;
     margin-bottom: 5rem;
+}
+
+.section-eyebrow {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.45em;
+    text-indent: 0.45em;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    opacity: 0.85;
 }
 
 .section-title {

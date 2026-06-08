@@ -314,47 +314,6 @@ document.querySelectorAll('.travel-item').forEach(item => {
     });
 });
 
-// ===== 打字机效果 =====
-const typewriterEl = document.getElementById('typewriter');
-const phrases = [
-    '山有木兮木有枝，心悦君兮君不知',
-    '大道如青天，我独不得出',
-    '长风破浪会有时，直挂云帆济沧海',
-    '一弦一柱思华年',
-    '踏遍青山人未老，风景这边独好'
-];
-let phraseIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-let typeSpeed = 120;
-
-function typeWriter() {
-    const current = phrases[phraseIndex];
-    
-    if (isDeleting) {
-        typewriterEl.innerHTML = current.substring(0, charIndex - 1) + '<span class="cursor"></span>';
-        charIndex--;
-        typeSpeed = 60;
-    } else {
-        typewriterEl.innerHTML = current.substring(0, charIndex + 1) + '<span class="cursor"></span>';
-        charIndex++;
-        typeSpeed = 120;
-    }
-    
-    if (!isDeleting && charIndex === current.length) {
-        typeSpeed = 3000;
-        isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        phraseIndex = (phraseIndex + 1) % phrases.length;
-        typeSpeed = 500;
-    }
-    
-    setTimeout(typeWriter, typeSpeed);
-}
-
-typeWriter();
-
 // ===== 鼠标跟随光效 =====
 const cursorGlow = document.getElementById('cursorGlow');
 document.addEventListener('mousemove', (e) => {
