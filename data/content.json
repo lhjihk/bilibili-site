@@ -1,0 +1,662 @@
+{
+  "settings": {
+    "colors": {
+      "purple": "#6a15ff",
+      "paperBg": "#f4f3eb",
+      "darkBg": "#0a0a0c",
+      "sealRed": "#b3402a"
+    },
+    "texts": {
+      "nav1": "宣言",
+      "nav2": "主打",
+      "nav3": "试听",
+      "nav4": "影像",
+      "nav5": "手账",
+      "nav6": "关于",
+      "navCta": "开始听 ↗",
+      "heroT1": "TRAMPLE",
+      "heroT2": "<em>THE</em> DECAY<sup>®</sup>",
+      "heroT3": "踏<i>破</i>腐<i>朽</i>",
+      "heroSub": "把腐朽的日子，弹成失真的原创音乐。<br>吉他手 / 创作者 / 骑士 —— 弹金属，写原创，骑车进藏。",
+      "heroHint": "[ MOVE MOUSE — INK REACTS · 往下滚 ]",
+      "hfTL": "TRAMPLE THE DECAY — EST.2017",
+      "hfTR": "[ 声音实验室 ]",
+      "mq1": "原创金属 <i>ORIGINAL METAL</i> 公路影像 <i>ROAD FILM</i> 旅行文章 <i>TRAVEL NOTES</i> <b class=\"mosaic\">★</b> ",
+      "mq2": "先听再说 <i>LISTEN FIRST</i> 支持正版 <i>REAL TAKES ONLY</i> 拖个 MP3 进来也行 <b class=\"mosaic\">♫</b> ",
+      "mqFoot": "弦上流年 <i>STRINGS OVER YEARS</i> 车轮山河 <i>WHEELS OVER LAND</i> <b class=\"mosaic\">♪</b> ",
+      "sec01Eyebrow": "(01) — MANIFESTO",
+      "sec01Note": "工作方法 / 上世纪的老办法",
+      "mfCopy": "真琴。真手。真录。 插电，失真拧到底，弹到手起茧。 不用假弹，不修音， 错了就重弹，弹到对为止。 每一首都从路上长出来—— 东南亚的风，风陵渡的黄河， 海拔五千米垭口的雪。 修出来的完美是塑料的， 我们不掺塑料。",
+      "sec02Eyebrow": "(02) — FEATURED TRACKS",
+      "sec02Note": "三首主打 / 口味不同，后座力都不小",
+      "sec02Title": "<span class=\"st-line\"><span>选你的</span></span><span class=\"st-line\"><span><em>武器</em> <i class=\"st-en\">WEAPONS</i></span></span>",
+      "sec03Eyebrow": "(03) — TASTING ROOM",
+      "sec03Note": "全部曲目 / 本地音频不上传，只在本页播",
+      "sec03Title": "<span class=\"st-line\"><span>试听<em>台</em> <i class=\"st-en\">LISTEN</i></span></span>",
+      "sec04Eyebrow": "(04) — FILM ARCHIVE",
+      "sec04Note": "影像档案 / 上架的都是真货",
+      "sec04Title": "<span class=\"st-line\"><span>影像<em>档案</em> <i class=\"st-en\">FILM</i></span></span>",
+      "sec05Eyebrow": "(05) — WAYFARER'S JOURNAL",
+      "sec05Note": "旅人手账 / 一整个世界在另一页",
+      "sec05Title": "<span class=\"st-line\"><span>路上写的<em>字</em> <i class=\"st-en\">JOURNAL</i></span></span>",
+      "jpPortal": "进入旅人手账",
+      "sec06Eyebrow": "(06) — THE HUMAN",
+      "sec06Note": "关于这个人 / EST.2017 ON THE ROAD",
+      "sec06Title": "<span class=\"st-line\"><span>关于<em>这个人</em></span></span>",
+      "aboutP1": "85 后吉他手。弹金属、写原创、录 Demo，发点生活音乐类视频，随缘更新。",
+      "aboutP2": "骑摩托穿越东南亚，骑哈雷回家，骑鑫源进藏。用音乐记录时间，用车轮丈量世界。",
+      "spec1": "GUITARS — SCHECTER / CARVIN / S.YAIRI",
+      "spec2": "AMP — PEAVEY 6505",
+      "spec3": "BIKES — HARLEY 48 / 鑫源400",
+      "spec4": "ROUTES — 东南亚 / 川藏 / 风陵渡",
+      "bigLink": "去 BILIBILI 串门",
+      "footGiant": "踏破腐朽",
+      "footNote": "© 2026 踏破腐朽® — 真琴实录，概不修音",
+      "jhEyebrow": "FIELD NOTES · 行路笔记 · 亲历亲录",
+      "jhTitle": "旅人手账",
+      "jhEn": "Wayfarer's Journal",
+      "jhSub": "骑出去想明白的事，回来趁热写下来。<br><em>Every road below was ridden, every word was lived.</em>",
+      "jQuote1": "路是长的，日子是碎的，琴弦一响就都接上了。",
+      "jQuote2": "没人冬天骑车进藏。加油站师傅说我疯了，然后给我倒了杯热水。",
+      "jQuote3": "每一刻悲喜共存的路途，本身就是终点。",
+      "jfLine": "WAYFARER'S JOURNAL — 弦上流年 · 车轮山河"
+    },
+    "lyrics": [
+      "九州同一声吼，山河都回头",
+      "故曲如风，吹旧了少年",
+      "相忘于天涯，各自赶路",
+      "孤灯照剑，夜路无人也要走",
+      "真琴实录，概不修音"
+    ],
+    "journal": {
+      "lockAll": false,
+      "passHash": "46e67c525617663b392a53c0e94ba79e62db62a851fb175ae87756d4e73c9718",
+      "passHint": "默认口令 2017，请在编辑台修改"
+    },
+    "backgrounds": {
+      "hero": "",
+      "heroFilter": "duotone",
+      "journalSky": "",
+      "aboutPhoto": "https://i2.hdslb.com/bfs/face/055258520bb074cb7f476712aace1d37c8cb1f8d.jpg"
+    },
+    "modules": [
+      {
+        "id": "manifesto",
+        "name": "(01) 宣言",
+        "show": true
+      },
+      {
+        "id": "weapon",
+        "name": "(02) 三首主打",
+        "show": true
+      },
+      {
+        "id": "listen",
+        "name": "(03) 试听台",
+        "show": true
+      },
+      {
+        "id": "film",
+        "name": "(04) 影像档案",
+        "show": true
+      },
+      {
+        "id": "writing",
+        "name": "(05) 手账引子",
+        "show": true
+      },
+      {
+        "id": "about",
+        "name": "(06) 关于",
+        "show": true
+      }
+    ]
+  },
+  "platformLinks": [
+    {
+      "name": "BILIBILI",
+      "url": "https://space.bilibili.com/107127158"
+    }
+  ],
+  "tracks": [
+    {
+      "type": "bilibili",
+      "bvid": "BV1tkvSB6E6U",
+      "title": "故曲如风 · 编曲版二",
+      "year": "2025",
+      "note": "原创"
+    },
+    {
+      "type": "bilibili",
+      "bvid": "BV1ypetehEe4",
+      "title": "九州同",
+      "year": "2024",
+      "note": "原创 · 致悟空与时代"
+    },
+    {
+      "type": "bilibili",
+      "bvid": "BV1cFeseSERJ",
+      "title": "故曲如风 · 初版",
+      "year": "2024",
+      "note": "原创 · 送给流逝的时光"
+    },
+    {
+      "type": "bilibili",
+      "bvid": "BV1pA411X7wr",
+      "title": "相忘于天涯",
+      "year": "2022",
+      "note": "原创"
+    },
+    {
+      "type": "bilibili",
+      "bvid": "BV1EP4y1J7zb",
+      "title": "孤灯照剑",
+      "year": "2021",
+      "note": "原创 Demo"
+    },
+    {
+      "type": "bilibili",
+      "bvid": "BV1Ps411w7LY",
+      "title": "过去心",
+      "year": "2018",
+      "note": "原创 · S.yairi yd25"
+    }
+  ],
+  "featured": [
+    {
+      "bvid": "BV1tkvSB6E6U",
+      "title": "故曲如风",
+      "en": "OLD SONG, NEW WIND",
+      "year": "2025",
+      "cover": "https://i2.hdslb.com/bfs/archive/d29b90cc25e5e887545fdbb539a8de4bb72f6a0a.jpg",
+      "flavor": "旋律是旧的，风是新的。前奏那段空间声，是在黄河边对着风录的。适合一个人骑夜路的时候听。",
+      "spec": "编曲版二 · 前奏带真风声"
+    },
+    {
+      "bvid": "BV1ypetehEe4",
+      "title": "九州同",
+      "en": "NINE PROVINCES, ONE ROAR",
+      "year": "2024",
+      "cover": "https://i1.hdslb.com/bfs/archive/6e016569e588b543edeea5959b2c1caeb41eedea.jpg",
+      "flavor": "致悟空，致这个时代的年轻人。失真拧满，鼓点像马蹄。慢板那段的动机来自海拔五千二的垭口。",
+      "spec": "重失真 · 含高原动机"
+    },
+    {
+      "bvid": "BV1pA411X7wr",
+      "title": "相忘于天涯",
+      "en": "FORGOTTEN AT WORLD'S END",
+      "year": "2022",
+      "cover": "https://i0.hdslb.com/bfs/archive/ba2f2d54fe7f8fe609c6562d8ed0c0c831f4726a.jpg",
+      "flavor": "写给所有走散在路上的人。清音开场，后半段才上失真——像旅行，出发时都体面，走远了才见真章。",
+      "spec": "清音转失真 · 慢热型"
+    }
+  ],
+  "videos": [
+    {
+      "bvid": "BV1tkvSB6E6U",
+      "title": "故曲如风 · 编曲版二",
+      "cover": "https://i2.hdslb.com/bfs/archive/d29b90cc25e5e887545fdbb539a8de4bb72f6a0a.jpg",
+      "date": "2025",
+      "category": "original",
+      "tag": "原创"
+    },
+    {
+      "bvid": "BV1PMGqzdEtk",
+      "title": "劳动节独奏 · 蛤蟆拳",
+      "cover": "https://i2.hdslb.com/bfs/archive/7cba62e6d39f6af1c4d671be7a84672a14378e09.jpg",
+      "date": "2025",
+      "category": "original",
+      "tag": "原创"
+    },
+    {
+      "bvid": "BV1ypetehEe4",
+      "title": "九州同 · 致悟空与时代",
+      "cover": "https://i1.hdslb.com/bfs/archive/6e016569e588b543edeea5959b2c1caeb41eedea.jpg",
+      "date": "2024",
+      "category": "original",
+      "tag": "原创"
+    },
+    {
+      "bvid": "BV1GzeWePEzJ",
+      "title": "Trivium Ampknob Bundle 演奏试听",
+      "cover": "https://i2.hdslb.com/bfs/archive/ffce5e4ff291ae16c67bc754b8930be489b44ad9.jpg",
+      "date": "2024",
+      "category": "gear",
+      "tag": "器材"
+    },
+    {
+      "bvid": "BV1cFeseSERJ",
+      "title": "故曲如风 · 送给流逝的时光",
+      "cover": "https://i0.hdslb.com/bfs/archive/ae7d6b9f2d710758f213a5e22c13f209e765cd4d.jpg",
+      "date": "2024",
+      "category": "original",
+      "tag": "原创"
+    },
+    {
+      "bvid": "BV1zc411y7gr",
+      "title": "随顺而已 · UADspark混音",
+      "cover": "https://i1.hdslb.com/bfs/archive/50fdacfd6417b74ba5da8b7016659bac51fbbef9.jpg",
+      "date": "2023",
+      "category": "original",
+      "tag": "原创"
+    },
+    {
+      "bvid": "BV1iD4y177rw",
+      "title": "RHYTHM IR - DOWNTUNED IR Demo",
+      "cover": "https://i2.hdslb.com/bfs/archive/f66e6013b9d9babe8537d97d81e24045c5a2b7ca.jpg",
+      "date": "2022",
+      "category": "gear",
+      "tag": "器材"
+    },
+    {
+      "bvid": "BV1pA411X7wr",
+      "title": "相忘于天涯 · 原创曲",
+      "cover": "https://i0.hdslb.com/bfs/archive/ba2f2d54fe7f8fe609c6562d8ed0c0c831f4726a.jpg",
+      "date": "2022",
+      "category": "original",
+      "tag": "原创"
+    },
+    {
+      "bvid": "BV1Yg411d7n3",
+      "title": "北京至西藏 · 雨拜丞相",
+      "cover": "https://i1.hdslb.com/bfs/archive/9e540be0172383f5e07db60b79c5dea4dac84ec8.jpg",
+      "date": "2022",
+      "category": "travel",
+      "tag": "旅行"
+    },
+    {
+      "bvid": "BV1KZ4y1h7Z4",
+      "title": "北京至西藏 · 风陵渡口",
+      "cover": "https://i0.hdslb.com/bfs/archive/cbf305cf28c509709feb397db5d0d5e5d087cc2a.jpg",
+      "date": "2022",
+      "category": "travel",
+      "tag": "旅行"
+    },
+    {
+      "bvid": "BV1hi4y1m7m6",
+      "title": "PEAVEY 6505 Metal Demo",
+      "cover": "https://i1.hdslb.com/bfs/archive/5a75e01b4cc38a00ec30e97c24b259c56c7225a0.jpg",
+      "date": "2022",
+      "category": "gear",
+      "tag": "器材"
+    },
+    {
+      "bvid": "BV1EP4y1J7zb",
+      "title": "孤灯照剑 · Demo",
+      "cover": "https://i1.hdslb.com/bfs/archive/38cad7b794fc53498d71a3d9cd78dde2c15b0ade.jpg",
+      "date": "2021",
+      "category": "original",
+      "tag": "原创"
+    },
+    {
+      "bvid": "BV1b54y1C722",
+      "title": "鑫源400 · 西藏骑行",
+      "cover": "https://i2.hdslb.com/bfs/archive/b85b8e8b6798d32602c1545cf414ff6978bd582d.jpg",
+      "date": "2020",
+      "category": "travel",
+      "tag": "旅行"
+    },
+    {
+      "bvid": "BV1Fp4y1S7hx",
+      "title": "EZBASS 贝斯音源试听",
+      "cover": "https://i0.hdslb.com/bfs/archive/735e8f1fcc081ed7c332b2503e2de85248fa657f.jpg",
+      "date": "2020",
+      "category": "gear",
+      "tag": "器材"
+    },
+    {
+      "bvid": "BV1Aa4y1v7ar",
+      "title": "Positive Grid BIAS FX2 Demo",
+      "cover": "https://i2.hdslb.com/bfs/archive/dcc77105c3afe3c26c45fb5b562b19d796a32b38.jpg",
+      "date": "2020",
+      "category": "gear",
+      "tag": "器材"
+    },
+    {
+      "bvid": "BV1jt411z7ZH",
+      "title": "Schecter Ravendark V 试听",
+      "cover": "https://i1.hdslb.com/bfs/archive/15ddadd5fad088e9de4bd21a14f4f8beeb16c050.jpg",
+      "date": "2019",
+      "category": "gear",
+      "tag": "器材"
+    },
+    {
+      "bvid": "BV1jt411z7fY",
+      "title": "Jamstik+ 吉他演示",
+      "cover": "https://i0.hdslb.com/bfs/archive/b20119cc3c53d10880f8bf67b07f07913b87d423.jpg",
+      "date": "2019",
+      "category": "gear",
+      "tag": "器材"
+    },
+    {
+      "bvid": "BV1Yt411e74f",
+      "title": "GoPro Hero7 · 骑行撸琴",
+      "cover": "https://i2.hdslb.com/bfs/archive/6a9aad98c0e19e9cb0d8983c8e23d66d14be6baf.jpg",
+      "date": "2018",
+      "category": "travel",
+      "tag": "旅行"
+    },
+    {
+      "bvid": "BV1rt411f7fJ",
+      "title": "山西·北京·终南山 旅行记录",
+      "cover": "https://i0.hdslb.com/bfs/archive/accb17624236e3d75ef9f00b1f2d1b6cb4341436.jpg",
+      "date": "2018",
+      "category": "travel",
+      "tag": "旅行"
+    },
+    {
+      "bvid": "BV1RW411R749",
+      "title": "Schecter Banshee Elite-6 测评",
+      "cover": "https://i0.hdslb.com/bfs/archive/faa3c143248015e1f79d3a4f82a042720dcf888d.jpg",
+      "date": "2018",
+      "category": "gear",
+      "tag": "器材"
+    },
+    {
+      "bvid": "BV1As411w71X",
+      "title": "Suicide Silence -《Disengage》Cover",
+      "cover": "https://i1.hdslb.com/bfs/archive/c35c5ec1ef1406d69d38714a826d0a404d4e1dbb.jpg",
+      "date": "2018",
+      "category": "cover",
+      "tag": "翻弹"
+    },
+    {
+      "bvid": "BV1Ps411w7LY",
+      "title": "过去心 · S.yairi yd25",
+      "cover": "https://i2.hdslb.com/bfs/archive/514b7e0a5ed1b46516393e6b559058f00bb43604.jpg",
+      "date": "2018",
+      "category": "original",
+      "tag": "原创"
+    },
+    {
+      "bvid": "BV1tp411R7bo",
+      "title": "哈雷 Forty-Eight · 归途",
+      "cover": "https://i1.hdslb.com/bfs/archive/693fb7b64eeac6bb92b8777195ca9b85485bf1b6.jpg",
+      "date": "2018",
+      "category": "travel",
+      "tag": "旅行"
+    },
+    {
+      "bvid": "BV1XW41157ME",
+      "title": "Don't Cry - Guns N' Roses Cover",
+      "cover": "https://i1.hdslb.com/bfs/archive/146f1f348c84d3d6e1c7bbd4b8e764ef0ab9237a.jpg",
+      "date": "2018",
+      "category": "cover",
+      "tag": "翻弹"
+    },
+    {
+      "bvid": "BV1BW411577j",
+      "title": "Metal 金属段落编曲",
+      "cover": "https://i2.hdslb.com/bfs/archive/8ba79d525fbddd90aaee120a19c13984174da1a6.jpg",
+      "date": "2018",
+      "category": "original",
+      "tag": "原创"
+    },
+    {
+      "bvid": "BV1Rx411V7nb",
+      "title": "Carvin + EZ Drummer 演奏",
+      "cover": "https://i2.hdslb.com/bfs/archive/6a6e5c65d23bb0f745348e6bb23024b1cde0a29d.jpg",
+      "date": "2017",
+      "category": "gear",
+      "tag": "器材"
+    },
+    {
+      "bvid": "BV1Jx411g7sm",
+      "title": "Dean Custom 450 Metal Demo",
+      "cover": "https://i0.hdslb.com/bfs/archive/6628a0a47d3a5450b596ac1b5ad305655f0f3b4c.jpg",
+      "date": "2017",
+      "category": "gear",
+      "tag": "器材"
+    },
+    {
+      "bvid": "BV1wx411g7SV",
+      "title": "The Wheel And The Black Light Cover",
+      "cover": "https://i2.hdslb.com/bfs/archive/e5612099e8de3d2be61703a84d3b4b56a5f775d4.jpg",
+      "date": "2017",
+      "category": "cover",
+      "tag": "翻弹"
+    },
+    {
+      "bvid": "BV1wx411g7yu",
+      "title": "东南亚骑行 · 曼谷华欣",
+      "cover": "https://i1.hdslb.com/bfs/archive/b36634766769e98f1c852f2cd8e297d95ca4c11a.jpg",
+      "date": "2017",
+      "category": "travel",
+      "tag": "旅行"
+    },
+    {
+      "bvid": "BV1wx411g72y",
+      "title": "东南亚骑行 · 启程",
+      "cover": "https://i1.hdslb.com/bfs/archive/342ecc6914129972b20f4bdaf56003f46a0542b0.jpg",
+      "date": "2017",
+      "category": "travel",
+      "tag": "旅行"
+    },
+    {
+      "bvid": "BV1vx411U7Jk",
+      "title": "Pantera《Revolution Is My Name》",
+      "cover": "https://i0.hdslb.com/bfs/archive/1de0958114e4f30288a4e5bd73e12f1a9c154a8b.jpg",
+      "date": "2017",
+      "category": "cover",
+      "tag": "翻弹"
+    }
+  ],
+  "articles": [
+    {
+      "id": "十三年峨眉",
+      "title": "十三年峨眉",
+      "date": "2026-05-12",
+      "year": "2026",
+      "place": "四川 · 峨眉山",
+      "coord": "29.52°N 103.33°E",
+      "bucket": "修行",
+      "locked": false,
+      "excerpt": "2013年第一次上峨眉，想在这里学道学佛；十三年后骑车再来，山还是那座山，人已走过千山。",
+      "file": "articles/十三年峨眉.md"
+    },
+    {
+      "id": "2026年出发的起点",
+      "title": "2026年出发的起点",
+      "date": "2026-05-12",
+      "year": "2026",
+      "place": "贵州 · 入川道上",
+      "coord": "27.70°N 106.92°E",
+      "bucket": "旅行",
+      "locked": false,
+      "excerpt": "又一次离家。前路终归何方？或许每一刻悲喜共存的路途，本身就是终点。",
+      "file": "articles/2026年出发的起点.md"
+    },
+    {
+      "id": "文革旅行思考",
+      "title": "文革旅行思考",
+      "date": "2026-05-30",
+      "year": "2026",
+      "place": "路上",
+      "coord": "",
+      "bucket": "旅行",
+      "locked": false,
+      "excerpt": "路过被岁月冲刷的庙宇，想起一段被折断的历史——物质的破坏有限，精神的断层难愈。",
+      "file": "articles/文革旅行思考.md"
+    },
+    {
+      "id": "要玩就玩真的-要弹就弹真琴",
+      "title": "要玩就玩真的，要弹就弹真琴",
+      "date": "2024-11-08",
+      "year": "2024",
+      "place": "北京 · 朝阳",
+      "coord": "",
+      "bucket": "乐记",
+      "locked": false,
+      "excerpt": "十五年吉他老店，北京朝阳集装箱工作室。要玩就玩真的，要弹就弹真琴。",
+      "file": "articles/要玩就玩真的-要弹就弹真琴.md"
+    },
+    {
+      "id": "晨暮雨中-滴落着种种的思绪",
+      "title": "晨暮雨中 滴落着种种的思绪",
+      "date": "2023-11-21",
+      "year": "2023",
+      "place": "",
+      "coord": "",
+      "bucket": "诗集",
+      "locked": false,
+      "excerpt": "窗外天空似故乡的风。你问我为何执迷着苦苦寻觅，你问我为何以天地为寄。",
+      "file": "articles/晨暮雨中-滴落着种种的思绪.md"
+    },
+    {
+      "id": "此刻虽悲心似火",
+      "title": "此刻虽悲心似火",
+      "date": "2023-09-04",
+      "year": "2023",
+      "place": "",
+      "coord": "",
+      "bucket": "诗集",
+      "locked": false,
+      "excerpt": "烈马狂奔脚力劲，此情必成追忆时。今夜作别祝安平。",
+      "file": "articles/此刻虽悲心似火.md"
+    },
+    {
+      "id": "fenglingdu",
+      "title": "风陵渡口，黄河替我按了暂停键",
+      "date": "2022 · 冬",
+      "year": "2022",
+      "place": "山西 · 风陵渡",
+      "coord": "34.60°N 110.30°E",
+      "bucket": "旅行",
+      "locked": false,
+      "excerpt": "从北京出发的第三天，我在风陵渡口停了车。黄河在这里拐了个九十度的弯，我也是。",
+      "file": "articles/fenglingdu.md"
+    },
+    {
+      "id": "lhasa-winter",
+      "title": "冬天进藏的人，都在还愿",
+      "date": "2022 · 冬",
+      "year": "2022",
+      "place": "西藏 · 拉萨",
+      "coord": "29.65°N 91.14°E",
+      "bucket": "旅行",
+      "locked": false,
+      "excerpt": "没人冬天骑车进藏。加油站的师傅说我疯了，然后给我倒了杯热水。",
+      "file": "articles/lhasa-winter.md"
+    },
+    {
+      "id": "策马扬鞭-此刻即为好",
+      "title": "策马扬鞭 此刻即为好",
+      "date": "2022-01-13",
+      "year": "2021",
+      "place": "",
+      "coord": "",
+      "bucket": "诗集",
+      "locked": false,
+      "excerpt": "正邪眼前过，此神静观。前路何求，随遇善存。",
+      "file": "articles/策马扬鞭-此刻即为好.md"
+    },
+    {
+      "id": "不为财迷-心见天真",
+      "title": "不为财迷 心见天真",
+      "date": "2021-10-26",
+      "year": "2021",
+      "place": "",
+      "coord": "",
+      "bucket": "修行",
+      "locked": false,
+      "excerpt": "见性见天真，此刻即巅峰。无论何境何物，来即迎之。",
+      "file": "articles/不为财迷-心见天真.md"
+    },
+    {
+      "id": "静正现-勿急勿迷",
+      "title": "静正现 勿急勿迷",
+      "date": "2021-11-05",
+      "year": "2021",
+      "place": "",
+      "coord": "",
+      "bucket": "诗集",
+      "locked": false,
+      "excerpt": "静正现，勿急勿迷。何需证，何需妄。浩气证古今。",
+      "file": "articles/静正现-勿急勿迷.md"
+    },
+    {
+      "id": "信仰之义-疫中所思",
+      "title": "信仰之义 疫中所思",
+      "date": "2020-01-29",
+      "year": "2021",
+      "place": "",
+      "coord": "",
+      "bucket": "修行",
+      "locked": false,
+      "excerpt": "有信仰是好，但终究还得靠我们自己：怀正念，敬众生，尽人事。",
+      "file": "articles/信仰之义-疫中所思.md"
+    },
+    {
+      "id": "搬空昆明-一行无悔",
+      "title": "搬空昆明 一行无悔",
+      "date": "2020-02-25",
+      "year": "2020",
+      "place": "云南 · 昆明",
+      "coord": "25.04°N 102.71°E",
+      "bucket": "乐记",
+      "locked": false,
+      "excerpt": "凌晨两点搬完琴行。世间难得双全法，选择随心，就要交出安逸。感恩那间与世隔绝的小店。",
+      "file": "articles/搬空昆明-一行无悔.md"
+    },
+    {
+      "id": "北漂一年-心路小记",
+      "title": "北漂一年 心路小记",
+      "date": "2020-05-29",
+      "year": "2020",
+      "place": "北京",
+      "coord": "39.90°N 116.40°E",
+      "bucket": "生活",
+      "locked": false,
+      "excerpt": "来京一年有余。所谓北漂只是个过程，人生在世谁无漂泊，只是换一种方式生活而已。",
+      "file": "articles/北漂一年-心路小记.md"
+    },
+    {
+      "id": "老歌用心-不取巧妙",
+      "title": "老歌用心 不取巧妙",
+      "date": "2019-07-25",
+      "year": "2019",
+      "place": "",
+      "coord": "",
+      "bucket": "乐记",
+      "locked": false,
+      "excerpt": "从不追星，不关心虚幻的流量。老歌写得用心，巧妙小聪明抵不住无常。",
+      "file": "articles/老歌用心-不取巧妙.md"
+    },
+    {
+      "id": "bangkok-huahin",
+      "title": "曼谷到华欣，一把吉他绑在后座",
+      "date": "2017 · 夏",
+      "year": "2017",
+      "place": "泰国 · 华欣",
+      "coord": "12.57°N 99.96°E",
+      "bucket": "旅行",
+      "locked": false,
+      "excerpt": "鑫源400在东南亚的国道上不算快，但吉他没散架，人也没有。",
+      "file": "articles/bangkok-huahin.md"
+    },
+    {
+      "id": "春节西山-龙门拥挤",
+      "title": "春节西山 龙门拥挤",
+      "date": "2017-02-02",
+      "year": "2017",
+      "place": "昆明 · 西山龙门",
+      "coord": "24.96°N 102.63°E",
+      "bucket": "生活",
+      "locked": false,
+      "excerpt": "初五爬西山，第一次去龙门。山不高，父母爬起来还是不容易。",
+      "file": "articles/春节西山-龙门拥挤.md"
+    },
+    {
+      "id": "曾识风华正茂时-寻寻觅觅渡浮沉",
+      "title": "曾识风华正茂时 寻寻觅觅渡浮沉",
+      "date": "2017-09-11",
+      "year": "2017",
+      "place": "",
+      "coord": "",
+      "bucket": "诗集",
+      "locked": false,
+      "excerpt": "曾识风华正茂时，寻寻觅觅渡浮沉。共演命运犹悲歌。",
+      "file": "articles/曾识风华正茂时-寻寻觅觅渡浮沉.md"
+    }
+  ]
+}

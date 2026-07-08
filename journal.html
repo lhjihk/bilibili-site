@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>旅人手账 — 踏破腐朽® / WAYFARER'S JOURNAL</title>
+    <meta name="description" content="踏破腐朽的旅行手账：征途、笔记与印章。">
+    <link rel="stylesheet" href="journal.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+SC:wght@400;600;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- 墨水转场幕布（从实验室进来时退场） -->
+    <div class="ink-veil" id="inkVeil" aria-hidden="true"></div>
+
+    <!-- ========== 封印之门（lockAll 时整站上锁） ========== -->
+    <div class="gate" id="gate" aria-hidden="true">
+        <div class="gate-paper">
+            <div class="gate-seal" aria-hidden="true">
+                <svg viewBox="0 0 140 140">
+                    <circle cx="70" cy="70" r="64" fill="none" stroke="currentColor" stroke-width="2.5"/>
+                    <circle cx="70" cy="70" r="55" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="3 5"/>
+                    <text x="70" y="62" text-anchor="middle" font-size="26" font-weight="900" fill="currentColor" font-family="'Noto Serif SC',serif">封</text>
+                    <text x="70" y="94" text-anchor="middle" font-size="26" font-weight="900" fill="currentColor" font-family="'Noto Serif SC',serif">存</text>
+                </svg>
+            </div>
+            <h1 class="gate-title">此账已封存</h1>
+            <p class="gate-sub">THE JOURNAL IS SEALED — 报上口令，方可启封</p>
+            <div class="gate-form">
+                <input type="password" id="gatePass" placeholder="口令 / PASSPHRASE" autocomplete="off">
+                <button id="gateBtn">启封</button>
+            </div>
+            <p class="gate-err" id="gateErr"></p>
+            <a class="gate-back" href="index.html">← 退回实验室</a>
+        </div>
+    </div>
+
+    <!-- ========== 页头 ========== -->
+    <header class="jheader">
+        <a class="jback mono" href="index.html" id="backLink">← 声音实验室</a>
+        <div class="jbrand mono">TRAMPLE THE DECAY — EST.2017</div>
+    </header>
+
+    <main id="jmain">
+
+    <!-- ========== 夜航开篇：星空 · 山影 · 碑铭 ========== -->
+    <section class="jnight" id="jnight">
+        <div class="jnight-sticky">
+            <canvas id="starCanvas" aria-hidden="true"></canvas>
+            <div class="jn-moon" aria-hidden="true"></div>
+            <svg class="jn-mtn jn-mtn-far" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M0,320 L0,210 L180,120 L340,190 L520,80 L700,170 L880,60 L1080,160 L1260,100 L1440,180 L1440,320 Z"/>
+            </svg>
+            <svg class="jn-mtn jn-mtn-near" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M0,320 L0,250 L220,150 L420,230 L640,120 L860,220 L1060,140 L1260,230 L1440,170 L1440,320 Z"/>
+            </svg>
+            <div class="jn-core">
+                <p class="jn-eyebrow mono" data-txt="jhEyebrow">FIELD NOTES · 行路笔记 · 亲历亲录</p>
+                <h1 class="jn-title" data-txt="jhTitle">旅人手账</h1>
+                <p class="jn-en" data-txt="jhEn">Wayfarer's Journal</p>
+                <p class="jn-sub" data-txt-html="jhSub">骑出去想明白的事，回来趁热写下来。<br><em>Every road below was ridden, every word was lived.</em></p>
+            </div>
+            <div class="jn-quote" id="jnQuote1"><span data-txt="jQuote1">路是长的，日子是碎的，琴弦一响就都接上了。</span></div>
+            <div class="jn-quote" id="jnQuote2"><span data-txt="jQuote2">没人冬天骑车进藏。加油站师傅说我疯了，然后给我倒了杯热水。</span></div>
+            <div class="jn-quote" id="jnQuote3"><span data-txt="jQuote3">每一刻悲喜共存的路途，本身就是终点。</span></div>
+            <div class="jn-dawn" id="jnDawn" aria-hidden="true"></div>
+            <div class="jn-scrollhint mono" aria-hidden="true">往下滚 — 天就亮了 ↓</div>
+        </div>
+    </section>
+
+    <!-- ========== 征途图 ========== -->
+    <section class="jmap-wrap">
+        <div class="jmap-head mono">
+            <span>ROUTE CHART — 征途图</span>
+            <span id="mapRange"></span>
+        </div>
+        <div class="jmap" id="jmap">
+            <svg id="mapSvg" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                <defs>
+                    <radialGradient id="mapVin" cx="50%" cy="45%" r="75%">
+                        <stop offset="60%" stop-color="transparent"/>
+                        <stop offset="100%" stop-color="rgba(63,44,24,0.18)"/>
+                    </radialGradient>
+                </defs>
+                <g id="mapGrid"></g>
+                <g id="mapRoute"></g>
+                <g id="mapPins"></g>
+                <rect x="0" y="0" width="1000" height="560" fill="url(#mapVin)" pointer-events="none"/>
+                <!-- 罗盘 -->
+                <g transform="translate(920, 470) scale(1.4)" opacity=".8">
+                    <circle r="26" fill="none" stroke="currentColor" stroke-width="1"/>
+                    <circle r="20" fill="none" stroke="currentColor" stroke-width=".5" stroke-dasharray="2 4"/>
+                    <path d="M0,-22 L4,0 L0,22 L-4,0 Z" fill="var(--seal)"/>
+                    <path d="M-22,0 L0,-4 L22,0 L0,4 Z" fill="currentColor" opacity=".5"/>
+                    <text y="-30" text-anchor="middle" font-size="9" fill="currentColor" font-family="'IBM Plex Mono',monospace">N</text>
+                </g>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ========== 分桶 + 时间轴 ========== -->
+    <section class="jarchive">
+        <div class="jbuckets mono" id="jbuckets"></div>
+        <div class="jtimeline" id="jtimeline"></div>
+    </section>
+
+    <!-- ========== 路上的随身听 ========== -->
+    <section class="jtape-wrap">
+        <div class="jmap-head mono">
+            <span>ROAD WALKMAN — 路上的随身听</span>
+            <span id="tapeStatus">STOPPED</span>
+        </div>
+        <div class="jtape" id="jtape">
+            <div class="jtape-body">
+                <svg class="jtape-svg" viewBox="0 0 340 200" aria-hidden="true">
+                    <rect x="6" y="6" width="328" height="188" rx="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
+                    <rect x="26" y="26" width="288" height="92" rx="10" fill="rgba(43,33,23,.07)" stroke="currentColor" stroke-width="1.4"/>
+                    <g class="tape-spool" id="spoolL" transform-origin="110 72">
+                        <circle cx="110" cy="72" r="26" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="110" cy="72" r="9" fill="currentColor"/>
+                        <path d="M110 46 v10 M110 88 v10 M84 72 h10 M126 72 h10" stroke="currentColor" stroke-width="2.4"/>
+                    </g>
+                    <g class="tape-spool" id="spoolR" transform-origin="230 72">
+                        <circle cx="230" cy="72" r="26" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="230" cy="72" r="9" fill="currentColor"/>
+                        <path d="M230 46 v10 M230 88 v10 M204 72 h10 M246 72 h10" stroke="currentColor" stroke-width="2.4"/>
+                    </g>
+                    <line x1="136" y1="72" x2="204" y2="72" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 4" opacity=".6"/>
+                    <rect x="26" y="132" width="288" height="36" rx="8" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".5"/>
+                    <text x="170" y="155" text-anchor="middle" font-size="13" fill="currentColor" font-family="'IBM Plex Mono',monospace" opacity=".8">SIDE A — TRAMPLE THE DECAY</text>
+                </svg>
+                <div class="jtape-label">
+                    <span class="jt-now mono">NOW PLAYING</span>
+                    <b id="tapeTitle">—</b>
+                    <span class="jt-note" id="tapeNote"></span>
+                </div>
+            </div>
+            <div class="jtape-ctrl">
+                <button class="jt-btn mono" id="tapePrev">◂◂</button>
+                <button class="jt-btn jt-play mono" id="tapePlay">▶ PLAY</button>
+                <button class="jt-btn mono" id="tapeNext">▸▸</button>
+            </div>
+            <div class="jtape-embed" id="tapeEmbed" aria-hidden="true"></div>
+        </div>
+    </section>
+
+    <!-- ========== 卷尾 ========== -->
+    <footer class="jfooter">
+        <div class="jf-seal" aria-hidden="true">踏破腐朽</div>
+        <p class="mono" data-txt="jfLine">WAYFARER'S JOURNAL — 弦上流年 · 车轮山河</p>
+        <a href="index.html" id="footBack">← 回声音实验室</a>
+    </footer>
+
+    </main>
+
+    <!-- ========== 启封小窗（单篇上锁） ========== -->
+    <div class="unlock-modal" id="unlockModal" aria-hidden="true">
+        <div class="um-card">
+            <span class="um-seal" aria-hidden="true">封</span>
+            <h3>这一篇被封存了</h3>
+            <p class="mono">ENTER PASSPHRASE TO UNSEAL</p>
+            <input type="password" id="umPass" placeholder="口令" autocomplete="off">
+            <div class="um-row">
+                <button id="umCancel">算了</button>
+                <button id="umOk" class="primary">启封</button>
+            </div>
+            <p class="um-err" id="umErr"></p>
+        </div>
+    </div>
+
+    <!-- ========== 阅读页（翻开的笔记本） ========== -->
+    <div class="jreader" id="jreader" aria-hidden="true">
+        <div class="jr-bar">
+            <button class="jr-close mono" id="jrClose">✕ 合上</button>
+            <span class="jr-coord mono" id="jrCoord"></span>
+        </div>
+        <article class="jr-page">
+            <div class="jr-stamps mono" id="jrStamps"></div>
+            <h1 class="jr-title" id="jrTitle"></h1>
+            <div class="jr-body" id="jrBody"></div>
+            <div class="jr-endseal" aria-hidden="true"><span>踏破腐朽</span></div>
+        </article>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+    <script src="journal.js"></script>
+</body>
+</html>

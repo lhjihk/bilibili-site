@@ -1,0 +1,488 @@
+/* ============================================================
+   旅人手账 — 羊皮纸 · 航海图 · 印章与征途
+   完全另一个世界：衬线字、纸纹、复古史诗感
+   ============================================================ */
+
+:root {
+    --parch: #ece3cf;
+    --parch-deep: #e2d6ba;
+    --ink: #2b2117;
+    --ink-soft: #5a4a38;
+    --seal: #b3402a;
+    --route: #39506b;
+    --serif: "Noto Serif SC", "EB Garamond", serif;
+    --serif-en: "EB Garamond", "Noto Serif SC", serif;
+    --mono: "IBM Plex Mono", monospace;
+    --ease-out: cubic-bezier(.16, 1, .3, 1);
+    --gutter: clamp(18px, 4vw, 64px);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: var(--parch);
+    color: var(--ink);
+    font-family: var(--serif);
+    line-height: 1.9;
+    overflow-x: clip;
+}
+/* 纸纹 + 陈年渍 */
+body::before {
+    content: ""; position: fixed; inset: 0; z-index: -1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.13 0 0 0 0 0.09 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 240px;
+}
+body::after {
+    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background:
+        radial-gradient(ellipse at 12% 8%, rgba(120, 84, 40, .10), transparent 42%),
+        radial-gradient(ellipse at 90% 90%, rgba(120, 84, 40, .12), transparent 40%),
+        radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(63, 44, 24, .14) 100%);
+}
+::selection { background: var(--seal); color: var(--parch); }
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+.mono { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+
+/* ============ 墨水幕布 ============ */
+.ink-veil {
+    position: fixed; inset: 0; z-index: 900;
+    background: radial-gradient(circle at 50% 50%, #4a0fc4 0%, #6a15ff 45%, #2d0880 100%);
+    display: none; pointer-events: none;
+    will-change: clip-path;
+}
+
+/* ============ 封印之门 ============ */
+.gate {
+    position: fixed; inset: 0; z-index: 700;
+    display: none;
+    align-items: center; justify-content: center;
+    background: var(--parch);
+}
+.gate.on { display: flex; }
+.gate-paper {
+    text-align: center; padding: 40px;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+    max-width: 480px;
+}
+.gate-seal { width: 130px; color: var(--seal); animation: sealpulse 3s ease-in-out infinite; }
+@keyframes sealpulse { 50% { transform: scale(1.04) rotate(2deg); } }
+.gate-title { font-size: clamp(30px, 5vw, 46px); font-weight: 900; letter-spacing: .2em; }
+.gate-sub { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; opacity: .6; }
+.gate-form { display: flex; gap: 10px; margin-top: 18px; }
+.gate-form input, .um-card input {
+    font-family: var(--mono); font-size: 14px;
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--ink-soft); border-radius: 0;
+    padding: 12px 16px; outline: none; letter-spacing: .2em;
+    width: 220px;
+}
+.gate-form input:focus, .um-card input:focus { border-color: var(--seal); }
+.gate-form button, .um-row .primary {
+    font-family: var(--serif); font-weight: 900;
+    background: var(--seal); color: var(--parch);
+    padding: 12px 26px; letter-spacing: .2em;
+    transition: transform .2s;
+}
+.gate-form button:hover { transform: translateY(-2px); }
+.gate-err, .um-err { color: var(--seal); font-size: 13px; min-height: 1.4em; }
+.gate-back { font-family: var(--mono); font-size: 11px; opacity: .55; margin-top: 20px; letter-spacing: .12em; }
+.gate-back:hover { opacity: 1; }
+
+/* ============ 页头 ============ */
+.jheader {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px var(--gutter);
+    background: color-mix(in srgb, var(--parch) 82%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid color-mix(in srgb, var(--ink) 25%, transparent);
+}
+.jback { opacity: .7; transition: opacity .3s, letter-spacing .3s; }
+.jback:hover { opacity: 1; letter-spacing: .18em; color: var(--seal); }
+.jbrand { opacity: .5; }
+
+/* ============ 夜航开篇 ============ */
+.jnight {
+    height: 320vh;
+    position: relative;
+    background: linear-gradient(180deg, #0a1024 0%, #101a36 55%, #2a3050 82%, var(--parch) 100%);
+    margin-top: -57px; /* 盖住页头下的缝 */
+}
+.jnight-sticky {
+    position: sticky; top: 0;
+    height: 100vh; overflow: hidden;
+}
+#starCanvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.jn-moon {
+    position: absolute; right: 12%; top: 14%;
+    width: clamp(60px, 8vw, 110px); aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 36%, #fdf8e8 0%, #e8ddc0 55%, #cabf9d 100%);
+    box-shadow: 0 0 60px 18px rgba(253, 248, 232, .22), 0 0 140px 60px rgba(253, 248, 232, .08);
+}
+.jn-mtn { position: absolute; left: 0; right: 0; bottom: -2px; width: 100%; height: 34vh; }
+.jn-mtn-far path { fill: #131b38; }
+.jn-mtn-near path { fill: #0a0f22; }
+.jn-mtn-near { height: 26vh; }
+.jn-core {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; color: #e9e2cf;
+    padding: 0 var(--gutter);
+    z-index: 2;
+}
+.jn-eyebrow { color: #c8a86a; margin-bottom: 24px; letter-spacing: .3em; }
+.jn-title {
+    font-weight: 900;
+    font-size: clamp(56px, 12vw, 170px);
+    line-height: 1.08; letter-spacing: .1em;
+    background: linear-gradient(180deg, #f6ecd2 20%, #d9c489 55%, #9a7f45 100%);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+    text-shadow: 0 1px 0 rgba(255, 244, 214, .08);
+    filter: drop-shadow(0 10px 34px rgba(0, 0, 0, .5));
+}
+.jn-en {
+    font-family: var(--serif-en); font-style: italic;
+    font-size: clamp(20px, 3.4vw, 44px);
+    color: #b9b19a; margin-top: 8px;
+}
+.jn-sub { margin-top: 26px; font-size: clamp(14px, 1.6vw, 18px); color: #a9a28d; }
+.jn-sub em { font-family: var(--serif-en); }
+.jn-quote {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(760px, 86vw); text-align: center;
+    font-size: clamp(20px, 3.2vw, 38px); font-weight: 600;
+    color: #efe7d0;
+    opacity: 0; z-index: 3;
+    text-shadow: 0 4px 26px rgba(0, 0, 0, .6);
+}
+.jn-quote span::before { content: "「"; color: #c8a86a; margin-right: .15em; }
+.jn-quote span::after { content: "」"; color: #c8a86a; margin-left: .15em; }
+.jn-dawn {
+    position: absolute; inset: 0; z-index: 4;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--parch) 82%, #f4c98a) 0%, var(--parch) 100%);
+    opacity: 0; pointer-events: none;
+}
+.jn-scrollhint {
+    position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+    color: rgba(233, 226, 207, .55); z-index: 5;
+    animation: hintbob 2.2s ease-in-out infinite;
+}
+@keyframes hintbob { 50% { transform: translate(-50%, 8px); } }
+/* 夜航段内页头透明化 */
+.jheader { transition: background .5s, border-color .5s; }
+body.at-night .jheader { background: transparent; border-color: transparent; }
+body.at-night .jheader a, body.at-night .jheader div { color: #e9e2cf; }
+
+/* ============ 征途图 ============ */
+.jmap-wrap { padding: 20px var(--gutter) clamp(60px, 10vh, 120px); }
+.jmap-head {
+    display: flex; justify-content: space-between;
+    border-top: 1px solid var(--ink-soft);
+    padding-top: 10px; margin-bottom: 20px; opacity: .7;
+}
+.jmap {
+    border: 1.5px solid var(--ink-soft);
+    outline: 1px solid color-mix(in srgb, var(--ink-soft) 40%, transparent);
+    outline-offset: 6px;
+    background: var(--parch-deep);
+    position: relative;
+}
+#mapSvg { display: block; width: 100%; height: auto; color: var(--ink-soft); }
+.map-grid-line { stroke: var(--ink-soft); stroke-width: .4; opacity: .28; }
+.map-grid-label { font-family: var(--mono); font-size: 10px; fill: var(--ink-soft); opacity: .55; }
+.map-route {
+    fill: none; stroke: var(--route); stroke-width: 2.2;
+    stroke-dasharray: 7 7; stroke-linecap: round;
+}
+.map-pin { cursor: pointer; }
+.map-pin circle.ring { fill: none; stroke: var(--seal); stroke-width: 1.6; }
+.map-pin circle.core { fill: var(--seal); }
+.map-pin text { font-family: var(--serif); font-weight: 600; font-size: 15px; fill: var(--ink); }
+.map-pin .pin-year { font-family: var(--mono); font-size: 10px; fill: var(--ink-soft); }
+.map-pin:hover circle.ring { stroke-width: 3; }
+.map-pin .pin-lock { font-size: 12px; }
+
+/* ============ 分桶 ============ */
+.jarchive { padding: 0 var(--gutter) clamp(80px, 12vh, 140px); }
+.jbuckets {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    margin-bottom: clamp(36px, 6vh, 64px);
+}
+.jbucket {
+    border: 1px solid var(--ink-soft);
+    padding: 9px 20px;
+    letter-spacing: .14em;
+    transition: all .3s;
+    position: relative;
+}
+.jbucket:hover { border-color: var(--seal); color: var(--seal); }
+.jbucket.active { background: var(--ink); color: var(--parch); border-color: var(--ink); }
+.jbucket .cnt { opacity: .55; margin-left: 6px; }
+
+/* ============ 时间轴 ============ */
+.jtimeline { position: relative; padding-left: clamp(28px, 5vw, 80px); }
+.jtimeline::before {
+    content: ""; position: absolute; left: clamp(6px, 1.6vw, 26px); top: 8px; bottom: 8px;
+    border-left: 2px dashed color-mix(in srgb, var(--route) 55%, transparent);
+}
+.jyear {
+    position: relative;
+    font-family: var(--serif-en); font-style: italic;
+    font-size: clamp(34px, 5vw, 62px); font-weight: 500;
+    color: var(--ink-soft);
+    margin: clamp(30px, 5vh, 56px) 0 18px;
+}
+.jyear::before {
+    content: ""; position: absolute;
+    left: calc(-1 * clamp(28px, 5vw, 80px) + clamp(6px, 1.6vw, 26px) - 5px);
+    top: 50%; width: 12px; height: 12px;
+    background: var(--route); border-radius: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--route) 25%, transparent);
+}
+
+/* 票根卡片 */
+.jcard {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 2fr) auto;
+    gap: clamp(14px, 2.6vw, 44px);
+    align-items: center;
+    background: color-mix(in srgb, var(--parch) 55%, #fff 12%);
+    border: 1px solid color-mix(in srgb, var(--ink) 30%, transparent);
+    padding: clamp(20px, 3.4vh, 34px) clamp(18px, 2.6vw, 36px);
+    margin-bottom: 18px;
+    cursor: pointer;
+    transition: transform .45s var(--ease-out), box-shadow .45s, border-color .3s;
+    /* 票根锯齿边 */
+    -webkit-mask: radial-gradient(circle 7px at 0 50%, transparent 96%, #000) 0 0 / 100% 100%,
+        radial-gradient(circle 7px at 100% 50%, transparent 96%, #000) 0 0 / 100% 100%;
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+}
+.jcard:hover {
+    transform: translateY(-4px) rotate(-.4deg);
+    box-shadow: 0 14px 34px -14px rgba(63, 44, 24, .45);
+    border-color: var(--seal);
+}
+.jcard-title {
+    font-weight: 900;
+    font-size: clamp(19px, 2.6vw, 32px);
+    line-height: 1.4;
+}
+.jcard:hover .jcard-title { color: var(--seal); }
+.jcard-excerpt { color: var(--ink-soft); font-size: clamp(13px, 1.5vw, 16px); }
+.jcard-meta {
+    display: flex; flex-direction: column; gap: 5px;
+    text-align: right; opacity: .65;
+    border-left: 1px dashed var(--ink-soft);
+    padding-left: clamp(14px, 2vw, 30px);
+}
+.jcard-lockmark {
+    position: absolute; right: 14px; top: 12px;
+    font-family: var(--serif); font-weight: 900; font-size: 13px;
+    color: var(--seal);
+    border: 2px solid var(--seal);
+    padding: 1px 8px;
+    transform: rotate(6deg);
+    opacity: .9;
+}
+.jcard.locked .jcard-excerpt { filter: blur(4px); user-select: none; }
+
+/* ============ 启封小窗 ============ */
+.unlock-modal {
+    position: fixed; inset: 0; z-index: 750;
+    display: none;
+    align-items: center; justify-content: center;
+    background: rgba(43, 33, 23, .55);
+    backdrop-filter: blur(4px);
+}
+.unlock-modal.on { display: flex; }
+.um-card {
+    background: var(--parch);
+    border: 1.5px solid var(--ink);
+    padding: 38px 44px;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    text-align: center;
+    max-width: 400px;
+}
+.um-seal {
+    width: 58px; height: 58px;
+    border: 3px solid var(--seal); color: var(--seal);
+    font-weight: 900; font-size: 26px;
+    display: grid; place-items: center;
+    transform: rotate(-8deg);
+}
+.um-card h3 { font-weight: 900; font-size: 22px; }
+.um-card .mono { opacity: .55; }
+.um-card input { width: 100%; text-align: center; }
+.um-row { display: flex; gap: 12px; margin-top: 6px; }
+.um-row button { padding: 10px 24px; border: 1px solid var(--ink-soft); }
+.um-row .primary { border: none; }
+
+/* ============ 阅读页 ============ */
+/* 卷轴展开：从中缝向上下铺开 */
+.jreader {
+    position: fixed; inset: 0; z-index: 600;
+    background: var(--parch);
+    overflow-y: auto;
+    clip-path: inset(50% 0 50% 0);
+    visibility: hidden;
+    transition: clip-path .8s cubic-bezier(.65, .05, .36, 1), visibility 0s .8s;
+}
+.jreader.open { clip-path: inset(0 0 0 0); visibility: visible; transition: clip-path .8s cubic-bezier(.65, .05, .36, 1); }
+.jreader::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.13 0 0 0 0 0.09 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 240px;
+}
+.jr-bar {
+    position: sticky; top: 0; z-index: 5;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px var(--gutter);
+    background: color-mix(in srgb, var(--parch) 85%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
+}
+.jr-close { letter-spacing: .14em; opacity: .7; }
+.jr-close:hover { opacity: 1; color: var(--seal); }
+.jr-coord { opacity: .55; }
+.jr-page {
+    max-width: 760px; margin: 0 auto;
+    padding: clamp(46px, 8vh, 90px) 26px 140px;
+    position: relative;
+}
+.jr-stamps { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
+.jr-stamps span {
+    border: 1.5px solid var(--ink-soft);
+    padding: 4px 12px;
+    opacity: .75;
+    transform: rotate(var(--r, 0deg));
+}
+.jr-stamps span:nth-child(odd) { --r: -1.6deg; border-color: var(--seal); color: var(--seal); }
+.jr-stamps span:nth-child(even) { --r: 1.2deg; }
+.jr-title {
+    font-weight: 900;
+    font-size: clamp(34px, 6vw, 64px);
+    line-height: 1.3;
+    margin-bottom: .9em;
+}
+.jr-body { font-size: clamp(16px, 1.8vw, 19px); }
+.jr-body > p:first-of-type::first-letter {
+    font-family: var(--serif-en);
+    font-size: 3.4em; font-weight: 600;
+    float: left; line-height: .82;
+    padding: .08em .12em 0 0;
+    color: var(--seal);
+}
+.jr-body p { margin-bottom: 1.5em; }
+.jr-body h2, .jr-body h3 {
+    font-weight: 900; margin: 2.2em 0 .9em;
+    font-size: 1.5em;
+}
+.jr-body h2::before { content: "◆ "; color: var(--seal); font-size: .7em; vertical-align: middle; }
+.jr-body blockquote {
+    border-left: 3px solid var(--seal);
+    padding: .2em 0 .2em 22px;
+    margin: 2em 0;
+    font-style: italic; color: var(--ink-soft);
+}
+.jr-body mark { background: color-mix(in srgb, var(--seal) 22%, transparent); color: inherit; padding: 0 3px; }
+.jr-body hr {
+    border: none; height: 26px; margin: 2.6em 0;
+    background:
+        radial-gradient(circle 3px at 50% 50%, var(--ink-soft) 95%, transparent) 0 0 / 22px 100% repeat-x;
+    opacity: .5;
+}
+.jr-body img {
+    max-width: 92%;
+    display: block;
+    margin: 2.2em auto;
+    padding: 10px 10px 44px;
+    background: #fbf8ef;
+    box-shadow: 0 10px 30px -12px rgba(63, 44, 24, .5);
+    transform: rotate(-1.2deg);
+}
+.jr-body img:nth-of-type(even) { transform: rotate(1.4deg); }
+.jr-endseal {
+    margin-top: 90px;
+    display: flex; justify-content: center;
+}
+.jr-endseal span {
+    width: 92px; height: 92px;
+    border: 4px solid var(--seal); color: var(--seal);
+    font-weight: 900; font-size: 26px;
+    display: grid; place-items: center;
+    text-align: center; line-height: 1.2;
+    padding: 8px;
+    transform: rotate(-6deg);
+    opacity: .88;
+}
+
+/* ============ 路上的随身听 ============ */
+.jtape-wrap { padding: 0 var(--gutter) clamp(70px, 11vh, 130px); }
+.jtape {
+    position: relative;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+    gap: clamp(20px, 4vw, 60px);
+    border: 1.5px solid var(--ink-soft);
+    border-radius: 20px;
+    background: color-mix(in srgb, var(--parch) 60%, #fff 10%);
+    padding: clamp(24px, 4vh, 44px);
+    box-shadow: 0 20px 50px -30px rgba(63, 44, 24, .5);
+}
+.jtape-body { display: flex; align-items: center; gap: clamp(18px, 3vw, 40px); flex-wrap: wrap; justify-content: center; }
+.jtape-svg { width: clamp(240px, 30vw, 340px); color: var(--ink); }
+.tape-spool { transform-box: fill-box; transform-origin: center; }
+.jtape.playing .tape-spool { animation: spoolspin 2.6s linear infinite; }
+@keyframes spoolspin { to { transform: rotate(360deg); } }
+.jtape-label { display: flex; flex-direction: column; gap: 8px; max-width: 300px; }
+.jt-now { color: var(--seal); letter-spacing: .2em; }
+.jtape-label b { font-size: clamp(19px, 2.4vw, 28px); font-weight: 900; line-height: 1.4; }
+.jt-note { color: var(--ink-soft); font-size: 14px; }
+.jtape-ctrl { display: flex; gap: 12px; }
+.jt-btn {
+    border: 1.5px solid var(--ink); border-radius: 999px;
+    padding: 12px 22px; letter-spacing: .14em;
+    transition: all .25s;
+}
+.jt-btn:hover { background: var(--ink); color: var(--parch); }
+.jt-play { background: var(--seal); border-color: var(--seal); color: var(--parch); font-weight: 700; }
+.jt-play:hover { background: var(--ink); border-color: var(--ink); }
+.jtape-embed { position: absolute; width: 1px; height: 1px; opacity: 0.01; overflow: hidden; pointer-events: none; }
+.jtape-embed iframe { width: 320px; height: 180px; border: 0; }
+
+/* ============ 卷尾 ============ */
+.jfooter {
+    text-align: center;
+    padding: clamp(50px, 9vh, 110px) var(--gutter) 60px;
+    display: flex; flex-direction: column; align-items: center; gap: 18px;
+    border-top: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
+}
+.jf-seal {
+    width: 110px; height: 110px;
+    border: 5px solid var(--seal); color: var(--seal);
+    font-weight: 900; font-size: 30px;
+    display: grid; place-items: center;
+    text-align: center; line-height: 1.25;
+    padding: 10px;
+    transform: rotate(-5deg);
+}
+.jfooter .mono { opacity: .5; }
+.jfooter a { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; opacity: .7; }
+.jfooter a:hover { color: var(--seal); opacity: 1; }
+
+/* ============ 响应式 ============ */
+@media (max-width: 760px) {
+    .jcard { grid-template-columns: 1fr; gap: 10px; }
+    .jcard-meta { text-align: left; border-left: none; padding-left: 0; flex-direction: row; gap: 14px; }
+    .map-pin text { font-size: 19px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

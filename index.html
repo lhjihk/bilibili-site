@@ -4,282 +4,289 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
-    <title>踏破腐朽 | 影像·音乐·旅行</title>
+    <title>踏破腐朽® — 声音实验室 / TRAMPLE THE DECAY</title>
+    <meta name="description" content="踏破腐朽 — 吉他手、创作者、旅行者。原创音乐、影像与旅行文章的声音实验室。">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700;1,800&family=IBM+Plex+Mono:wght@400;500&family=Palette+Mosaic&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
 </head>
-<body>
-    <!-- 鼠标跟随光效 -->
-    <div class="cursor-glow" id="cursorGlow"></div>
-    
-    <!-- 粒子画布 -->
-    <canvas id="particleCanvas"></canvas>
+<body data-theme="paper">
 
-    <!-- 胶片颗粒质感 -->
-    <div class="grain"></div>
-
-    <!-- 导航栏 -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-brand">
-            <span class="brand-cn">踏破腐朽</span>
-        </div>
-        <div class="nav-links">
-            <a href="#hero" class="nav-link active" data-section="hero">首页</a>
-            <a href="#videos" class="nav-link" data-section="videos">影像</a>
-            <a href="#music" class="nav-link" data-section="music">音乐</a>
-            <a href="#travel" class="nav-link" data-section="travel">旅行志</a>
-            <a href="#about" class="nav-link" data-section="about">关于</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
-            <span class="toggle-icon">🌙</span>
-        </button>
-    </nav>
-
-    <!-- 首屏 Hero -->
-    <section class="hero" id="hero">
-        <div class="hero-bg">
-            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80" alt="" class="hero-bg-img">
-            <div class="hero-overlay"></div>
-        </div>
-        <div class="hero-content">
-            <span class="hero-eyebrow">GUITARIST · CREATOR · RIDER</span>
-            <h1 class="hero-title">踏破腐朽</h1>
-            <p class="hero-subtitle-en">Music · Film · The Road</p>
-            <p class="hero-desc">吉他手 · 创作者 · 旅行者</p>
-        </div>
-        <div class="scroll-hint">
-            <span>SCROLL ↓</span>
-        </div>
-    </section>
-
-    <!-- 影像区 -->
-    <section class="section" id="videos">
-        <div class="section-header">
-            <span class="section-eyebrow">Selected Works</span>
-            <h2 class="section-title">影 像</h2>
-            <p class="section-subtitle">每一帧都是时光的注脚</p>
-        </div>
-        <div class="video-filters">
-            <button class="filter-btn active" data-filter="all">全部</button>
-            <button class="filter-btn" data-filter="original">原创音乐</button>
-            <button class="filter-btn" data-filter="cover">翻弹</button>
-            <button class="filter-btn" data-filter="gear">器材</button>
-            <button class="filter-btn" data-filter="travel">旅行</button>
-        </div>
-        <div class="video-grid" id="videoGrid">
-            <!-- Videos injected by JS -->
-        </div>
-    </section>
-
-    <!-- 音乐区 -->
-    <section class="section" id="music">
-        <div class="section-header">
-            <span class="section-eyebrow">Original Music</span>
-            <h2 class="section-title">音 乐</h2>
-            <p class="section-subtitle">弦上流年，曲中山河</p>
-        </div>
-        <div class="music-showcase">
-            <div class="music-card" data-bvid="BV1tkvSB6E6U">
-                <div class="music-cover">
-                    <img src="https://i2.hdslb.com/bfs/archive/d29b90cc25e5e887545fdbb539a8de4bb72f6a0a.jpg" alt="故曲如风">
-                    <div class="play-overlay">▶</div>
-                </div>
-                <div class="music-info">
-                    <h3>故曲如风 · 编曲版二</h3>
-                    <p>2025 · 原创</p>
-                </div>
-            </div>
-            <div class="music-card" data-bvid="BV1ypetehEe4">
-                <div class="music-cover">
-                    <img src="https://i1.hdslb.com/bfs/archive/6e016569e588b543edeea5959b2c1caeb41eedea.jpg" alt="九州同">
-                    <div class="play-overlay">▶</div>
-                </div>
-                <div class="music-info">
-                    <h3>九州同</h3>
-                    <p>2024 · 原创</p>
-                </div>
-            </div>
-            <div class="music-card" data-bvid="BV1cFeseSERJ">
-                <div class="music-cover">
-                    <img src="https://i0.hdslb.com/bfs/archive/ae7d6b9f2d710758f213a5e22c13f209e765cd4d.jpg" alt="故曲如风">
-                    <div class="play-overlay">▶</div>
-                </div>
-                <div class="music-info">
-                    <h3>故曲如风 · 初版</h3>
-                    <p>2024 · 原创</p>
-                </div>
-            </div>
-            <div class="music-card" data-bvid="BV1pA411X7wr">
-                <div class="music-cover">
-                    <img src="https://i0.hdslb.com/bfs/archive/ba2f2d54fe7f8fe609c6562d8ed0c0c831f4726a.jpg" alt="相忘于天涯">
-                    <div class="play-overlay">▶</div>
-                </div>
-                <div class="music-info">
-                    <h3>相忘于天涯</h3>
-                    <p>2022 · 原创</p>
-                </div>
-            </div>
-            <div class="music-card" data-bvid="BV1EP4y1J7zb">
-                <div class="music-cover">
-                    <img src="https://i1.hdslb.com/bfs/archive/38cad7b794fc53498d71a3d9cd78dde2c15b0ade.jpg" alt="孤灯照剑">
-                    <div class="play-overlay">▶</div>
-                </div>
-                <div class="music-info">
-                    <h3>孤灯照剑</h3>
-                    <p>2021 · 原创</p>
-                </div>
-            </div>
-            <div class="music-card" data-bvid="BV1Ps411w7LY">
-                <div class="music-cover">
-                    <img src="https://i2.hdslb.com/bfs/archive/514b7e0a5ed1b46516393e6b559058f00bb43604.jpg" alt="过去心">
-                    <div class="play-overlay">▶</div>
-                </div>
-                <div class="music-info">
-                    <h3>过去心</h3>
-                    <p>2018 · 原创</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 旅行志 -->
-    <section class="section" id="travel">
-        <div class="section-header">
-            <span class="section-eyebrow">On The Road</span>
-            <h2 class="section-title">旅 行 志</h2>
-            <p class="section-subtitle">车轮碾过的每一寸土地，都是诗</p>
-        </div>
-        <div class="travel-timeline">
-            <div class="travel-item" data-bvid="BV1Yg411d7n3">
-                <div class="travel-cover">
-                    <img src="https://i1.hdslb.com/bfs/archive/9e540be0172383f5e07db60b79c5dea4dac84ec8.jpg" alt="北京-西藏 第二集">
-                </div>
-                <div class="travel-info">
-                    <span class="travel-date">2022</span>
-                    <h3>北京至西藏 · 雨拜丞相</h3>
-                    <p>难忘的冬季，难忘的旅行</p>
-                </div>
-            </div>
-            <div class="travel-item" data-bvid="BV1KZ4y1h7Z4">
-                <div class="travel-cover">
-                    <img src="https://i0.hdslb.com/bfs/archive/cbf305cf28c509709feb397db5d0d5e5d087cc2a.jpg" alt="北京-西藏 第一集">
-                </div>
-                <div class="travel-info">
-                    <span class="travel-date">2022</span>
-                    <h3>北京至西藏 · 风陵渡口</h3>
-                    <p>观山陕雄景，过风陵渡心</p>
-                </div>
-            </div>
-            <div class="travel-item" data-bvid="BV1b54y1C722">
-                <div class="travel-cover">
-                    <img src="https://i2.hdslb.com/bfs/archive/b85b8e8b6798d32602c1545cf414ff6978bd582d.jpg" alt="西藏骑行">
-                </div>
-                <div class="travel-info">
-                    <span class="travel-date">2020</span>
-                    <h3>鑫源400 · 西藏骑行</h3>
-                    <p>GoPro 剪辑</p>
-                </div>
-            </div>
-            <div class="travel-item" data-bvid="BV1Yt411e74f">
-                <div class="travel-cover">
-                    <img src="https://i2.hdslb.com/bfs/archive/6a9aad98c0e19e9cb0d8983c8e23d66d14be6baf.jpg" alt="GoPro骑行">
-                </div>
-                <div class="travel-info">
-                    <span class="travel-date">2018</span>
-                    <h3>GoPro Hero7 · 骑行撸琴</h3>
-                    <p>路上的吉他与风</p>
-                </div>
-            </div>
-            <div class="travel-item" data-bvid="BV1rt411f7fJ">
-                <div class="travel-cover">
-                    <img src="https://i0.hdslb.com/bfs/archive/accb17624236e3d75ef9f00b1f2d1b6cb4341436.jpg" alt="北京旅行">
-                </div>
-                <div class="travel-info">
-                    <span class="travel-date">2018</span>
-                    <h3>山西·北京·终南山</h3>
-                    <p>故宫、古北水镇、西安</p>
-                </div>
-            </div>
-            <div class="travel-item" data-bvid="BV1tp411R7bo">
-                <div class="travel-cover">
-                    <img src="https://i1.hdslb.com/bfs/archive/693fb7b64eeac6bb92b8777195ca9b85485bf1b6.jpg" alt="哈雷X48">
-                </div>
-                <div class="travel-info">
-                    <span class="travel-date">2018</span>
-                    <h3>哈雷 Forty-Eight · 归途</h3>
-                    <p>HARLEY-DAVIDSON X48 回家骑行</p>
-                </div>
-            </div>
-            <div class="travel-item" data-bvid="BV1wx411g7yu">
-                <div class="travel-cover">
-                    <img src="https://i1.hdslb.com/bfs/archive/b36634766769e98f1c852f2cd8e297d95ca4c11a.jpg" alt="东南亚骑行二">
-                </div>
-                <div class="travel-info">
-                    <span class="travel-date">2017</span>
-                    <h3>东南亚骑行 · 曼谷华欣</h3>
-                    <p>鑫源400 摩托旅行（二）</p>
-                </div>
-            </div>
-            <div class="travel-item" data-bvid="BV1wx411g72y">
-                <div class="travel-cover">
-                    <img src="https://i1.hdslb.com/bfs/archive/342ecc6914129972b20f4bdaf56003f46a0542b0.jpg" alt="东南亚骑行一">
-                </div>
-                <div class="travel-info">
-                    <span class="travel-date">2017</span>
-                    <h3>东南亚骑行 · 启程</h3>
-                    <p>鑫源400 摩托旅行（一）</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 关于 -->
-    <section class="section" id="about">
-        <div class="section-header">
-            <span class="section-eyebrow">About</span>
-            <h2 class="section-title">关 于</h2>
-            <p class="section-subtitle">一个弹琴的人，一个在路上的人</p>
-        </div>
-        <div class="about-content">
-            <div class="about-text">
-                <p>85后吉他手，发点生活音乐类视频，随缘更新。</p>
-                <p>骑摩托穿越东南亚，骑哈雷回家，骑鑫源进藏。弹金属、写原创、录Demo。</p>
-                <p>用音乐记录时间，用车轮丈量世界。</p>
-                <div class="about-links">
-                    <a href="https://space.bilibili.com/107127158" target="_blank" class="about-link">
-                        <span class="link-icon">📺</span> Bilibili
-                    </a>
-                </div>
-            </div>
-            <div class="about-avatar">
-                <img src="https://i2.hdslb.com/bfs/face/055258520bb074cb7f476712aace1d37c8cb1f8d.jpg" alt="踏破腐朽" class="avatar-img">
-            </div>
-        </div>
-    </section>
-
-    <!-- 底部 -->
-    <footer class="footer">
-        <p>© 2025 踏破腐朽 · 影像与音乐</p>
-    </footer>
-
-    <!-- 底部音乐播放器 -->
-    <div class="mini-player" id="miniPlayer">
-        <div class="player-info">
-            <span class="player-title" id="playerTitle">点击任意音乐卡片播放</span>
-        </div>
-        <div class="player-controls">
-            <button class="player-btn" id="prevBtn">⏮</button>
-            <button class="player-btn" id="playBtn">▶</button>
-            <button class="player-btn" id="nextBtn">⏭</button>
-        </div>
-        <div class="player-progress">
-            <div class="progress-bar" id="progressBar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
+    <!-- ========== LOADER：计数器 + 马赛克像素幕布 ========== -->
+    <div class="loader" id="loader" aria-hidden="true">
+        <div class="loader-grid" id="loaderGrid"></div>
+        <div class="loader-core">
+            <span class="loader-label mono">SOUND LABORATORY — LOADING</span>
+            <span class="loader-count" id="loaderCount">000</span>
+            <span class="loader-name"><b>踏破腐朽</b><i>®</i></span>
         </div>
     </div>
 
+    <!-- ========== 墨水吞页转场幕布 ========== -->
+    <div class="ink-veil" id="inkVeil" aria-hidden="true"></div>
+    <!-- ========== 键盘彩蛋印章（敲 metal） ========== -->
+    <div class="egg-stamp" id="eggStamp" aria-hidden="true"></div>
+
+    <!-- ========== 自定义光标 ========== -->
+    <div class="cursor" id="cursor" aria-hidden="true">
+        <span class="cursor-dot"></span>
+        <span class="cursor-label mono" id="cursorLabel"></span>
+    </div>
+
+    <!-- ========== 导航 ========== -->
+    <nav class="navbar" id="navbar">
+        <a class="nav-logo" href="#top" data-cursor="TOP">
+            <span class="nav-logo-cn">踏破腐朽</span><sup class="mono">®</sup>
+        </a>
+        <div class="nav-meta mono">
+            <span class="nav-coord">39.90°N&nbsp;116.40°E</span>
+            <span class="nav-clock" id="navClock">00:00:00</span>
+        </div>
+        <div class="nav-links mono">
+            <a class="nav-link" href="#manifesto" data-scramble><i>(01)</i><span data-txt="nav1">宣言</span></a>
+            <a class="nav-link" href="#weapon" data-scramble><i>(02)</i><span data-txt="nav2">主打</span></a>
+            <a class="nav-link" href="#listen" data-scramble><i>(03)</i><span data-txt="nav3">试听</span></a>
+            <a class="nav-link" href="#film" data-scramble><i>(04)</i><span data-txt="nav4">影像</span></a>
+            <a class="nav-link" href="journal.html" data-ink-nav data-scramble><i>(05)</i><span data-txt="nav5">手账</span></a>
+            <a class="nav-link" href="#about" data-scramble><i>(06)</i><span data-txt="nav6">关于</span></a>
+        </div>
+        <button class="theme-btn mono" id="themeBtn" data-cursor="FLIP">● 暗房</button>
+        <a class="nav-cta mono" href="#listen" data-magnetic data-cursor="PLAY" data-txt="navCta">开始听 ↗</a>
+        <button class="nav-burger" id="navBurger" aria-label="菜单"><i></i><i></i></button>
+    </nav>
+
+    <!-- 移动端全屏菜单 -->
+    <div class="mmenu" id="mmenu" aria-hidden="true">
+        <a href="#manifesto"><span class="mono">(01)</span>宣言</a>
+        <a href="#weapon"><span class="mono">(02)</span>主打</a>
+        <a href="#listen"><span class="mono">(03)</span>试听</a>
+        <a href="#film"><span class="mono">(04)</span>影像</a>
+        <a href="journal.html"><span class="mono">(05)</span>手账</a>
+        <a href="#about"><span class="mono">(06)</span>关于</a>
+    </div>
+
+    <main id="smoothContent">
+
+    <!-- ========== HERO：流体墨水 + 巨字 ========== -->
+    <header class="hero" id="top">
+        <div class="hero-bg" id="heroBg" aria-hidden="true"></div>
+        <canvas id="fluidCanvas" aria-hidden="true"></canvas>
+        <div class="hero-frame mono" aria-hidden="true">
+            <span class="hf hf-tl" data-scramble data-txt="hfTL">TRAMPLE THE DECAY — EST.2017</span>
+            <span class="hf hf-tr" data-scramble data-txt="hfTR">[ 声音实验室 ]</span>
+            <span class="hf hf-bl" data-scramble>GUITAR / ROAD / INK</span>
+            <span class="hf hf-br" data-scramble>V.2026 — BEIJING</span>
+        </div>
+        <h1 class="hero-title">
+            <span class="ht-line"><span class="ht-word" data-txt="heroT1">TRAMPLE</span></span>
+            <span class="ht-line ht-mid"><span class="ht-word" data-txt="heroT2"><em>THE</em> DECAY<sup>®</sup></span></span>
+            <span class="ht-line ht-cn"><span class="ht-word" data-txt="heroT3">踏<i>破</i>腐<i>朽</i></span></span>
+        </h1>
+        <div class="hero-foot">
+            <p class="hero-sub"><span class="mosaic">♪</span> 把腐朽的日子，弹成失真的原创音乐。<br>吉他手 / 创作者 / 骑士 —— 弹金属，写原创，骑车进藏。</p>
+            <div class="hero-hint mono" data-scramble data-txt="heroHint">[ MOVE MOUSE — INK REACTS · 往下滚 ]</div>
+        </div>
+        <div class="hero-scrollline" aria-hidden="true"></div>
+    </header>
+
+    <!-- ========== MARQUEE 1：滚动变速大字带 ========== -->
+    <div class="marquee mq-outline" data-marquee data-speed="1" aria-hidden="true">
+        <div class="marquee-inner">
+            <span class="marquee-chunk" data-txt-html="mq1">原创金属 <i>ORIGINAL METAL</i> 公路影像 <i>ROAD FILM</i> 旅行文章 <i>TRAVEL NOTES</i> <b class="mosaic">★</b> </span>
+        </div>
+    </div>
+
+    <!-- ========== (01) 宣言：黑幕钉屏扫词 ========== -->
+    <section class="section manifesto" id="manifesto">
+        <div class="mf-pin" id="mfPin">
+            <div class="sec-head mono">
+                <span data-scramble data-txt="sec01Eyebrow">(01) — MANIFESTO</span>
+                <span data-scramble data-txt="sec01Note">工作方法 / 上世纪的老办法</span>
+            </div>
+            <p class="mf-copy" id="mfCopy" data-txt="mfCopy">
+                真琴。真手。真录。 插电，失真拧到底，弹到手起茧。 不用假弹，不修音， 错了就重弹，弹到对为止。 每一首都从路上长出来—— 东南亚的风，风陵渡的黄河， 海拔五千米垭口的雪。 修出来的完美是塑料的， 我们不掺塑料。
+            </p>
+            <div class="mf-tags mono" aria-hidden="true">
+                <span>[NO_MIDI_GUITAR]</span><span>[NO_PITCH_FIX]</span><span>[SMALL_BATCH]</span><span>[FIELD_RECORDED]</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== (02) 主打：弹射切换台 ========== -->
+    <section class="section weapon" id="weapon">
+        <div class="sec-head mono">
+            <span data-scramble data-txt="sec02Eyebrow">(02) — FEATURED TRACKS</span>
+            <span data-scramble data-txt="sec02Note">三首主打 / 口味不同，后座力都不小</span>
+        </div>
+        <h2 class="sec-title" data-txt-html="sec02Title"><span class="st-line"><span>选你的</span></span><span class="st-line"><span><em>武器</em> <i class="st-en">WEAPONS</i></span></span></h2>
+        <div class="deck-switcher">
+            <div class="ds-index mono"><b id="dsNo">01</b><span>/ 03</span></div>
+            <div class="ds-stage" id="dsStage">
+                <!-- injected by script.js -->
+            </div>
+            <div class="ds-rail">
+                <button class="rail-btn mono" id="dsPrev" data-magnetic data-cursor="PREV">←</button>
+                <div class="ds-dots" id="dsDots"></div>
+                <button class="rail-btn mono" id="dsNext" data-magnetic data-cursor="NEXT">→</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== MARQUEE 2：反向 紫底 ========== -->
+    <div class="marquee mq-purple" data-marquee data-speed="-1.4" aria-hidden="true">
+        <div class="marquee-inner">
+            <span class="marquee-chunk" data-txt-html="mq2">先听再说 <i>LISTEN FIRST</i> 支持正版 <i>REAL TAKES ONLY</i> 拖个 MP3 进来也行 <b class="mosaic">♫</b> </span>
+        </div>
+    </div>
+
+    <!-- ========== (03) 试听台 ========== -->
+    <section class="section listen" id="listen">
+        <div class="sec-head mono">
+            <span data-scramble data-txt="sec03Eyebrow">(03) — TASTING ROOM</span>
+            <span data-scramble data-txt="sec03Note">全部曲目 / 本地音频不上传，只在本页播</span>
+        </div>
+        <h2 class="sec-title" data-txt-html="sec03Title"><span class="st-line"><span>试听<em>台</em> <i class="st-en">LISTEN</i></span></span></h2>
+        <div class="listen-layout">
+            <div class="deck" data-reveal>
+                <div class="deck-visual">
+                    <canvas id="waveCanvas" aria-hidden="true"></canvas>
+                    <div class="deck-idle" id="deckIdle">
+                        <div class="deck-disc" aria-hidden="true">
+                            <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#030303"/><circle cx="50" cy="50" r="34" fill="none" stroke="#f4f3eb" stroke-width="0.6" opacity="0.5"/><circle cx="50" cy="50" r="27" fill="none" stroke="#f4f3eb" stroke-width="0.6" opacity="0.4"/><circle cx="50" cy="50" r="20" fill="none" stroke="#f4f3eb" stroke-width="0.6" opacity="0.3"/><circle cx="50" cy="50" r="13" fill="#6a15ff"/><circle cx="50" cy="50" r="2.4" fill="#f4f3eb"/></svg>
+                        </div>
+                        <span class="deck-idle-txt mono" data-scramble>SELECT A TRACK — 选一首开始</span>
+                    </div>
+                    <div class="deck-embed" id="deckEmbed"></div>
+                    <div class="deck-mini" id="deckMini" aria-hidden="true">
+                        <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="28" fill="#030303" stroke="rgba(244,243,235,.3)" stroke-width="1"/><circle cx="30" cy="30" r="18" fill="none" stroke="rgba(244,243,235,.25)" stroke-width=".8"/><circle cx="30" cy="30" r="8" fill="#6a15ff"/><circle cx="30" cy="30" r="1.6" fill="#f4f3eb"/></svg>
+                    </div>
+                </div>
+                <div class="deck-console">
+                    <div class="deck-np">
+                        <span class="np-label mono">NOW_PLAYING</span>
+                        <span class="np-title" id="npTitle">—</span>
+                        <span class="deck-time mono" id="deckTime">00:00 / 00:00</span>
+                    </div>
+                    <div class="deck-controls">
+                        <button class="ctrl-btn mono" id="btnPrev" data-magnetic aria-label="上一首">←</button>
+                        <button class="ctrl-btn ctrl-play" id="btnPlay" data-magnetic aria-label="播放/暂停">▶</button>
+                        <button class="ctrl-btn mono" id="btnNext" data-magnetic aria-label="下一首">→</button>
+                        <button class="ctrl-btn mono btn-video" id="btnVideo" data-cursor="VIDEO" aria-label="显示/隐藏画面" style="display:none">画面</button>
+                        <div class="deck-seek" id="deckSeek"><div class="deck-seek-fill" id="deckSeekFill"></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="tracklist-wrap" data-reveal>
+                <ol class="tracklist" id="tracklist"></ol>
+                <label class="dropzone mono" id="dropzone" data-cursor="DROP">
+                    <input type="file" id="fileInput" accept="audio/*" multiple hidden>
+                    <span class="dz-plus">+</span>
+                    <span>拖入本地音频试听 — DROP MP3 / WAV<br><i>仅本页播放，不会上传</i></span>
+                </label>
+                <div class="platform-links mono" id="platformLinks"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== (04) 影像：马赛克揭示网格 ========== -->
+    <section class="section film" id="film">
+        <div class="sec-head mono">
+            <span data-scramble data-txt="sec04Eyebrow">(04) — FILM ARCHIVE</span>
+            <span data-scramble data-txt="sec04Note">影像档案 / 上架的都是真货</span>
+        </div>
+        <h2 class="sec-title" data-txt-html="sec04Title"><span class="st-line"><span>影像<em>档案</em> <i class="st-en">FILM</i></span></span></h2>
+        <div class="film-filters mono" id="filmFilters">
+            <button class="chip active" data-filter="all" data-scramble>ALL 全部</button>
+            <button class="chip" data-filter="original" data-scramble>原创</button>
+            <button class="chip" data-filter="cover" data-scramble>翻弹</button>
+            <button class="chip" data-filter="gear" data-scramble>器材</button>
+            <button class="chip" data-filter="travel" data-scramble>旅行</button>
+        </div>
+        <div class="film-grid" id="filmGrid"></div>
+    </section>
+
+    <!-- ========== (05) 手账引子 ========== -->
+    <section class="section writing" id="writing">
+        <div class="sec-head mono">
+            <span data-scramble data-txt="sec05Eyebrow">(05) — WAYFARER'S JOURNAL</span>
+            <span data-scramble data-txt="sec05Note">旅人手账 / 一整个世界在另一页</span>
+        </div>
+        <h2 class="sec-title" data-txt-html="sec05Title"><span class="st-line"><span>路上写的<em>字</em> <i class="st-en">JOURNAL</i></span></span></h2>
+        <div class="article-rows" id="teaserRows"></div>
+        <a class="journal-portal" href="journal.html" data-ink-nav data-cursor="ENTER">
+            <span class="jp-deco" aria-hidden="true">
+                <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 6"/><path d="M60 14 v10 M60 96 v10 M14 60 h10 M96 60 h10" stroke="currentColor" stroke-width="1.5"/><path d="M60 34 L68 60 L60 86 L52 60 Z" fill="var(--seal-red, #b3402a)" stroke="none" transform="rotate(28 60 60)"/><circle cx="60" cy="60" r="4" fill="currentColor"/></svg>
+            </span>
+            <span class="jp-copy">
+                <b data-txt="jpPortal">进入旅人手账</b>
+                <i class="mono">共 <b id="teaserCount">00</b> 篇 — 羊皮纸 · 航海图 · 印章与征途 — ENTER THE JOURNAL ↗</i>
+            </span>
+        </a>
+    </section>
+
+    <!-- ========== (06) 关于 ========== -->
+    <section class="section about" id="about">
+        <div class="sec-head mono">
+            <span data-scramble data-txt="sec06Eyebrow">(06) — THE HUMAN</span>
+            <span data-scramble data-txt="sec06Note">关于这个人 / EST.2017 ON THE ROAD</span>
+        </div>
+        <div class="about-grid">
+            <div class="about-photo" data-reveal>
+                <img id="aboutPhoto" src="https://i2.hdslb.com/bfs/face/055258520bb074cb7f476712aace1d37c8cb1f8d.jpg" alt="踏破腐朽">
+                <span class="about-stamp mono">SUBJECT_01 / 吉他手</span>
+            </div>
+            <div class="about-copy">
+                <h2 class="sec-title" data-txt-html="sec06Title"><span class="st-line"><span>关于<em>这个人</em></span></span></h2>
+                <p data-reveal id="aboutP1">85 后吉他手。弹金属、写原创、录 Demo，发点生活音乐类视频，随缘更新。</p>
+                <p data-reveal id="aboutP2">骑摩托穿越东南亚，骑哈雷回家，骑鑫源进藏。用音乐记录时间，用车轮丈量世界。</p>
+                <div class="about-specs mono" data-reveal>
+                    <span data-txt="spec1">GUITARS — SCHECTER / CARVIN / S.YAIRI</span>
+                    <span data-txt="spec2">AMP — PEAVEY 6505</span>
+                    <span data-txt="spec3">BIKES — HARLEY 48 / 鑫源400</span>
+                    <span data-txt="spec4">ROUTES — 东南亚 / 川藏 / 风陵渡</span>
+                </div>
+                <a class="big-link" href="https://space.bilibili.com/107127158" target="_blank" rel="noopener" data-magnetic data-cursor="GO">
+                    <span data-txt="bigLink">去 BILIBILI 串门</span> <span class="bl-arrow">↗</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="marquee mq-outline mq-foot" data-marquee data-speed="0.8" aria-hidden="true">
+            <div class="marquee-inner">
+                <span class="marquee-chunk" data-txt-html="mqFoot">弦上流年 <i>STRINGS OVER YEARS</i> 车轮山河 <i>WHEELS OVER LAND</i> <b class="mosaic">♪</b> </span>
+            </div>
+        </div>
+        <div class="footer-main">
+            <span class="footer-giant" id="footerGiant" aria-hidden="true" data-txt="footGiant">踏破腐朽</span>
+            <div class="footer-meta mono">
+                <span data-txt="footNote">© 2026 踏破腐朽® — 真琴实录，概不修音</span>
+                <span>TRAMPLE THE DECAY — SOUND LABORATORY</span>
+                <a href="#top" data-cursor="TOP" data-scramble>BACK TO TOP ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    </main>
+
+    <!-- 视频弹层 -->
+    <div class="video-modal" id="videoModal" aria-hidden="true">
+        <button class="ctrl-btn vm-close" id="vmClose" aria-label="关闭">✕</button>
+        <div class="vm-frame" id="vmFrame"></div>
+    </div>
+
+    <!-- libs -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+    <!-- site -->
+    <script src="boot.js"></script>
+    <script src="fluid.js"></script>
+    <script src="player.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
