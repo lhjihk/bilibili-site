@@ -5,6 +5,13 @@
    Hanken Grotesk + IBM Plex Mono + Palette Mosaic + Noto Sans SC
    ============================================================ */
 
+/* LOGO 毛笔字：志莽行书（OFL 免费商用），只裁了「路即天涯」四字，1.8KB */
+@font-face {
+    font-family: "LogoBrush";
+    src: url("assets/fonts/lujitianya-logo.woff2") format("woff2");
+    font-display: swap;
+}
+
 :root {
     --paper-bg: #f4f3eb;
     --dark-bg: #0a0a0c;
@@ -19,6 +26,8 @@
     --font-cn: "Noto Sans SC", "Hanken Grotesk", sans-serif;
     --font-mono: "IBM Plex Mono", "Noto Sans SC", monospace;
     --font-mosaic: "Palette Mosaic", monospace;
+    --font-brush: "LogoBrush", "Noto Sans SC", sans-serif;
+    --font-serif-cn: "Noto Serif SC", serif;
     --ease-out: cubic-bezier(.16, 1, .3, 1);
     --ease-inout: cubic-bezier(.65, .05, .36, 1);
     --ease-in: cubic-bezier(.55, .06, .68, .19);
@@ -132,8 +141,8 @@ img { display: block; max-width: 100%; }
     font-weight: 400; line-height: 1;
     font-variant-numeric: tabular-nums;
 }
-.loader-name { font-family: var(--font-cn); font-weight: 900; font-size: 15px; letter-spacing: .5em; padding-left: .5em; }
-.loader-name i { font-style: normal; color: var(--purple); }
+.loader-name { font-family: var(--font-brush); font-weight: 400; font-size: 26px; letter-spacing: .4em; padding-left: .4em; }
+.loader-name i { font-style: normal; color: var(--purple); font-size: 11px; vertical-align: 10px; }
 
 /* ============ 光标 ============ */
 .cursor {
@@ -169,10 +178,17 @@ img { display: block; max-width: 100%; }
     padding: 18px var(--gutter);
     transition: transform .5s var(--ease-out), background .3s;
 }
-.navbar.scrolled { background: color-mix(in srgb, var(--beige) 88%, transparent); backdrop-filter: blur(12px); }
+/* 不用 backdrop-filter：毛玻璃叠在 WebGL 画布上是 Safari 卡顿源，改用更实的底色 */
+.navbar.scrolled { background: color-mix(in srgb, var(--beige) 95%, transparent); box-shadow: 0 1px 0 color-mix(in srgb, var(--black) 10%, transparent); }
 .navbar.hidden { transform: translateY(-110%); }
-.nav-logo { font-family: var(--font-cn); font-weight: 900; font-size: 18px; letter-spacing: .12em; white-space: nowrap; }
-.nav-logo sup { color: var(--purple); font-size: 9px; }
+.nav-logo { font-family: var(--font-brush); font-weight: 400; font-size: 27px; letter-spacing: .1em; white-space: nowrap; line-height: 1; display: flex; align-items: center; }
+.nav-seal {
+    width: 15px; height: 15px; margin-left: 9px;
+    background: var(--seal-red); color: var(--paper-bg);
+    font: 500 8px/15px var(--font-mono);
+    text-align: center; border-radius: 2px;
+    align-self: flex-start; margin-top: 2px;
+}
 .nav-meta { display: flex; gap: 18px; opacity: .55; }
 .nav-clock { font-variant-numeric: tabular-nums; }
 .nav-links { display: flex; gap: clamp(10px, 1.6vw, 22px); margin-left: auto; }
@@ -287,8 +303,8 @@ img { display: block; max-width: 100%; }
 .ht-mid em { font-style: italic; font-weight: 400; }
 .ht-mid sup { font-size: .22em; color: var(--purple); font-weight: 600; }
 .ht-cn {
-    font-family: var(--font-cn); font-weight: 900;
-    font-size: .62em; letter-spacing: .04em;
+    font-family: var(--font-brush); font-weight: 400;
+    font-size: .74em; letter-spacing: .05em;
 }
 .ht-cn i { font-style: normal; color: var(--purple); }
 
@@ -750,8 +766,8 @@ img { display: block; max-width: 100%; }
 .footer-main { padding: clamp(40px, 8vh, 100px) var(--gutter) 28px; overflow: clip; }
 .footer-giant {
     display: block;
-    font-family: var(--font-cn); font-weight: 900;
-    font-size: clamp(80px, 17.5vw, 300px);
+    font-family: var(--font-brush); font-weight: 400;
+    font-size: clamp(84px, 18.5vw, 320px);
     line-height: .95; letter-spacing: .01em;
     text-align: center;
     white-space: nowrap;
@@ -855,3 +871,49 @@ img { display: block; max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* ============ 禅 · 落款（hero 右缘竖排小字 + 朱砂印） ============ */
+.hero-colophon {
+    position: absolute; right: calc(var(--gutter) + 4px); top: 50%;
+    transform: translateY(-58%);
+    z-index: 1;
+    display: flex; flex-direction: column; align-items: center; gap: 18px;
+    pointer-events: none;
+}
+.colo-line {
+    writing-mode: vertical-rl;
+    font-family: var(--font-serif-cn); font-weight: 500;
+    font-size: 15px; letter-spacing: .52em;
+    color: color-mix(in srgb, var(--black) 62%, transparent);
+}
+.colo-seal {
+    display: grid; grid-template-columns: 1fr 1fr;
+    width: 40px; height: 40px;
+    background: var(--seal-red); color: var(--paper-bg);
+    border-radius: 3px;
+    transform: rotate(-3deg);
+    padding: 3px; gap: 1px;
+    box-shadow: 0 2px 10px -4px color-mix(in srgb, var(--seal-red) 60%, transparent);
+}
+.colo-seal i {
+    font-style: normal;
+    font-family: var(--font-serif-cn); font-weight: 700;
+    font-size: 13px; line-height: 1;
+    display: grid; place-items: center;
+}
+@media (max-width: 900px) { .hero-colophon { display: none; } }
+
+/* ============ 禅 · 毛笔笔触下划线（JS 注入到 .sec-title 后） ============ */
+.brush-line {
+    display: block;
+    width: min(180px, 30vw); height: auto;
+    margin-top: 16px;
+    color: var(--black); opacity: .85;
+}
+.about-copy .brush-line { width: min(140px, 24vw); }
+
+/* ============ 禅 · 远山墨影分隔 ============ */
+.ink-mtns { overflow: hidden; margin: clamp(-10px, -1vh, -20px) 0 0; }
+.ink-mtns svg { display: block; width: 100%; height: clamp(90px, 14vh, 190px); color: var(--black); }
+.ink-mtns .m-far { fill: currentColor; opacity: .05; }
+.ink-mtns .m-near { fill: currentColor; opacity: .09; }

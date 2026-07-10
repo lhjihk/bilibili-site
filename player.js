@@ -64,13 +64,19 @@
         const fakePhase = Array.from({ length: 72 }, () => Math.random() * Math.PI * 2);
         const fakeSpeed = Array.from({ length: 72 }, () => 0.7 + Math.random() * 1.8);
 
+        let waveOn = false;
         function drawWave() {
+            if (mode === 'idle') { // 待机：清一次画布就停帧，不空转
+                wctx.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
+                window.__level = 0;
+                waveOn = false;
+                return;
+            }
             requestAnimationFrame(drawWave);
             const w = waveCanvas.width, h = waveCanvas.height;
             wctx.clearRect(0, 0, w, h);
             const playingAudio = mode === 'audio' && !audio.paused;
             const playingEmbed = mode === 'embed' && embedOn;
-            if (mode === 'idle') { window.__level = 0; return; }
 
             let data = null;
             if (playingAudio && analyser) {
@@ -155,7 +161,7 @@
                 deckTime.textContent = fmt(audio.currentTime) + ' / ' + fmt(audio.duration);
             }
         }
-        requestAnimationFrame(drawWave);
+        function wakeWave() { if (!waveOn) { waveOn = true; requestAnimationFrame(drawWave); } }
 
         function fmt(s) {
             s = Math.floor(s || 0);
@@ -224,6 +230,7 @@
                 deckTime.textContent = '声音来自 B站 · 点「画面」看视频';
                 if (btnVideo) btnVideo.style.display = '';
             }
+            wakeWave();
             render();
         }
 

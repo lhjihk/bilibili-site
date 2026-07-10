@@ -195,7 +195,9 @@
                 .from('.ht-word', { yPercent: 110, duration: 1.1, ease: 'expo.out', stagger: 0.09 })
                 .from('.hero-foot', { opacity: 0, y: 24, duration: 0.7, ease: 'power2.out' }, '-=0.55')
                 .from('.hf', { opacity: 0, y: -10, duration: 0.5, stagger: 0.08 }, '-=0.5')
-                .from('.navbar', { opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.5');
+                .from('.navbar', { opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.5')
+                .from('.colo-line', { opacity: 0, y: -18, duration: 0.9, ease: 'power2.out' }, '-=0.4')
+                .from('.colo-seal', { opacity: 0, scale: 1.9, rotate: 8, duration: 0.5, ease: 'back.out(2.2)' }, '-=0.3');
         }
         runLoader();
 
@@ -268,12 +270,16 @@
             const need = Math.ceil((window.innerWidth * 2) / Math.max(chunk.offsetWidth, 200)) + 1;
             for (let i = 0; i < need; i++) inner.appendChild(chunk.cloneNode(true));
             const dir = parseFloat(mq.dataset.speed || '1');
+            // 宽度只在字体就绪/窗口变化时量一次，别在每帧里读布局
+            let w = Math.max(chunk.offsetWidth, 200);
+            const remeasure = () => { w = Math.max(chunk.offsetWidth, 200); };
+            window.addEventListener('resize', remeasure);
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(remeasure);
             let x = 0;
             gsap.ticker.add((t, dt) => {
                 const boost = Math.min(Math.abs(scrollVelocity) * 0.06, 5);
                 const music = (window.__level || 0) * 2.2;
                 x -= (0.05 + boost * 0.02 + music * 0.03) * dt * dir;
-                const w = chunk.offsetWidth;
                 if (x <= -w) x += w;
                 if (x > 0) x -= w;
                 inner.style.transform = `translateX(${x}px)`;
@@ -286,7 +292,14 @@
             let cached = null, cacheT = 0;
             gsap.ticker.add((t) => {
                 const lv = window.__level || 0;
-                if (lv < 0.01 && !cached) return;
+                if (lv < 0.01) { // 没在放歌：归位一次后彻底歇着
+                    if (cached) {
+                        cached.forEach((el) => { el.style.transform = ''; });
+                        cached = null;
+                        document.documentElement.style.setProperty('--pulse', '0');
+                    }
+                    return;
+                }
                 if (!cached || t - cacheT > 3) { cached = pulseEls(); cacheT = t; }
                 const s = 1 + lv * 0.5;
                 cached.forEach((el) => { el.style.transform = `scale(${s})`; el.style.display = 'inline-block'; });
@@ -314,6 +327,33 @@
                 }, 1600);
             }
         });
+
+        // ============ 禅 · 毛笔笔触下划线（章节标题下画一笔） ============
+        const BRUSH_D = 'M3,9.5 C36,5 78,3 120,4.2 C158,5.2 196,4.4 234,2.6 C222,6.8 196,9.6 158,10.8 C118,12 62,12.2 22,11 C13,10.7 6,10.2 3,9.5 Z M239,3.2 C243,3.4 246,4.2 247,5.4 C244,5.8 241,5.2 239,3.2 Z';
+        document.querySelectorAll('.sec-title').forEach((title) => {
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('viewBox', '0 0 250 14');
+            svg.setAttribute('aria-hidden', 'true');
+            svg.classList.add('brush-line');
+            svg.innerHTML = `<path d="${BRUSH_D}" fill="currentColor"/>`;
+            title.appendChild(svg);
+            if (!reduced) {
+                gsap.fromTo(svg, { clipPath: 'inset(0 100% 0 0)' }, {
+                    clipPath: 'inset(0 0% 0 0)', duration: 0.9, ease: 'power2.inOut', delay: 0.25,
+                    scrollTrigger: { trigger: title, start: 'top 85%' },
+                });
+            }
+        });
+
+        // ============ 禅 · 远山墨影视差 ============
+        if (!reduced) {
+            document.querySelectorAll('.ink-mtns').forEach((m) => {
+                const far = m.querySelector('.m-far'), near = m.querySelector('.m-near');
+                const st = { trigger: m, start: 'top bottom', end: 'bottom top', scrub: true };
+                if (far) gsap.fromTo(far, { yPercent: 14 }, { yPercent: -8, ease: 'none', scrollTrigger: st });
+                if (near) gsap.fromTo(near, { yPercent: 26 }, { yPercent: -4, ease: 'none', scrollTrigger: { ...st } });
+            });
+        }
 
         // ============ 章节标题 + 揭示 ============
         if (!reduced) {

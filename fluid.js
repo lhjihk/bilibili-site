@@ -364,11 +364,24 @@
         new IntersectionObserver((en) => { running = en[0].isIntersecting; }, { rootMargin: '100px' }).observe(canvas);
     }
 
+    // 禅 · 闲时滴墨：页面静止一阵后，自己落一滴墨慢慢晕开
+    let lastActive = performance.now();
+    ['pointermove', 'pointerdown', 'wheel', 'touchstart', 'keydown', 'scroll'].forEach((ev) =>
+        window.addEventListener(ev, () => { lastActive = performance.now(); }, { passive: true }));
+    let nextDrop = 0;
+    function idleDrop(now) {
+        if (now - lastActive < 8000 || now < nextDrop) return;
+        nextDrop = now + 12000 + Math.random() * 9000;
+        splat(0.22 + Math.random() * 0.56, 0.3 + Math.random() * 0.45,
+            (Math.random() - 0.5) * 260, (Math.random() - 0.5) * 260, ink(1.5), 2.4 + Math.random() * 2);
+    }
+
     let lastT = performance.now();
     function frame(now) {
         const dt = Math.min((now - lastT) / 1000, 1 / 30);
         lastT = now;
         if (running && !document.hidden) {
+            idleDrop(now);
             step(dt);
             render();
         }
