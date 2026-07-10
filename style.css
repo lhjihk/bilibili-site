@@ -5,10 +5,10 @@
    Hanken Grotesk + IBM Plex Mono + Palette Mosaic + Noto Sans SC
    ============================================================ */
 
-/* LOGO 毛笔字：志莽行书（OFL 免费商用），只裁了「路即天涯」四字，1.8KB */
+/* LOGO 毛笔字：阿里妈妈东方大楷（免费商用），只裁了「路即天涯」四字，2.1KB */
 @font-face {
     font-family: "LogoBrush";
-    src: url("assets/fonts/lujitianya-logo.woff2") format("woff2");
+    src: url("assets/fonts/dongfangdakai-logo.woff2") format("woff2");
     font-display: swap;
 }
 
@@ -181,14 +181,7 @@ img { display: block; max-width: 100%; }
 /* 不用 backdrop-filter：毛玻璃叠在 WebGL 画布上是 Safari 卡顿源，改用更实的底色 */
 .navbar.scrolled { background: color-mix(in srgb, var(--beige) 95%, transparent); box-shadow: 0 1px 0 color-mix(in srgb, var(--black) 10%, transparent); }
 .navbar.hidden { transform: translateY(-110%); }
-.nav-logo { font-family: var(--font-brush); font-weight: 400; font-size: 27px; letter-spacing: .1em; white-space: nowrap; line-height: 1; display: flex; align-items: center; }
-.nav-seal {
-    width: 15px; height: 15px; margin-left: 9px;
-    background: var(--seal-red); color: var(--paper-bg);
-    font: 500 8px/15px var(--font-mono);
-    text-align: center; border-radius: 2px;
-    align-self: flex-start; margin-top: 2px;
-}
+.nav-logo { font-family: var(--font-brush); font-weight: 400; font-size: 30px; letter-spacing: .08em; white-space: nowrap; line-height: 1; display: flex; align-items: center; }
 .nav-meta { display: flex; gap: 18px; opacity: .55; }
 .nav-clock { font-variant-numeric: tabular-nums; }
 .nav-links { display: flex; gap: clamp(10px, 1.6vw, 22px); margin-left: auto; }

@@ -43,21 +43,11 @@
             });
         }
 
-        // ============ Lenis 平滑滚动 ============
-        let lenis = null;
+        // ============ 滚动：交给浏览器原生（Lenis 接管滚轮在老机器上会卡死） ============
         let scrollVelocity = 0;
-        if (!reduced && typeof Lenis !== 'undefined') {
-            lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1 });
-            lenis.on('scroll', (e) => {
-                scrollVelocity = e.velocity || 0;
-                ScrollTrigger.update();
-            });
-            gsap.ticker.add((t) => lenis.raf(t * 1000));
-            gsap.ticker.lagSmoothing(0);
-        }
+        gsap.ticker.add(() => { scrollVelocity *= 0.88; }); // 停止滚动后速度自然衰减
         function scrollTo(target, instant) {
-            if (lenis) lenis.scrollTo(target, { offset: -70, duration: instant ? 0 : 1.4, immediate: !!instant });
-            else document.querySelector(target)?.scrollIntoView({ behavior: instant ? 'auto' : 'smooth' });
+            document.querySelector(target)?.scrollIntoView({ behavior: instant ? 'auto' : 'smooth' });
         }
 
         // ============ 墨水吞页转场 ============
@@ -228,6 +218,7 @@
         let lastScroll = 0;
         window.addEventListener('scroll', () => {
             const y = window.scrollY;
+            scrollVelocity = y - lastScroll; // 跑马灯"滚得越快跑越快"的信号源
             navbar.classList.toggle('scrolled', y > 60);
             navbar.classList.toggle('hidden', y > 400 && y > lastScroll && !mmenuOpen);
             lastScroll = y;
@@ -384,8 +375,9 @@
             }).join(' ');
             const spans = mfCopy.querySelectorAll('.w');
             if (!reduced) {
+                // 不再钉屏（钉住滚动在老机器上像"卡死"），随滚过逐词点亮
                 ScrollTrigger.create({
-                    trigger: '#mfPin', start: 'top top', end: '+=160%', pin: true, scrub: 0.4,
+                    trigger: '#mfPin', start: 'top 70%', end: 'bottom 60%', scrub: 0.4,
                     onUpdate: (self) => {
                         const lit = Math.floor(self.progress * 1.15 * spans.length);
                         spans.forEach((s, i) => s.classList.toggle('lit', i < lit));
@@ -558,13 +550,13 @@
                 <a class="vm-outlink" href="https://www.bilibili.com/video/${bvid}" target="_blank" rel="noopener">在 BILIBILI 打开 ↗</a>`;
             videoModal.classList.add('open');
             videoModal.setAttribute('aria-hidden', 'false');
-            if (lenis) lenis.stop();
+            document.body.style.overflow = 'hidden';
         };
         function closeVideo() {
             vmFrame.innerHTML = '';
             videoModal.classList.remove('open');
             videoModal.setAttribute('aria-hidden', 'true');
-            if (lenis) lenis.start();
+            document.body.style.overflow = '';
         }
         $('vmClose')?.addEventListener('click', closeVideo);
         videoModal?.addEventListener('click', (e) => { if (e.target === videoModal) closeVideo(); });
