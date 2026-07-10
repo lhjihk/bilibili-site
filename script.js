@@ -43,12 +43,23 @@
             });
         }
 
-        // ============ 滚动：交给浏览器原生（Lenis 接管滚轮在老机器上会卡死） ============
+        // ============ Lenis 平滑滚动（高级感回归；卡死元凶“每帧强制排版”已在别处修掉） ============
+        let lenis = null;
         let scrollVelocity = 0;
-        gsap.ticker.add(() => { scrollVelocity *= 0.88; }); // 停止滚动后速度自然衰减
-        function scrollTo(target, instant) {
-            document.querySelector(target)?.scrollIntoView({ behavior: instant ? 'auto' : 'smooth' });
+        if (!reduced && typeof Lenis !== 'undefined') {
+            lenis = new Lenis({ lerp: 0.12, wheelMultiplier: 1 });
+            lenis.on('scroll', (e) => {
+                scrollVelocity = e.velocity || 0;
+                ScrollTrigger.update();
+            });
+            gsap.ticker.add((t) => lenis.raf(t * 1000));
+            gsap.ticker.lagSmoothing(0);
         }
+        function scrollTo(target, instant) {
+            if (lenis) lenis.scrollTo(target, { offset: -70, duration: instant ? 0 : 1.4, immediate: !!instant });
+            else document.querySelector(target)?.scrollIntoView({ behavior: instant ? 'auto' : 'smooth' });
+        }
+        gsap.ticker.add(() => { scrollVelocity *= 0.9; }); // 停止滚动后跑马灯提速信号自然归零
 
         // ============ 墨水吞页转场 ============
         const veil = $('inkVeil');
@@ -278,22 +289,37 @@
         });
 
         // ============ 随乐呼吸（音乐驱动全站） ============
+        // 原版只挑了几个小字号元素、幅度又小，肉眼基本看不见；现在提亮并给 LOGO/唱片一起呼吸
         if (!reduced) {
-            const pulseEls = () => document.querySelectorAll('.nav-logo sup, .ds-index b, .np-label, .hero-sub .mosaic, .marquee-chunk b');
+            const PULSE = [
+                { sel: '.nav-logo-cn', k: 0.09, origin: 'left center' },
+                { sel: '.deck-mini', k: 0.22 },
+                { sel: '.ds-index b', k: 0.55 },
+                { sel: '.np-label', k: 0.55 },
+                { sel: '.hero-sub .mosaic', k: 0.7 },
+                { sel: '.marquee-chunk b', k: 0.7 },
+            ];
+            const collect = () => PULSE.flatMap(({ sel, k, origin }) =>
+                Array.from(document.querySelectorAll(sel)).map((el) => {
+                    if (origin) el.style.transformOrigin = origin;
+                    return { el, k };
+                }));
             let cached = null, cacheT = 0;
             gsap.ticker.add((t) => {
-                const lv = window.__level || 0;
-                if (lv < 0.01) { // 没在放歌：归位一次后彻底歇着
+                const lv = Math.min((window.__level || 0) * 2.2, 1);
+                if (lv < 0.02) { // 没在放歌：归位一次后彻底歇着
                     if (cached) {
-                        cached.forEach((el) => { el.style.transform = ''; });
+                        cached.forEach(({ el }) => { el.style.transform = ''; });
                         cached = null;
                         document.documentElement.style.setProperty('--pulse', '0');
                     }
                     return;
                 }
-                if (!cached || t - cacheT > 3) { cached = pulseEls(); cacheT = t; }
-                const s = 1 + lv * 0.5;
-                cached.forEach((el) => { el.style.transform = `scale(${s})`; el.style.display = 'inline-block'; });
+                if (!cached || t - cacheT > 3) { cached = collect(); cacheT = t; }
+                cached.forEach(({ el, k }) => {
+                    el.style.display = 'inline-block';
+                    el.style.transform = `scale(${1 + lv * k})`;
+                });
                 document.documentElement.style.setProperty('--pulse', lv.toFixed(3));
             });
         }
@@ -375,9 +401,8 @@
             }).join(' ');
             const spans = mfCopy.querySelectorAll('.w');
             if (!reduced) {
-                // 不再钉屏（钉住滚动在老机器上像"卡死"），随滚过逐词点亮
                 ScrollTrigger.create({
-                    trigger: '#mfPin', start: 'top 70%', end: 'bottom 60%', scrub: 0.4,
+                    trigger: '#mfPin', start: 'top top', end: '+=160%', pin: true, scrub: 0.4, anticipatePin: 1,
                     onUpdate: (self) => {
                         const lit = Math.floor(self.progress * 1.15 * spans.length);
                         spans.forEach((s, i) => s.classList.toggle('lit', i < lit));
@@ -551,12 +576,14 @@
             videoModal.classList.add('open');
             videoModal.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
+            if (lenis) lenis.stop();
         };
         function closeVideo() {
             vmFrame.innerHTML = '';
             videoModal.classList.remove('open');
             videoModal.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = '';
+            if (lenis) lenis.start();
         }
         $('vmClose')?.addEventListener('click', closeVideo);
         videoModal?.addEventListener('click', (e) => { if (e.target === videoModal) closeVideo(); });
