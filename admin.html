@@ -106,7 +106,7 @@
             <button class="addbtn" data-add="tracks">＋ 加一首</button>
         </div>
         <div class="panel" id="p-featured">
-            <p class="panel-tip">首页「选你的武器」的三张大卡。cover 填封面图链接（B站封面右键复制图片地址）。</p>
+            <p class="panel-tip">首页「选你的武器」三张大卡 + 影像馆子页「三支主打」共用这份数据，改一处两页同步。cover 填封面图链接（B站封面右键复制图片地址），换视频后封面/毛笔字标题自动跟着变；标题常用字都有毛笔字形，无需担心缺字。</p>
             <div id="list-featured"></div>
             <button class="addbtn" data-add="featured">＋ 加一张主打卡</button>
         </div>
@@ -184,6 +184,7 @@
                         <option value="melocoton">蜜桃 MELOCOTÓN</option>
                         <option value="hielo">冰蓝 HIELO</option>
                     </select></div>
+                    <div><label>行色引导重现间隔（小时；0=每次进站都弹，默认24）</label><input type="number" min="0" step="1" placeholder="24" data-set="gateHours"></div>
                 </div>
             </div>
             <div class="setgroup">
@@ -249,6 +250,6 @@
             <textarea id="mdEditorBox" style="flex:1;resize:none;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.8"></textarea>
         </div>
     </div>
-    <script src="admin.js?v=20260712"></script>
+    <script src="admin.js?v=20260712b"></script>
 </body>
 </html>

@@ -58,7 +58,13 @@
         renderArchive(SITE.videos || []);
         bindFilters();
         bindModal();
-        if (!reduced && window.gsap) animate();
+        if (!reduced && window.gsap) {
+            animate();
+            // 封面图晚到会改变布局，载完刷新触发点，防止标题揭示错过/错位
+            window.addEventListener('load', function () {
+                if (window.ScrollTrigger) ScrollTrigger.refresh();
+            });
+        }
     }
 
     // ---------- 三支主打 ----------

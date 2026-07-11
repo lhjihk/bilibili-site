@@ -8,9 +8,9 @@
     <meta name="description" content="路即天涯的旅行手账：征途、笔记与印章。">
     <script>/* 书法字体秒开：先用上次记住的选择，content.json 到位后以后台设置为准 */
     (function(){try{var b=localStorage.getItem('ljty-brush');if(b)document.documentElement.dataset.brush=b;}catch(e){}})();</script>
-    <link rel="stylesheet" href="journal.css?v=20260712">
-    <link rel="stylesheet" href="palette.css?v=20260712">
-    <script src="palette.js?v=20260712"></script>
+    <link rel="stylesheet" href="journal.css?v=20260712b">
+    <link rel="stylesheet" href="palette.css?v=20260712b">
+    <script src="palette.js?v=20260712b"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+SC:wght@400;600;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -27,8 +27,8 @@
                 <svg viewBox="0 0 140 140">
                     <circle cx="70" cy="70" r="64" fill="none" stroke="currentColor" stroke-width="2.5"/>
                     <circle cx="70" cy="70" r="55" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="3 5"/>
-                    <text x="70" y="62" text-anchor="middle" font-size="26" font-weight="900" fill="currentColor" font-family="'Noto Serif SC',serif">封</text>
-                    <text x="70" y="94" text-anchor="middle" font-size="26" font-weight="900" fill="currentColor" font-family="'Noto Serif SC',serif">存</text>
+                    <text x="70" y="62" text-anchor="middle" font-size="26" font-weight="900" fill="currentColor">封</text>
+                    <text x="70" y="94" text-anchor="middle" font-size="26" font-weight="900" fill="currentColor">存</text>
                 </svg>
             </div>
             <h1 class="gate-title">此账已封存</h1>
@@ -55,14 +55,19 @@
         <div class="jnight-sticky">
             <canvas id="starCanvas" aria-hidden="true"></canvas>
             <div class="jn-moon" aria-hidden="true"></div>
+            <div class="jn-photo" aria-hidden="true"></div>
             <svg class="jn-mtn jn-mtn-far" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
                 <path d="M0,320 L0,210 L180,120 L340,190 L520,80 L700,170 L880,60 L1080,160 L1260,100 L1440,180 L1440,320 Z"/>
             </svg>
             <svg class="jn-mtn jn-mtn-near" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
                 <path d="M0,320 L0,250 L220,150 L420,230 L640,120 L860,220 L1060,140 L1260,230 L1440,170 L1440,320 Z"/>
             </svg>
+            <div class="jn-mist m1" aria-hidden="true"></div>
+            <div class="jn-mist m2" aria-hidden="true"></div>
             <div class="jn-core">
                 <p class="jn-eyebrow mono" data-txt="jhEyebrow">FIELD NOTES · 行路笔记 · 亲历亲录</p>
+                <span class="jn-flank fl" data-txt="jhSideL">一骑 · 一琴 · 一路</span>
+                <span class="jn-flank fr" data-txt="jhSideR">山河为幕 · 星斗为灯</span>
                 <h1 class="jn-title" data-txt="jhTitle">旅人手账</h1>
                 <p class="jn-en" data-txt="jhEn">Wayfarer's Journal</p>
                 <p class="jn-sub" data-txt-html="jhSub">骑出去想明白的事，回来趁热写下来。<br><em>Every road below was ridden, every word was lived.</em></p>
@@ -192,6 +197,6 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
-    <script src="journal.js?v=20260712"></script>
+    <script src="journal.js?v=20260712b"></script>
 </body>
 </html>

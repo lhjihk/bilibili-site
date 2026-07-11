@@ -10,7 +10,8 @@
     'use strict';
 
     var KEY = 'ljty-palette';        // 访客自选
-    var SEEN = 'ljty-palette-seen';  // 是否看过进站引导
+    var GATE_AT = 'ljty-gate-at';    // 上次看引导的时间戳（限时重现）
+    var gateHours = 24;              // 引导重现间隔，后台 settings.gateHours 可调，0=每次都弹
 
     // 水墨简笔图标（静态 SVG，stroke 跟随色块墨色）
     var IC = {
@@ -77,6 +78,10 @@
     // 后台默认配色 + 引导文案：仅当访客没有自选时套用默认色（不写入访客偏好）
     function applyDefaultFromSettings(settings) {
         if (settings && settings.texts) GATE_TEXTS = settings.texts;
+        if (settings && settings.gateHours != null && settings.gateHours !== '') {
+            var gh = parseFloat(settings.gateHours);
+            if (isFinite(gh) && gh >= 0) gateHours = gh;
+        }
         if (stored() !== null) return;
         var d = (settings && settings.palette) || '';
         if (d && byId(d).id === d) setAttr(d);
@@ -126,7 +131,7 @@
                 + '<span>' + p.cn + '</span><span class="en">' + p.en + '</span>';
             b.addEventListener('click', function () {
                 apply(p.id, true);
-                try { localStorage.setItem(SEEN, '1'); } catch (e) { }
+                try { localStorage.setItem(GATE_AT, String(Date.now())); } catch (e) { }
             });
             dock.appendChild(b);
         });
@@ -188,7 +193,7 @@
         });
 
         function leave(chosenId) {
-            try { localStorage.setItem(SEEN, '1'); } catch (e) { }
+            try { localStorage.setItem(GATE_AT, String(Date.now())); } catch (e) { }
             if (chosenId !== null) apply(chosenId, true);
             else setAttr(stored() || '');   // 跳过：还原到进门前的状态
             gate.classList.add('hide');
@@ -200,7 +205,11 @@
     }
 
     function needGate() {
-        try { return !localStorage.getItem(SEEN); } catch (e) { return false; }
+        try {
+            var t = parseInt(localStorage.getItem(GATE_AT) || '0', 10);
+            if (!t) return true;
+            return (Date.now() - t) > gateHours * 3600 * 1000;
+        } catch (e) { return false; }
     }
 
     // 主页有加载器动画：等它自毁后再弹引导，不打断开场
@@ -217,7 +226,10 @@
 
     document.addEventListener('DOMContentLoaded', function () {
         buildFab();
-        if (needGate()) whenLoaderGone(function () { setTimeout(buildGate, 350); });
+        // 是否弹引导延到加载器退场后再判定：此时后台设置(间隔小时数)已就位
+        whenLoaderGone(function () {
+            setTimeout(function () { if (needGate()) buildGate(); }, 350);
+        });
     });
 
     // 后台默认配色/文案：主页走 site:ready；手账/影像页自取数后调 window.__paletteDefault

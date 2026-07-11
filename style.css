@@ -8,23 +8,23 @@
 /* LOGO 毛笔字：庞门正道粗书体（免费商用，天生厚重毛笔），全站文案700字符子集 */
 @font-face {
     font-family: "LogoBrush";
-    src: url("assets/fonts/pangmen-cushu-site.woff2?v=2") format("woff2");
+    src: url("assets/fonts/pangmen-cushu-site.woff2?v=3") format("woff2");
     font-display: swap;
 }
 /* 可切换书法字体（编辑台·站点设置选择；全站文案620字子集，浏览器只下载选中那款） */
 @font-face {
     font-family: "BrushXia"; /* 演示夏行楷 · 免费商用 */
-    src: url("assets/fonts/xiaxingkai-site.woff2?v=2") format("woff2");
+    src: url("assets/fonts/xiaxingkai-site.woff2?v=3") format("woff2");
     font-display: swap;
 }
 @font-face {
     font-family: "BrushHonglei"; /* 鸿雷行书简体 · 免费商用 */
-    src: url("assets/fonts/honglei-site.woff2?v=2") format("woff2");
+    src: url("assets/fonts/honglei-site.woff2?v=3") format("woff2");
     font-display: swap;
 }
 @font-face {
     font-family: "BrushDongfang"; /* 阿里妈妈东方大楷 · 免费商用 */
-    src: url("assets/fonts/dongfangdakai-site.woff2?v=2") format("woff2");
+    src: url("assets/fonts/dongfangdakai-site.woff2?v=3") format("woff2");
     font-display: swap;
 }
 /* 行书类偏瘦：描边整体均匀加粗，四字同厚不突兀 */
@@ -640,10 +640,10 @@ img { display: block; max-width: 100%; }
 .fvc-dot.tl { top: -4px; left: -4px; } .fvc-dot.tr { top: -4px; right: -4px; }
 .fvc-dot.bl { bottom: -4px; left: -4px; } .fvc-dot.br { bottom: -4px; right: -4px; }
 .film-vault-cta:hover .fvc-dot { transform: scale(1.7); }
-.fvc-cn {
-    font-family: var(--font-brush); font-weight: 400;
-    font-size: clamp(30px, 4vw, 56px); line-height: 1.2;
-    -webkit-text-stroke: var(--brush-stroke, 0px) currentColor;
+.fvc-cn { /* 用全站统一中文黑体，不上毛笔 */
+    font-family: var(--font-cn); font-weight: 900;
+    font-size: clamp(26px, 3.4vw, 48px); line-height: 1.2;
+    letter-spacing: .06em;
 }
 .fvc-en { font-size: 11px; letter-spacing: .22em; opacity: .6; text-align: center; }
 .film-vault-cta:hover .fvc-en { color: var(--purple); opacity: 1; }
@@ -961,8 +961,9 @@ img { display: block; max-width: 100%; }
 }
 .colo-line {
     writing-mode: vertical-rl;
-    font-family: var(--font-serif-cn); font-weight: 500;
-    font-size: 15px; letter-spacing: .52em;
+    font-family: var(--font-brush); font-weight: 400; /* 跟随后台所选书法字体 */
+    -webkit-text-stroke: var(--brush-stroke, 0px) currentColor;
+    font-size: 16px; letter-spacing: .52em;
     color: color-mix(in srgb, var(--black) 62%, transparent);
 }
 .colo-seal {
