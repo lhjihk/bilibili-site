@@ -55,26 +55,34 @@
             gsap.ticker.add((t) => lenis.raf(t * 1000));
             gsap.ticker.lagSmoothing(0);
 
-            // 自适应保险：老机器/老浏览器帧率撑不住时，自动退回原生滚动（其他人无感）
-            setTimeout(() => {
+            // ---- 自适应保险：撑不住丝滑滚动的设备自动退回原生滚动，健康设备无感 ----
+            const dropLenis = () => {
                 if (!lenis) return;
-                let frames = 0;
-                let t0 = performance.now();
-                (function probe() {
-                    if (document.hidden) { // 切了后台就重新计，防误判
-                        frames = 0; t0 = performance.now();
-                        requestAnimationFrame(probe); return;
-                    }
-                    frames++;
-                    const el = performance.now() - t0;
-                    if (el < 3000) { requestAnimationFrame(probe); return; }
-                    if (frames / (el / 1000) < 32) {
-                        lenis.destroy();
-                        lenis = null;
-                        gsap.ticker.lagSmoothing(500, 33);
-                    }
-                })();
-            }, 3500); // 等 loader/开场动画过去再测，别误判
+                lenis.destroy();
+                lenis = null;
+                gsap.ticker.lagSmoothing(500, 33);
+            };
+            // 保险一（直接证据）：滚轮在转、页面却不动 = 卡死，立刻退
+            let wheelStuck = 0;
+            window.__unstick = () => { wheelStuck = 0; }; // 页面真动了就清零（navbar 滚动监听里调）
+            window.addEventListener('wheel', (e) => {
+                if (!lenis) return;
+                const max = document.documentElement.scrollHeight - innerHeight;
+                const y = window.scrollY;
+                if ((e.deltaY > 0 && y >= max - 4) || (e.deltaY < 0 && y <= 4)) return; // 到顶/到底属正常
+                if (++wheelStuck > 20) dropLenis();
+            }, { passive: true });
+            // 保险二（体质检测）：滚动窗口内帧率持续低于 30，也退
+            let fpsFrames = 0, fpsT0 = performance.now();
+            document.addEventListener('visibilitychange', () => { fpsFrames = 0; fpsT0 = performance.now(); });
+            gsap.ticker.add(() => {
+                if (!lenis) return;
+                fpsFrames++;
+                const now = performance.now();
+                if (now - fpsT0 < 4000) return;
+                if (!document.hidden && fpsFrames / ((now - fpsT0) / 1000) < 30) dropLenis();
+                fpsFrames = 0; fpsT0 = now;
+            });
         }
         function scrollTo(target, instant) {
             if (lenis) lenis.scrollTo(target, { offset: -70, duration: instant ? 0 : 1.4, immediate: !!instant });
@@ -215,6 +223,7 @@
             if (reduced) return;
             gsap.timeline()
                 .from('.ht-word', { yPercent: 110, duration: 1.1, ease: 'expo.out', stagger: 0.09 })
+                .from('.ht-cn .hc', { opacity: 0, filter: 'blur(8px)', scale: 1.15, stagger: 0.1, duration: 0.6, ease: 'power2.out' }, '-=0.75')
                 .from('.hero-foot', { opacity: 0, y: 24, duration: 0.7, ease: 'power2.out' }, '-=0.55')
                 .from('.hf', { opacity: 0, y: -10, duration: 0.5, stagger: 0.08 }, '-=0.5')
                 .from('.navbar', { opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.5')
@@ -251,6 +260,7 @@
         window.addEventListener('scroll', () => {
             const y = window.scrollY;
             scrollVelocity = y - lastScroll; // 跑马灯"滚得越快跑越快"的信号源
+            if (window.__unstick) window.__unstick(); // 页面在动，滚轮卡死计数清零
             navbar.classList.toggle('scrolled', y > 60);
             navbar.classList.toggle('hidden', y > 400 && y > lastScroll && !mmenuOpen);
             lastScroll = y;

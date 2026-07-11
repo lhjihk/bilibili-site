@@ -141,7 +141,7 @@ img { display: block; max-width: 100%; }
     font-weight: 400; line-height: 1;
     font-variant-numeric: tabular-nums;
 }
-.loader-name { font-family: var(--font-brush); font-weight: 400; font-size: 26px; letter-spacing: .4em; padding-left: .4em; }
+.loader-name { font-family: var(--font-brush); font-weight: 400; font-size: 26px; letter-spacing: .4em; padding-left: .4em; -webkit-text-stroke: .02em currentColor; }
 .loader-name i { font-style: normal; color: var(--purple); font-size: 11px; vertical-align: 10px; }
 
 /* ============ 光标 ============ */
@@ -181,7 +181,13 @@ img { display: block; max-width: 100%; }
 /* 不用 backdrop-filter：毛玻璃叠在 WebGL 画布上是 Safari 卡顿源，改用更实的底色 */
 .navbar.scrolled { background: color-mix(in srgb, var(--beige) 95%, transparent); box-shadow: 0 1px 0 color-mix(in srgb, var(--black) 10%, transparent); }
 .navbar.hidden { transform: translateY(-110%); }
-.nav-logo { font-family: var(--font-brush); font-weight: 400; font-size: 30px; letter-spacing: .08em; white-space: nowrap; line-height: 1; display: flex; align-items: center; }
+.nav-logo { font-family: var(--font-brush); font-weight: 400; font-size: 30px; letter-spacing: .05em; white-space: nowrap; line-height: 1; display: flex; align-items: center; -webkit-text-stroke: .02em currentColor; }
+/* 书法章法：四字轻微错落，不做等大平齐 */
+.nav-logo-cn b { font-weight: 400; display: inline-block; }
+.nav-logo-cn b:nth-child(1) { font-size: 1.04em; transform: translateY(.02em); }
+.nav-logo-cn b:nth-child(2) { font-size: .86em; transform: translateY(-.05em); }
+.nav-logo-cn b:nth-child(3) { font-size: .97em; transform: translateY(.03em); }
+.nav-logo-cn b:nth-child(4) { font-size: 1.08em; transform: translateY(-.01em); }
 .nav-meta { display: flex; gap: 18px; opacity: .55; }
 .nav-clock { font-variant-numeric: tabular-nums; }
 .nav-links { display: flex; gap: clamp(10px, 1.6vw, 22px); margin-left: auto; }
@@ -297,9 +303,15 @@ img { display: block; max-width: 100%; }
 .ht-mid sup { font-size: .22em; color: var(--purple); font-weight: 600; }
 .ht-cn {
     font-family: var(--font-brush); font-weight: 400;
-    font-size: .74em; letter-spacing: .05em;
+    font-size: .74em; letter-spacing: .03em;
+    -webkit-text-stroke: .018em currentColor;
 }
 .ht-cn i { font-style: normal; color: var(--purple); }
+.ht-cn .hc { display: inline-block; }
+.ht-cn .hc:nth-child(1) { font-size: 1.04em; transform: translateY(.02em); }
+.ht-cn .hc:nth-child(2) { font-size: .86em; transform: translateY(-.05em); }
+.ht-cn .hc:nth-child(3) { font-size: .97em; transform: translateY(.03em); }
+.ht-cn .hc:nth-child(4) { font-size: 1.08em; transform: translateY(-.01em); }
 
 .hero-foot {
     position: relative; z-index: 1;
@@ -764,8 +776,13 @@ img { display: block; max-width: 100%; }
     line-height: .95; letter-spacing: .01em;
     text-align: center;
     white-space: nowrap;
+    -webkit-text-stroke: .016em currentColor;
 }
-.footer-giant .fg-char { display: inline-block; will-change: transform; }
+.footer-giant .fg-char { display: inline-block; will-change: transform; position: relative; }
+.footer-giant .fg-char:nth-child(1) { font-size: 1.03em; top: .015em; }
+.footer-giant .fg-char:nth-child(2) { font-size: .88em; top: -.04em; }
+.footer-giant .fg-char:nth-child(3) { font-size: .97em; top: .025em; }
+.footer-giant .fg-char:nth-child(4) { font-size: 1.07em; top: -.01em; }
 .footer-meta {
     display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
     border-top: 1px solid rgba(244, 243, 235, .2);
