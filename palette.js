@@ -152,6 +152,8 @@
         gate.setAttribute('role', 'dialog');
         gate.setAttribute('aria-label', '选择网站配色');
         gate.innerHTML =
+            '<span class="pgate-aur a" aria-hidden="true"></span>' +
+            '<span class="pgate-aur b" aria-hidden="true"></span>' +
             '<div class="pgate-bar">' +
             '  <span class="brand">路即天涯</span>' +
             '  <span class="live"><i></i>在路上 · ON THE ROAD</span>' +

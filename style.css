@@ -8,23 +8,23 @@
 /* LOGO 毛笔字：庞门正道粗书体（免费商用，天生厚重毛笔），全站文案700字符子集 */
 @font-face {
     font-family: "LogoBrush";
-    src: url("assets/fonts/pangmen-cushu-site.woff2") format("woff2");
+    src: url("assets/fonts/pangmen-cushu-site.woff2?v=2") format("woff2");
     font-display: swap;
 }
 /* 可切换书法字体（编辑台·站点设置选择；全站文案620字子集，浏览器只下载选中那款） */
 @font-face {
     font-family: "BrushXia"; /* 演示夏行楷 · 免费商用 */
-    src: url("assets/fonts/xiaxingkai-site.woff2") format("woff2");
+    src: url("assets/fonts/xiaxingkai-site.woff2?v=2") format("woff2");
     font-display: swap;
 }
 @font-face {
     font-family: "BrushHonglei"; /* 鸿雷行书简体 · 免费商用 */
-    src: url("assets/fonts/honglei-site.woff2") format("woff2");
+    src: url("assets/fonts/honglei-site.woff2?v=2") format("woff2");
     font-display: swap;
 }
 @font-face {
     font-family: "BrushDongfang"; /* 阿里妈妈东方大楷 · 免费商用 */
-    src: url("assets/fonts/dongfangdakai-site.woff2") format("woff2");
+    src: url("assets/fonts/dongfangdakai-site.woff2?v=2") format("woff2");
     font-display: swap;
 }
 /* 行书类偏瘦：描边整体均匀加粗，四字同厚不突兀 */

@@ -21,6 +21,8 @@
         });
 
     function init(SITE) {
+        try { sessionStorage.removeItem('ink-in'); } catch (e) { } // 消化主页墨水转场标记
+
         var S = SITE.settings || {};
 
         // 书法字体（与主页 boot.js 同一逻辑）

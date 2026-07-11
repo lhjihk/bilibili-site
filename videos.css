@@ -9,22 +9,22 @@
 
 @font-face {
     font-family: "LogoBrush";
-    src: url("assets/fonts/pangmen-cushu-site.woff2") format("woff2");
+    src: url("assets/fonts/pangmen-cushu-site.woff2?v=2") format("woff2");
     font-display: swap;
 }
 @font-face {
     font-family: "BrushXia";
-    src: url("assets/fonts/xiaxingkai-site.woff2") format("woff2");
+    src: url("assets/fonts/xiaxingkai-site.woff2?v=2") format("woff2");
     font-display: swap;
 }
 @font-face {
     font-family: "BrushHonglei";
-    src: url("assets/fonts/honglei-site.woff2") format("woff2");
+    src: url("assets/fonts/honglei-site.woff2?v=2") format("woff2");
     font-display: swap;
 }
 @font-face {
     font-family: "BrushDongfang";
-    src: url("assets/fonts/dongfangdakai-site.woff2") format("woff2");
+    src: url("assets/fonts/dongfangdakai-site.woff2?v=2") format("woff2");
     font-display: swap;
 }
 html[data-brush="xia"] { --font-brush: "BrushXia", "Noto Sans SC", sans-serif; --brush-stroke: .032em; }

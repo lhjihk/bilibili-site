@@ -44,7 +44,7 @@
 
             // 顶部导航 + 移动端菜单跟随模块拖动排序，编号重排，隐藏模块入口一并隐藏
             try {
-                const NAV_OF = { manifesto: '#manifesto', weapon: '#weapon', listen: '#listen', film: '#film', writing: 'journal.html', about: '#about' };
+                const NAV_OF = { manifesto: '#manifesto', weapon: '#weapon', listen: '#listen', film: 'videos.html', writing: 'journal.html', about: '#about' };
                 ['.nav-links', '.mmenu'].forEach((wrapSel) => {
                     const wrap = document.querySelector(wrapSel);
                     if (!wrap) return;
