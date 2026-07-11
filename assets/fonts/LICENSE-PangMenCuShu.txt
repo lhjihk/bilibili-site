@@ -1,0 +1,5 @@
+pangmen-cushu-logo.woff2
+来源：庞门正道粗书体 (PangMenZhengDao-Cu)，庞门正道 x 郑庆科
+授权：作者公开声明永久免费商用
+获取：https://github.com/wordshub/free-font（assets/font/中文/庞门正道字体系列/庞门正道粗书体.ttf）
+本文件为仅含「路即天涯」四字的子集，用于本站 LOGO 展示。

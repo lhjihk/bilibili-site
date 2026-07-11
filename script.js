@@ -600,10 +600,6 @@
         // ============ 视频弹层 ============
         const videoModal = $('videoModal'), vmFrame = $('vmFrame');
         window.openVideo = function (bvid) {
-            if (!canHover) { // 手机：网页内嵌B站播放器不可靠，直接去B站（可唤起App）
-                window.open('https://www.bilibili.com/video/' + bvid, '_blank', 'noopener');
-                return;
-            }
             vmFrame.innerHTML = `
                 <iframe src="https://player.bilibili.com/player.html?bvid=${bvid}&autoplay=1&danmaku=0&high_quality=1"
                     allow="autoplay; fullscreen" allowfullscreen scrolling="no"></iframe>

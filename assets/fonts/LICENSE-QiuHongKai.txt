@@ -1,5 +1,0 @@
-qiuhongkai-logo.woff2
-来源：演示秋鸿楷 (Slideqiuhong) v1.000，作者：秋水 / keynote研究所
-授权：作者公开声明永久免费商用（"演示字体"系列）
-获取：https://github.com/wordshub/free-font（assets/font/中文/其他字体/演示秋鸿楷.ttf）
-本文件为仅含「路即天涯」四字的子集，用于本站 LOGO 展示。
