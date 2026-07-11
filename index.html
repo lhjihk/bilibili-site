@@ -6,7 +6,11 @@
     <meta name="referrer" content="no-referrer">
     <title>路即天涯® — 声音实验室 / THE ROAD IS THE HORIZON</title>
     <meta name="description" content="路即天涯 — 吉他手、创作者、旅行者。原创音乐、影像与旅行文章的声音实验室。">
+    <script>/* 书法字体秒开：先用上次记住的选择，content.json 到位后以后台设置为准 */
+    (function(){try{var b=localStorage.getItem('ljty-brush');if(b)document.documentElement.dataset.brush=b;}catch(e){}})();</script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="palette.css">
+    <script src="palette.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700;1,800&family=IBM+Plex+Mono:wght@400;500&family=Palette+Mosaic&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
@@ -208,6 +212,11 @@
             <button class="chip" data-filter="travel" data-scramble>旅行</button>
         </div>
         <div class="film-grid" id="filmGrid"></div>
+        <a class="film-vault-cta" href="videos.html" data-cursor="GO">
+            <span class="fvc-dot tl"></span><span class="fvc-dot tr"></span><span class="fvc-dot bl"></span><span class="fvc-dot br"></span>
+            <span class="fvc-cn" data-txt="fvCtaCn">走进影像馆</span>
+            <span class="fvc-en mono" data-txt="fvCtaEn">ENTER THE FILM VAULT — 大银幕 · 流体墨水 · 就地开播 →</span>
+        </a>
     </section>
 
     <!-- 禅 · 远山墨影分隔 -->

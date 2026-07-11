@@ -5,12 +5,32 @@
    Hanken Grotesk + IBM Plex Mono + Palette Mosaic + Noto Sans SC
    ============================================================ */
 
-/* LOGO 毛笔字：庞门正道粗书体（免费商用，天生厚重毛笔），只裁了「路即天涯」四字，3KB */
+/* LOGO 毛笔字：庞门正道粗书体（免费商用，天生厚重毛笔），全站文案700字符子集 */
 @font-face {
     font-family: "LogoBrush";
-    src: url("assets/fonts/pangmen-cushu-logo.woff2") format("woff2");
+    src: url("assets/fonts/pangmen-cushu-site.woff2") format("woff2");
     font-display: swap;
 }
+/* 可切换书法字体（编辑台·站点设置选择；全站文案620字子集，浏览器只下载选中那款） */
+@font-face {
+    font-family: "BrushXia"; /* 演示夏行楷 · 免费商用 */
+    src: url("assets/fonts/xiaxingkai-site.woff2") format("woff2");
+    font-display: swap;
+}
+@font-face {
+    font-family: "BrushHonglei"; /* 鸿雷行书简体 · 免费商用 */
+    src: url("assets/fonts/honglei-site.woff2") format("woff2");
+    font-display: swap;
+}
+@font-face {
+    font-family: "BrushDongfang"; /* 阿里妈妈东方大楷 · 免费商用 */
+    src: url("assets/fonts/dongfangdakai-site.woff2") format("woff2");
+    font-display: swap;
+}
+/* 行书类偏瘦：描边整体均匀加粗，四字同厚不突兀 */
+html[data-brush="xia"] { --font-brush: "BrushXia", "Noto Sans SC", sans-serif; --brush-stroke: .032em; }
+html[data-brush="honglei"] { --font-brush: "BrushHonglei", "Noto Sans SC", sans-serif; --brush-stroke: .03em; }
+html[data-brush="dongfang"] { --font-brush: "BrushDongfang", "Noto Sans SC", sans-serif; --brush-stroke: 0px; }
 
 :root {
     --paper-bg: #f4f3eb;
@@ -141,7 +161,7 @@ img { display: block; max-width: 100%; }
     font-weight: 400; line-height: 1;
     font-variant-numeric: tabular-nums;
 }
-.loader-name { font-family: var(--font-brush); font-weight: 400; font-size: 26px; letter-spacing: .4em; padding-left: .4em; }
+.loader-name { font-family: var(--font-brush); font-weight: 400; font-size: 26px; letter-spacing: .4em; padding-left: .4em; -webkit-text-stroke: var(--brush-stroke, 0px) currentColor; }
 .loader-name i { font-style: normal; color: var(--purple); font-size: 11px; vertical-align: 10px; }
 
 /* ============ 光标 ============ */
@@ -181,7 +201,7 @@ img { display: block; max-width: 100%; }
 /* 不用 backdrop-filter：毛玻璃叠在 WebGL 画布上是 Safari 卡顿源，改用更实的底色 */
 .navbar.scrolled { background: color-mix(in srgb, var(--beige) 95%, transparent); box-shadow: 0 1px 0 color-mix(in srgb, var(--black) 10%, transparent); }
 .navbar.hidden { transform: translateY(-110%); }
-.nav-logo { font-family: var(--font-brush); font-weight: 400; font-size: 29px; letter-spacing: .06em; white-space: nowrap; line-height: 1; display: flex; align-items: center; }
+.nav-logo { font-family: var(--font-brush); font-weight: 400; font-size: 29px; letter-spacing: .06em; white-space: nowrap; line-height: 1; display: flex; align-items: center; -webkit-text-stroke: var(--brush-stroke, 0px) currentColor; }
 .nav-logo-cn b { font-weight: 400; }
 .nav-meta { display: flex; gap: 18px; opacity: .55; }
 .nav-clock { font-variant-numeric: tabular-nums; }
@@ -299,6 +319,7 @@ img { display: block; max-width: 100%; }
 .ht-cn {
     font-family: var(--font-brush); font-weight: 400;
     font-size: .74em; letter-spacing: .04em;
+    -webkit-text-stroke: var(--brush-stroke, 0px) currentColor;
 }
 .ht-cn i { font-style: normal; color: var(--purple); }
 .ht-cn .hc { display: inline-block; }
@@ -566,6 +587,41 @@ img { display: block; max-width: 100%; }
 .platform-link:hover { background: var(--black); color: var(--beige); }
 
 /* ============ (04) 影像 ============ */
+/* 影像档案 → 黑盒放映室：与影像馆子页同一血脉（wildmind 式整块硬切衔接）
+   手法：局部换 --beige/--black 两个变量，区块内所有旧样式自动适配，零破坏 */
+.section.film {
+    --beige: var(--dark-bg);
+    --black: var(--paper-bg);
+    background: var(--dark-bg);
+    color: var(--black);
+}
+/* 通往影像馆的检票口：虚线框 + 印泥红角点（子页同款语言） */
+.film-vault-cta {
+    position: relative;
+    margin-top: clamp(36px, 5vh, 64px);
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    padding: clamp(26px, 3.5vw, 48px) 20px;
+    border: 1px dashed color-mix(in srgb, var(--black) 40%, transparent);
+    text-decoration: none; color: inherit;
+    transition: border-color .3s;
+}
+.film-vault-cta:hover { border-color: color-mix(in srgb, var(--black) 75%, transparent); }
+.fvc-dot {
+    position: absolute; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--seal-red);
+    transition: transform .3s var(--ease-out);
+}
+.fvc-dot.tl { top: -4px; left: -4px; } .fvc-dot.tr { top: -4px; right: -4px; }
+.fvc-dot.bl { bottom: -4px; left: -4px; } .fvc-dot.br { bottom: -4px; right: -4px; }
+.film-vault-cta:hover .fvc-dot { transform: scale(1.7); }
+.fvc-cn {
+    font-family: var(--font-brush); font-weight: 400;
+    font-size: clamp(30px, 4vw, 56px); line-height: 1.2;
+    -webkit-text-stroke: var(--brush-stroke, 0px) currentColor;
+}
+.fvc-en { font-size: 11px; letter-spacing: .22em; opacity: .6; text-align: center; }
+.film-vault-cta:hover .fvc-en { color: var(--purple); opacity: 1; }
+
 .film-filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: clamp(28px, 4vh, 48px); }
 .chip {
     border: 1px solid var(--black); border-radius: 999px;
@@ -762,6 +818,7 @@ img { display: block; max-width: 100%; }
 .footer-giant {
     display: block;
     font-family: var(--font-brush); font-weight: 400;
+    -webkit-text-stroke: var(--brush-stroke, 0px) currentColor;
     font-size: clamp(84px, 18.5vw, 320px);
     line-height: .95; letter-spacing: .01em;
     text-align: center;
@@ -892,7 +949,8 @@ img { display: block; max-width: 100%; }
 }
 .colo-seal i {
     font-style: normal;
-    font-family: var(--font-serif-cn); font-weight: 700;
+    font-family: var(--font-brush); font-weight: 400;
+    -webkit-text-stroke: var(--brush-stroke, 0px) currentColor;
     font-size: 13px; line-height: 1;
     display: grid; place-items: center;
 }

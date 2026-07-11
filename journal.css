@@ -3,14 +3,35 @@
    完全另一个世界：衬线字、纸纹、复古史诗感
    ============================================================ */
 
-/* LOGO 毛笔字：庞门正道粗书体子集（与主页共用同一文件） */
+/* LOGO 毛笔字：庞门正道粗书体子集（与主页共用同一文件，700字符） */
 @font-face {
     font-family: "LogoBrush";
-    src: url("assets/fonts/pangmen-cushu-logo.woff2") format("woff2");
+    src: url("assets/fonts/pangmen-cushu-site.woff2") format("woff2");
     font-display: swap;
 }
+/* 可切换书法字体（与主页同一套，编辑台·站点设置选择） */
+@font-face {
+    font-family: "BrushXia";
+    src: url("assets/fonts/xiaxingkai-site.woff2") format("woff2");
+    font-display: swap;
+}
+@font-face {
+    font-family: "BrushHonglei";
+    src: url("assets/fonts/honglei-site.woff2") format("woff2");
+    font-display: swap;
+}
+@font-face {
+    font-family: "BrushDongfang";
+    src: url("assets/fonts/dongfangdakai-site.woff2") format("woff2");
+    font-display: swap;
+}
+html[data-brush="xia"] { --font-brush: "BrushXia", var(--serif); --brush-stroke: .032em; }
+html[data-brush="honglei"] { --font-brush: "BrushHonglei", var(--serif); --brush-stroke: .03em; }
+html[data-brush="dongfang"] { --font-brush: "BrushDongfang", var(--serif); --brush-stroke: 0px; }
 
 :root {
+    --font-brush: "LogoBrush", "Noto Serif SC", serif;
+    --brush-stroke: 0px;
     --parch: #ece3cf;
     --parch-deep: #e2d6ba;
     --ink: #2b2117;
@@ -142,12 +163,15 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 }
 .jn-eyebrow { color: #c8a86a; margin-bottom: 24px; letter-spacing: .3em; }
 .jn-title {
-    font-weight: 900;
+    font-family: var(--font-brush);
+    font-weight: 400;
     font-size: clamp(56px, 12vw, 170px);
     line-height: 1.08; letter-spacing: .1em;
     background: linear-gradient(180deg, #f6ecd2 20%, #d9c489 55%, #9a7f45 100%);
     -webkit-background-clip: text; background-clip: text;
     color: transparent;
+    /* 渐变裁字下 currentColor 描边会透明，用金调中间色描边实现加粗 */
+    -webkit-text-stroke: var(--brush-stroke, 0px) #d9c489;
     text-shadow: 0 1px 0 rgba(255, 244, 214, .08);
     filter: drop-shadow(0 10px 34px rgba(0, 0, 0, .5));
 }
@@ -321,7 +345,9 @@ body.at-night .jheader a, body.at-night .jheader div { color: #e9e2cf; }
 .um-seal {
     width: 58px; height: 58px;
     border: 3px solid var(--seal); color: var(--seal);
-    font-weight: 900; font-size: 26px;
+    font-family: var(--font-brush);
+    -webkit-text-stroke: var(--brush-stroke, 0px) currentColor;
+    font-weight: 400; font-size: 26px;
     display: grid; place-items: center;
     transform: rotate(-8deg);
 }
@@ -423,7 +449,8 @@ body.at-night .jheader a, body.at-night .jheader div { color: #e9e2cf; }
 .jr-endseal span {
     width: 92px; height: 92px;
     border: 4px solid var(--seal); color: var(--seal);
-    font-family: "LogoBrush", var(--serif);
+    font-family: var(--font-brush);
+    -webkit-text-stroke: var(--brush-stroke, 0px) currentColor;
     font-weight: 400; font-size: 30px;
     display: grid; place-items: center;
     text-align: center; line-height: 1.2;
@@ -483,7 +510,8 @@ body.at-night .jheader a, body.at-night .jheader div { color: #e9e2cf; }
 .jf-seal {
     width: 110px; height: 110px;
     border: 5px solid var(--seal); color: var(--seal);
-    font-family: "LogoBrush", var(--serif);
+    font-family: var(--font-brush);
+    -webkit-text-stroke: var(--brush-stroke, 0px) currentColor;
     font-weight: 400; font-size: 36px;
     display: grid; place-items: center;
     text-align: center; line-height: 1.25;

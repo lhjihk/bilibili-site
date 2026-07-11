@@ -41,6 +41,18 @@
         .catch((e) => console.error('content.json 加载失败', e));
 
     function init(SITE) {
+        // 书法字体切换（与主页 boot.js 同一逻辑，以后台设置为准）
+        try {
+            const brush = (SITE.settings && SITE.settings.logoFont) || '';
+            if (brush) {
+                document.documentElement.dataset.brush = brush;
+                localStorage.setItem('ljty-brush', brush);
+            } else {
+                delete document.documentElement.dataset.brush;
+                localStorage.removeItem('ljty-brush');
+            }
+        } catch (e) { /* localStorage 不可用不影响本页 */ }
+
         const J = (SITE.settings && SITE.settings.journal) || {};
         const ARTICLES = SITE.articles || [];
         const PASS_HASH = J.passHash || '';
@@ -180,8 +192,12 @@
             }
             function playTape() {
                 const t = TR[cur];
+                // 手机浏览器放不了电脑版外链播放器，换 B站手机 H5 播放器（内嵌直播，不跳APP）
+                const biliSrc = TOUCH
+                    ? `https://www.bilibili.com/blackboard/html5mobileplayer.html?bvid=${t.bvid}&page=1&high_quality=1&danmaku=0&posterFirst=1`
+                    : `https://player.bilibili.com/player.html?bvid=${t.bvid}&autoplay=1&danmaku=0`;
                 tEmbed.innerHTML = t.type === 'bilibili'
-                    ? `<iframe src="https://player.bilibili.com/player.html?bvid=${t.bvid}&autoplay=1&danmaku=0" allow="autoplay; fullscreen"></iframe>`
+                    ? `<iframe src="${biliSrc}" allow="autoplay; fullscreen" allowfullscreen></iframe>`
                     : t.type === '163'
                         ? `<iframe src="https://music.163.com/outchain/player?type=2&id=${t.id}&auto=1&height=66" allow="autoplay"></iframe>`
                         : `<audio src="${t.src}" autoplay></audio>`;
