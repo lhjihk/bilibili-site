@@ -3,10 +3,10 @@
    完全另一个世界：衬线字、纸纹、复古史诗感
    ============================================================ */
 
-/* LOGO 毛笔字：阿里妈妈东方大楷子集（与主页共用同一文件） */
+/* LOGO 毛笔字：演示秋鸿楷子集（与主页共用同一文件） */
 @font-face {
     font-family: "LogoBrush";
-    src: url("assets/fonts/dongfangdakai-logo.woff2") format("woff2");
+    src: url("assets/fonts/qiuhongkai-logo.woff2") format("woff2");
     font-display: swap;
 }
 

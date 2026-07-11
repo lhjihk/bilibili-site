@@ -54,6 +54,27 @@
             });
             gsap.ticker.add((t) => lenis.raf(t * 1000));
             gsap.ticker.lagSmoothing(0);
+
+            // 自适应保险：老机器/老浏览器帧率撑不住时，自动退回原生滚动（其他人无感）
+            setTimeout(() => {
+                if (!lenis) return;
+                let frames = 0;
+                let t0 = performance.now();
+                (function probe() {
+                    if (document.hidden) { // 切了后台就重新计，防误判
+                        frames = 0; t0 = performance.now();
+                        requestAnimationFrame(probe); return;
+                    }
+                    frames++;
+                    const el = performance.now() - t0;
+                    if (el < 3000) { requestAnimationFrame(probe); return; }
+                    if (frames / (el / 1000) < 32) {
+                        lenis.destroy();
+                        lenis = null;
+                        gsap.ticker.lagSmoothing(500, 33);
+                    }
+                })();
+            }, 3500); // 等 loader/开场动画过去再测，别误判
         }
         function scrollTo(target, instant) {
             if (lenis) lenis.scrollTo(target, { offset: -70, duration: instant ? 0 : 1.4, immediate: !!instant });

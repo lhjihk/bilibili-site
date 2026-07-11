@@ -5,10 +5,10 @@
    Hanken Grotesk + IBM Plex Mono + Palette Mosaic + Noto Sans SC
    ============================================================ */
 
-/* LOGO 毛笔字：阿里妈妈东方大楷（免费商用），只裁了「路即天涯」四字，2.1KB */
+/* LOGO 毛笔字：演示秋鸿楷（免费商用，真毛笔楷书），只裁了「路即天涯」四字，4.4KB */
 @font-face {
     font-family: "LogoBrush";
-    src: url("assets/fonts/dongfangdakai-logo.woff2") format("woff2");
+    src: url("assets/fonts/qiuhongkai-logo.woff2") format("woff2");
     font-display: swap;
 }
 
