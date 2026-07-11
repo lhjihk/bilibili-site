@@ -93,151 +93,162 @@ html[data-palette] body[data-theme="dark"] {
 }
 
 /* ============================================================
-   常驻切换入口：右下角「墨碟」——网站卖点，全程可换色
-   纯 CSS 渲染（径向渐层唱片），无 canvas / 无逐帧动画
+   切换瞬间抑制全站过渡风暴：换色即点即变，不拖泥带水
+   （palette.js 在设置属性前后各一帧挂/摘这个类）
+   ============================================================ */
+html.pal-instant *, html.pal-instant *::before, html.pal-instant *::after { transition: none !important; }
+
+/* ============================================================
+   常驻切换入口：右下角「色卡扇」——三张迷你色卡呈扇形，
+   hover 展开；点开出九色码头。纯 CSS 渲染，无逐帧动画。
    ============================================================ */
 .pd-fab {
-    position: fixed; right: 22px; bottom: 22px; z-index: 1200;
-    width: 52px; height: 52px; border-radius: 50%;
-    border: 1px solid rgba(120, 120, 120, .35);
+    position: fixed; right: 20px; bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    z-index: 1200;
+    width: 56px; height: 56px; border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, .16);
+    background: color-mix(in srgb, var(--dark-bg, #0a0a0c) 88%, #fff 0%);
     cursor: pointer; padding: 0;
-    background:
-        radial-gradient(circle at 50% 50%,
-            var(--pd-c1, #6a15ff) 0 22%,
-            var(--pd-c2, #0a0a0c) 23% 44%,
-            var(--pd-c3, #f4f3eb) 45% 62%,
-            var(--pd-c2, #0a0a0c) 63% 100%);
-    box-shadow: 0 6px 24px -8px rgba(0, 0, 0, .5);
-    transition: transform .5s cubic-bezier(.16, 1, .3, 1), box-shadow .3s;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, .55);
+    transition: transform .35s cubic-bezier(.16, 1, .3, 1);
 }
-.pd-fab::after { /* 唱片中孔 */
-    content: ""; position: absolute; inset: 0; margin: auto;
-    width: 7px; height: 7px; border-radius: 50%;
-    background: #fff; opacity: .9;
-}
-.pd-fab:hover { transform: rotate(120deg) scale(1.08); }
+.pd-fab:hover { transform: translateY(-3px); }
 .pd-fab:focus-visible { outline: 2px solid var(--purple, #6a15ff); outline-offset: 3px; }
+.pd-fab .pf {
+    position: absolute; left: 50%; top: 50%;
+    width: 17px; height: 26px; border-radius: 4.5px;
+    border: 1px solid rgba(0, 0, 0, .35);
+    transform-origin: 50% 88%;
+    transition: transform .35s cubic-bezier(.16, 1, .3, 1);
+}
+.pd-fab .pf.a { background: var(--pd-c3, #f4f3eb); transform: translate(-50%, -55%) rotate(-16deg); }
+.pd-fab .pf.b { background: var(--pd-c1, #6a15ff); transform: translate(-50%, -55%) rotate(0deg); }
+.pd-fab .pf.c { background: var(--pd-c2, #0a0a0c); transform: translate(-50%, -55%) rotate(16deg); }
+.pd-fab:hover .pf.a { transform: translate(-50%, -55%) rotate(-30deg); }
+.pd-fab:hover .pf.c { transform: translate(-50%, -55%) rotate(30deg); }
 
 .pd-dock {
-    position: fixed; right: 22px; bottom: 86px; z-index: 1200;
-    display: flex; flex-direction: column; gap: 6px;
-    padding: 14px;
-    background: color-mix(in srgb, var(--dark-bg, #0a0a0c) 92%, transparent);
-    border: 1px solid rgba(255, 255, 255, .14);
-    border-radius: 14px;
-    box-shadow: 0 18px 48px -16px rgba(0, 0, 0, .6);
-    opacity: 0; transform: translateY(10px) scale(.96);
+    position: fixed; right: 20px; bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+    z-index: 1200;
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 12px;
+    background: rgba(12, 12, 15, .94);
+    border: 1px solid rgba(255, 255, 255, .13);
+    border-radius: 16px;
+    box-shadow: 0 20px 50px -18px rgba(0, 0, 0, .65);
+    opacity: 0; transform: translateY(10px) scale(.97);
     pointer-events: none;
-    transition: opacity .28s, transform .28s cubic-bezier(.16, 1, .3, 1);
+    transition: opacity .25s, transform .25s cubic-bezier(.16, 1, .3, 1);
 }
 .pd-dock.open { opacity: 1; transform: none; pointer-events: auto; }
 .pd-dock-title {
     font: 500 10px/1 "IBM Plex Mono", monospace;
-    letter-spacing: .22em; color: rgba(255, 255, 255, .55);
-    margin: 2px 2px 6px;
+    letter-spacing: .24em; color: rgba(255, 255, 255, .5);
+    margin: 2px 4px 8px;
 }
 .pd-item {
     display: flex; align-items: center; gap: 10px;
     border: 0; background: transparent; cursor: pointer;
-    padding: 5px 8px 5px 5px; border-radius: 9px;
+    padding: 6px 9px 6px 6px; border-radius: 10px;
     color: #eee; font: 400 12.5px/1.2 "Noto Sans SC", sans-serif;
-    transition: background .2s;
+    transition: background .18s;
 }
 .pd-item:hover { background: rgba(255, 255, 255, .09); }
-.pd-item.cur { background: rgba(255, 255, 255, .14); }
+.pd-item.cur { background: rgba(255, 255, 255, .15); }
 .pd-item .sw {
-    width: 26px; height: 26px; border-radius: 50%; flex: none;
-    background:
-        radial-gradient(circle at 50% 50%,
-            var(--sw1) 0 24%, var(--sw2) 25% 48%, var(--sw3) 49% 68%, var(--sw2) 69% 100%);
-    border: 1px solid rgba(255, 255, 255, .25);
+    width: 32px; height: 22px; border-radius: 6px; flex: none;
+    background: linear-gradient(100deg, var(--sw3) 0 36%, var(--sw1) 36% 68%, var(--sw2) 68% 100%);
+    border: 1px solid rgba(255, 255, 255, .22);
 }
-.pd-item .en { opacity: .45; font-size: 10px; font-family: "IBM Plex Mono", monospace; letter-spacing: .08em; margin-left: auto; padding-left: 10px; }
+.pd-item .en { opacity: .42; font-size: 9.5px; font-family: "IBM Plex Mono", monospace; letter-spacing: .08em; margin-left: auto; padding-left: 12px; }
 
 /* ============================================================
-   进站配色引导（首访一次）——「路上的天色，由你定」
-   轻量实现：纯 CSS 渐层与过渡，无 WebGL / 无粒子 / 无逐帧循环
+   进站行色引导：九宫色块（cloudstudio 的方块矩阵骨架 ×
+   路即天涯的水墨简笔图标）。发丝黑缝分隔，纯 CSS/SVG。
    ============================================================ */
 .pgate {
     position: fixed; inset: 0; z-index: 3000;
-    display: grid; place-items: center;
+    display: flex; flex-direction: column;
     background: var(--paper-bg, #f4f3eb);
-    color: #101012;
-    transition: background .5s ease, opacity .6s ease, visibility .6s;
-    overflow: hidden;
+    color: #141416;
+    transition: background .45s ease, opacity .55s ease, visibility .55s;
+    overflow: hidden auto;
 }
 .pgate.hide { opacity: 0; visibility: hidden; pointer-events: none; }
-.pgate::before { /* 纸纹颗粒，静态，无动画 */
-    content: ""; position: absolute; inset: 0; opacity: .05; pointer-events: none;
-    background-image: radial-gradient(rgba(0,0,0,.6) 1px, transparent 1.4px);
-    background-size: 22px 22px;
-}
 .pgate-bar {
-    position: absolute; top: 0; left: 0; right: 0;
     display: flex; justify-content: space-between; align-items: center;
-    padding: 18px clamp(18px, 4vw, 44px);
+    padding: 16px clamp(18px, 4vw, 44px) 6px;
     font: 500 11px/1 "IBM Plex Mono", monospace; letter-spacing: .18em;
+    flex: none;
 }
 .pgate-bar .brand { font-family: var(--font-brush, "LogoBrush", serif); font-size: 22px; letter-spacing: .08em; -webkit-text-stroke: var(--brush-stroke, 0px) currentColor; }
 .pgate-bar .live { display: flex; align-items: center; gap: 8px; opacity: .7; }
 .pgate-bar .live i { width: 7px; height: 7px; border-radius: 50%; background: #c43a22; display: inline-block; }
-.pgate-core { text-align: center; padding: 0 20px; max-width: 860px; position: relative; }
-.pgate-eyebrow { font: 500 11px/1 "IBM Plex Mono", monospace; letter-spacing: .3em; opacity: .6; margin-bottom: 26px; }
+.pgate-head { text-align: center; padding: clamp(8px, 2vh, 22px) 20px 0; flex: none; }
+.pgate-eyebrow { font: 500 10.5px/1 "IBM Plex Mono", monospace; letter-spacing: .3em; opacity: .58; }
 .pgate-title {
+    margin-top: 12px;
     font-family: var(--font-brush, "LogoBrush", serif); font-weight: 400;
-    font-size: clamp(34px, 6.4vw, 76px); line-height: 1.15; letter-spacing: .04em;
+    font-size: clamp(28px, 4.6vw, 54px); line-height: 1.15; letter-spacing: .04em;
     -webkit-text-stroke: var(--brush-stroke, 0px) currentColor;
 }
-.pgate-sub { margin-top: 14px; font: 400 clamp(13px, 1.6vw, 16px)/1.7 "Noto Sans SC", sans-serif; opacity: .72; }
-.pgate-sub em { font-style: italic; font-family: Georgia, serif; opacity: .85; }
-.pgate-stage { margin: 34px auto 10px; height: 118px; display: grid; place-items: center; }
-.pgate-disc {
-    width: 108px; height: 108px; border-radius: 50%;
-    background:
-        radial-gradient(circle at 50% 50%,
-            var(--gd1, #6a15ff) 0 22%, var(--gd2, #0a0a0c) 23% 46%, var(--gd3, #f4f3eb) 47% 64%, var(--gd2, #0a0a0c) 65% 100%);
-    border: 1px solid rgba(0, 0, 0, .3);
-    box-shadow: 0 16px 44px -14px rgba(0, 0, 0, .45);
-    transition: transform .6s cubic-bezier(.16, 1, .3, 1), background .4s;
-}
-.pgate:not(.hide) .pgate-disc:hover { transform: rotate(140deg); }
-.pgate-name { margin-top: 16px; font: 700 15px/1 "Noto Sans SC", sans-serif; letter-spacing: .1em; }
-.pgate-name .en { font: italic 400 12px/1 Georgia, serif; opacity: .55; margin-left: 8px; letter-spacing: .05em; }
-.pgate-dock { margin-top: 26px; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
-.pgate-slot {
-    width: 34px; height: 34px; border-radius: 50%; border: 2px solid transparent;
-    cursor: pointer; padding: 0; flex: none;
-    background:
-        radial-gradient(circle at 50% 50%,
-            var(--sw1) 0 24%, var(--sw2) 25% 48%, var(--sw3) 49% 68%, var(--sw2) 69% 100%);
-    outline: 1px solid rgba(0, 0, 0, .22);
-    transition: transform .25s cubic-bezier(.16, 1, .3, 1), border-color .2s;
-}
-.pgate-slot:hover { transform: translateY(-4px); }
-.pgate-slot.cur { border-color: #101012; transform: translateY(-4px) scale(1.12); }
-.pgate-actions { margin-top: 34px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
-.pgate-go {
-    border: 0; cursor: pointer;
-    background: #101012; color: var(--paper-bg, #f4f3eb);
-    font: 600 14px/1 "Noto Sans SC", sans-serif; letter-spacing: .12em;
-    padding: 15px 34px; border-radius: 999px;
-    transition: transform .3s cubic-bezier(.16, 1, .3, 1), background .3s;
-}
-.pgate-go:hover { transform: translateY(-2px); }
-.pgate-skip {
-    border: 0; background: transparent; cursor: pointer;
-    font: 400 12px/1 "IBM Plex Mono", monospace; letter-spacing: .12em;
-    color: inherit; opacity: .6; text-decoration: underline; text-underline-offset: 4px;
-}
-.pgate-skip:hover { opacity: 1; }
-.pgate-hint { position: absolute; bottom: 18px; left: 0; right: 0; text-align: center; font: 400 10.5px/1.6 "IBM Plex Mono", monospace; letter-spacing: .1em; opacity: .45; padding: 0 20px; }
+.pgate-sub { margin-top: 8px; font: 400 clamp(12px, 1.35vw, 14.5px)/1.75 "Noto Sans SC", sans-serif; opacity: .7; }
+.pgate-sub em { font-style: italic; font-family: Georgia, serif; }
 
-@media (max-width: 640px) {
-    .pd-fab { right: 14px; bottom: 14px; width: 46px; height: 46px; }
-    .pd-dock { right: 14px; bottom: 70px; max-height: 62vh; overflow: auto; }
-    .pgate-stage { height: 92px; }
-    .pgate-disc { width: 84px; height: 84px; }
+.pgate-grid {
+    flex: none;
+    width: min(1060px, calc(100vw - clamp(24px, 6vw, 88px)));
+    margin: clamp(14px, 2.6vh, 30px) auto 0;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; padding: 2px;
+    background: #141416;              /* 发丝黑缝，cloudstudio 同款分隔语言 */
+    border-radius: 14px;
+    box-shadow: 0 30px 70px -30px rgba(0, 0, 0, .4);
+    overflow: hidden;
+}
+.pgate-cell {
+    position: relative;
+    border: 0; cursor: pointer; padding: clamp(14px, 2vh, 24px) 12px;
+    min-height: clamp(118px, 17.5vh, 170px);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px;
+    color: #17171a;
+    transition: filter .2s;
+}
+.pgate-cell:hover, .pgate-cell:focus-visible { filter: brightness(1.05) saturate(1.06); }
+.pgate-cell:focus-visible { outline: 2px solid #141416; outline-offset: -4px; }
+.pgate-cell.cur::after {
+    content: "✓"; position: absolute; top: 8px; right: 10px;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: #141416; color: #f4f3eb;
+    font-size: 11px; display: grid; place-items: center;
+}
+.pgate-cell svg { width: clamp(30px, 4.6vh, 44px); height: auto; display: block; }
+.pgate-cell .nm { font: 700 clamp(14px, 1.9vh, 17px)/1.2 "Noto Sans SC", sans-serif; letter-spacing: .14em; }
+.pgate-cell .nm-en { font: 500 9.5px/1 "IBM Plex Mono", monospace; letter-spacing: .26em; opacity: .72; }
+.pgate-cell .tag { font: 400 clamp(10.5px, 1.5vh, 12px)/1.5 "Noto Sans SC", sans-serif; opacity: .62; }
+.pgate-cell .tag em { font-style: italic; font-family: Georgia, serif; letter-spacing: .02em; }
+
+.pgate-foot {
+    text-align: center; padding: clamp(12px, 2.4vh, 26px) 20px calc(clamp(14px, 2.6vh, 26px) + env(safe-area-inset-bottom, 0px));
+    flex: none;
+}
+.pgate-skip {
+    border: 1px solid color-mix(in srgb, currentColor 34%, transparent);
+    background: transparent; cursor: pointer; color: inherit;
+    font: 500 12px/1 "Noto Sans SC", sans-serif; letter-spacing: .12em;
+    padding: 11px 26px; border-radius: 999px;
+    transition: background .2s, color .2s;
+}
+.pgate-skip:hover { background: #141416; color: #f4f3eb; }
+.pgate-hint { margin-top: 10px; font: 400 10px/1.7 "IBM Plex Mono", monospace; letter-spacing: .1em; opacity: .42; }
+
+@media (max-width: 760px) {
+    .pgate-grid { grid-template-columns: repeat(2, 1fr); width: calc(100vw - 28px); }
+    .pgate-cell:last-child { grid-column: 1 / -1; }
+    .pgate-cell { min-height: 108px; }
+    .pd-fab { right: 14px; }
+    .pd-dock { right: 14px; max-height: 60vh; overflow: auto; }
 }
 @media (prefers-reduced-motion: reduce) {
-    .pd-fab, .pd-dock, .pgate, .pgate-disc, .pgate-slot, .pgate-go { transition: none; }
+    .pd-fab, .pd-fab .pf, .pd-dock, .pgate, .pgate-cell { transition: none; }
 }

@@ -1,5 +1,6 @@
 {
   "settings": {
+        "logoFont": "honglei",
     "colors": {
       "purple": "#6a15ff",
       "paperBg": "#f4f3eb",

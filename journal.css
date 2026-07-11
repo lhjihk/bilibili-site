@@ -437,6 +437,7 @@ body.at-night .jheader a, body.at-night .jheader div { color: #e9e2cf; }
     display: block;
     margin: 2.2em auto;
     padding: 10px 10px 44px;
+    border-radius: 8px;
     background: #fbf8ef;
     box-shadow: 0 10px 30px -12px rgba(63, 44, 24, .5);
     transform: rotate(-1.2deg);

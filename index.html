@@ -8,9 +8,9 @@
     <meta name="description" content="路即天涯 — 吉他手、创作者、旅行者。原创音乐、影像与旅行文章的声音实验室。">
     <script>/* 书法字体秒开：先用上次记住的选择，content.json 到位后以后台设置为准 */
     (function(){try{var b=localStorage.getItem('ljty-brush');if(b)document.documentElement.dataset.brush=b;}catch(e){}})();</script>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="palette.css">
-    <script src="palette.js"></script>
+    <link rel="stylesheet" href="style.css?v=20260712">
+    <link rel="stylesheet" href="palette.css?v=20260712">
+    <script src="palette.js?v=20260712"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700;1,800&family=IBM+Plex+Mono:wght@400;500&family=Palette+Mosaic&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
@@ -21,7 +21,7 @@
     <div class="loader" id="loader" aria-hidden="true">
         <div class="loader-grid" id="loaderGrid"></div>
         <div class="loader-core">
-            <span class="loader-label mono">SOUND LABORATORY — LOADING</span>
+            <span class="loader-label mono" data-txt="loaderLabel">SOUND LABORATORY — LOADING</span>
             <span class="loader-count" id="loaderCount">000</span>
             <span class="loader-name"><b>路即天涯</b><i>®</i></span>
         </div>
@@ -79,8 +79,8 @@
         <div class="hero-frame mono" aria-hidden="true">
             <span class="hf hf-tl" data-scramble data-txt="hfTL">THE ROAD IS THE HORIZON — EST.2017</span>
             <span class="hf hf-tr" data-scramble data-txt="hfTR">[ 声音实验室 ]</span>
-            <span class="hf hf-bl" data-scramble>GUITAR / ROAD / INK</span>
-            <span class="hf hf-br" data-scramble>V.2026 — BEIJING</span>
+            <span class="hf hf-bl" data-scramble data-txt="hfBL">GUITAR / ROAD / INK</span>
+            <span class="hf hf-br" data-scramble data-txt="hfBR">V.2026 — BEIJING</span>
         </div>
         <h1 class="hero-title">
             <span class="ht-line"><span class="ht-word" data-txt="heroT1">THE ROAD</span></span>
@@ -163,7 +163,7 @@
                         <div class="deck-disc" aria-hidden="true">
                             <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#030303"/><circle cx="50" cy="50" r="34" fill="none" stroke="#f4f3eb" stroke-width="0.6" opacity="0.5"/><circle cx="50" cy="50" r="27" fill="none" stroke="#f4f3eb" stroke-width="0.6" opacity="0.4"/><circle cx="50" cy="50" r="20" fill="none" stroke="#f4f3eb" stroke-width="0.6" opacity="0.3"/><circle cx="50" cy="50" r="13" fill="#6a15ff"/><circle cx="50" cy="50" r="2.4" fill="#f4f3eb"/></svg>
                         </div>
-                        <span class="deck-idle-txt mono" data-scramble>SELECT A TRACK — 选一首开始</span>
+                        <span class="deck-idle-txt mono" data-scramble data-txt="deckIdle">SELECT A TRACK — 选一首开始</span>
                     </div>
                     <div class="deck-embed" id="deckEmbed"></div>
                     <div class="deck-mini" id="deckMini" aria-hidden="true">
@@ -180,7 +180,7 @@
                         <button class="ctrl-btn mono" id="btnPrev" data-magnetic aria-label="上一首">←</button>
                         <button class="ctrl-btn ctrl-play" id="btnPlay" data-magnetic aria-label="播放/暂停">▶</button>
                         <button class="ctrl-btn mono" id="btnNext" data-magnetic aria-label="下一首">→</button>
-                        <button class="ctrl-btn mono btn-video" id="btnVideo" data-cursor="VIDEO" aria-label="显示/隐藏画面" style="display:none">画面</button>
+                        <button class="ctrl-btn mono btn-video" id="btnVideo" data-cursor="VIDEO" aria-label="显示/隐藏画面" style="display:none">画</button>
                         <div class="deck-seek" id="deckSeek"><div class="deck-seek-fill" id="deckSeekFill"></div></div>
                     </div>
                 </div>
@@ -198,6 +198,7 @@
     </section>
 
     <!-- ========== (04) 影像：马赛克揭示网格 ========== -->
+    <div class="ink-break ib-into-dark" aria-hidden="true"></div>
     <section class="section film" id="film">
         <div class="sec-head mono">
             <span data-scramble data-txt="sec04Eyebrow">(04) — FILM ARCHIVE</span>
@@ -218,6 +219,7 @@
             <span class="fvc-en mono" data-txt="fvCtaEn">ENTER THE FILM VAULT — 大银幕 · 流体墨水 · 就地开播 →</span>
         </a>
     </section>
+    <div class="ink-break ib-outof-dark" aria-hidden="true"></div>
 
     <!-- 禅 · 远山墨影分隔 -->
     <div class="ink-mtns" aria-hidden="true">
@@ -245,6 +247,7 @@
             </span>
         </a>
     </section>
+    <div class="ink-break ib-outof-dark" aria-hidden="true"></div>
 
     <!-- 禅 · 远山墨影分隔 -->
     <div class="ink-mtns" aria-hidden="true">
@@ -283,6 +286,7 @@
     </section>
 
     <!-- ========== FOOTER ========== -->
+    <div class="ink-break ib-foot" aria-hidden="true"></div>
     <footer class="footer">
         <div class="marquee mq-outline mq-foot" data-marquee data-speed="0.8" aria-hidden="true">
             <div class="marquee-inner">
@@ -313,9 +317,9 @@
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
     <!-- site -->
-    <script src="boot.js"></script>
-    <script src="fluid.js"></script>
-    <script src="player.js"></script>
-    <script src="script.js"></script>
+    <script src="boot.js?v=20260712"></script>
+    <script src="fluid.js?v=20260712"></script>
+    <script src="player.js?v=20260712"></script>
+    <script src="script.js?v=20260712"></script>
 </body>
 </html>

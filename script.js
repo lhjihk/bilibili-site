@@ -41,6 +41,26 @@
                 const sec = document.getElementById(m.id);
                 if (sec && m.show === false) sec.style.display = 'none';
             });
+
+            // 顶部导航 + 移动端菜单跟随模块拖动排序，编号重排，隐藏模块入口一并隐藏
+            try {
+                const NAV_OF = { manifesto: '#manifesto', weapon: '#weapon', listen: '#listen', film: '#film', writing: 'journal.html', about: '#about' };
+                ['.nav-links', '.mmenu'].forEach((wrapSel) => {
+                    const wrap = document.querySelector(wrapSel);
+                    if (!wrap) return;
+                    let n = 0;
+                    MODULES.forEach((m) => {
+                        const href = NAV_OF[m.id];
+                        if (!href) return;
+                        const a = wrap.querySelector(`a[href="${href}"]`);
+                        if (!a) return;
+                        wrap.appendChild(a); // 按模块顺序依次挪到末尾 = 重排
+                        const num = a.querySelector('i') || a.querySelector('span.mono');
+                        if (m.show === false) a.style.display = 'none';
+                        else { n++; if (num) num.textContent = `(${String(n).padStart(2, '0')})`; }
+                    });
+                });
+            } catch (e) { console.warn('导航排序同步失败', e); }
         }
 
         // ============ Lenis 平滑滚动（高级感回归；卡死元凶“每帧强制排版”已在别处修掉） ============
@@ -298,6 +318,7 @@
 
         // ============ MARQUEE（滚动+音乐双重变速） ============
         document.querySelectorAll('[data-marquee]').forEach((mq) => {
+            try {
             const inner = mq.querySelector('.marquee-inner');
             const chunk = inner.querySelector('.marquee-chunk');
             const need = Math.ceil((window.innerWidth * 2) / Math.max(chunk.offsetWidth, 200)) + 1;
@@ -310,13 +331,15 @@
             if (document.fonts && document.fonts.ready) document.fonts.ready.then(remeasure);
             let x = 0;
             gsap.ticker.add((t, dt) => {
-                const boost = Math.min(Math.abs(scrollVelocity) * 0.06, 5);
+                const boost = Math.min(Math.abs(scrollVelocity) * 0.06, 5) || 0; // NaN 防御
                 const music = (window.__level || 0) * 2.2;
                 x -= (0.05 + boost * 0.02 + music * 0.03) * dt * dir;
+                if (!isFinite(x)) x = 0; // 任何异常值直接归零重来，跑马灯永不冻结
                 if (x <= -w) x += w;
                 if (x > 0) x -= w;
                 inner.style.transform = `translateX(${x}px)`;
             });
+            } catch (e) { console.warn('marquee 初始化失败（单条跳过，不影响其他条）', e); }
         });
 
         // ============ 随乐呼吸（音乐驱动全站） ============

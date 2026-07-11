@@ -421,6 +421,7 @@ img { display: block; max-width: 100%; }
 .ds-card-media {
     position: relative; overflow: hidden;
     background: var(--black);
+    border-radius: clamp(14px, 1.5vw, 24px);
     cursor: pointer;
 }
 .ds-card-media img {
@@ -515,6 +516,8 @@ img { display: block; max-width: 100%; }
     flex: none;
 }
 .ctrl-btn:hover { background: var(--black); color: var(--beige); }
+/* 「画」单字圆钮：圆圈刚好包住一个字，替代原来突兀的两字胶囊 */
+.btn-video { width: 42px; height: 42px; padding: 0; border-radius: 50%; display: grid; place-items: center; font-size: 15px; line-height: 1; }
 .ctrl-play { background: var(--purple); color: var(--beige); border-color: var(--purple); }
 .ctrl-play:hover { background: var(--black); border-color: var(--black); }
 .deck-seek {
@@ -587,6 +590,28 @@ img { display: block; max-width: 100%; }
 .platform-link:hover { background: var(--black); color: var(--beige); }
 
 /* ============ (04) 影像 ============ */
+/* ============================================================
+   墨刷撕裂衔接带（与影像馆子页同款，蒙版取自参考站截图）
+   上方区块颜色向下"撕"入下方区块；颜色全走变量，
+   白天/暗房/九套行色自动适配，纯静态 mask 零性能开销
+   ============================================================ */
+.ink-break {
+    position: relative;
+    height: clamp(70px, 10vw, 190px);
+    pointer-events: none;
+}
+.ink-break::before {
+    content: ""; position: absolute; inset: 0;
+    -webkit-mask: url("assets/ink-edge.png") center top / 100% 100% no-repeat;
+    mask: url("assets/ink-edge.png") center top / 100% 100% no-repeat;
+}
+.ib-into-dark { background: var(--dark-bg); }
+.ib-into-dark::before { background: var(--beige); }
+.ib-outof-dark { background: var(--beige); }
+.ib-outof-dark::before { background: var(--dark-bg); }
+.ib-foot { background: var(--black); }
+.ib-foot::before { background: var(--beige); }
+
 /* 影像档案 → 黑盒放映室：与影像馆子页同一血脉（wildmind 式整块硬切衔接）
    手法：局部换 --beige/--black 两个变量，区块内所有旧样式自动适配，零破坏 */
 .section.film {
@@ -602,6 +627,7 @@ img { display: block; max-width: 100%; }
     display: flex; flex-direction: column; align-items: center; gap: 10px;
     padding: clamp(26px, 3.5vw, 48px) 20px;
     border: 1px dashed color-mix(in srgb, var(--black) 40%, transparent);
+    border-radius: clamp(16px, 1.8vw, 26px);
     text-decoration: none; color: inherit;
     transition: border-color .3s;
 }
@@ -750,6 +776,7 @@ img { display: block; max-width: 100%; }
     margin-top: clamp(28px, 5vh, 52px);
     padding: clamp(24px, 4vh, 44px) clamp(20px, 3vw, 44px);
     border: 1px solid var(--black);
+    border-radius: clamp(16px, 1.8vw, 26px);
     background:
         radial-gradient(ellipse at 85% 20%, color-mix(in srgb, var(--seal-red) 8%, transparent), transparent 55%),
         repeating-linear-gradient(0deg, transparent 0 34px, color-mix(in srgb, var(--black) 6%, transparent) 34px 35px);
@@ -781,7 +808,7 @@ img { display: block; max-width: 100%; }
     gap: clamp(28px, 5vw, 80px);
     align-items: center;
 }
-.about-photo { position: relative; overflow: hidden; }
+.about-photo { position: relative; overflow: hidden; border-radius: clamp(14px, 1.5vw, 24px); }
 .about-photo img {
     width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
     filter: grayscale(1) contrast(1.1);
@@ -883,7 +910,7 @@ img { display: block; max-width: 100%; }
     position: absolute; top: 20px; right: 20px;
     color: var(--beige); border-color: var(--beige);
 }
-.vm-frame { width: min(1080px, 92vw); aspect-ratio: 16 / 9; background: #000; }
+.vm-frame { width: min(1080px, 92vw); aspect-ratio: 16 / 9; background: #000; border-radius: 14px; overflow: hidden; }
 .vm-frame iframe { width: 100%; height: 100%; border: 0; }
 .vm-outlink {
     position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
