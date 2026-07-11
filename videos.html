@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>踏破腐朽 — 影像馆 · 路即天涯® / THE FILM VAULT</title>
+    <meta name="description" content="路即天涯的影像馆：原创曲、翻弹、器材与旅途实录，真琴实拍，概不修音。">
+    <script>/* 书法字体秒开：先用上次记住的选择，content.json 到位后以后台设置为准 */
+    (function(){try{var b=localStorage.getItem('ljty-brush');if(b)document.documentElement.dataset.brush=b;}catch(e){}})();</script>
+    <link rel="stylesheet" href="videos.css">
+    <link rel="stylesheet" href="palette.css">
+    <script src="palette.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,600;0,800;1,400&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- 固定导航：反色混合，黑纸两界都能读 -->
+    <nav class="vnav" aria-label="影像馆导航">
+        <a class="vnav-brand" href="#top" data-txt="vpBrand">踏破腐朽</a>
+        <div class="vnav-links">
+            <a href="index.html">← 声音实验室</a>
+            <a href="journal.html" class="hidemobile">旅人手账</a>
+            <a href="https://space.bilibili.com/107127158" target="_blank" rel="noopener">BILIBILI ↗</a>
+        </div>
+    </nav>
+
+    <main id="top">
+
+    <!-- ========== TC 00:00 · 开场（黑）：流体墨水 + 毛笔巨字 ========== -->
+    <header class="vhero">
+        <canvas id="fluidCanvas" aria-hidden="true"></canvas>
+        <div class="tc" aria-hidden="true">
+            <span class="rec">REC</span>
+            <span data-txt="vpTcHero">TC 00:00:00 — 开场 · OPEN THE VAULT</span>
+            <span>16:9 / 4K / 实录</span>
+        </div>
+        <div class="vhero-core">
+            <h1 class="vhero-title" data-txt-html="vpTitle">踏破腐朽<i>。</i></h1>
+            <div class="vhero-sub">
+                <p class="cn" data-txt="vpSub">镜头不说谎：琴是那把琴，路是那条路。每一帧都在现场，每一声都没修过。</p>
+                <p class="en">THE FILM VAULT — EVERY FRAME WAS REALLY THERE<br>SCROLL ↓</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== TC 00:32 · 为什么拍（纸色，硬切衔接） ========== -->
+    <section class="vsec on-cream" id="why">
+        <div class="tc">
+            <span data-txt="vpTc1">TC 00:32:11 — 为什么拍 · WHY FILM</span>
+            <span>( 01 )</span>
+        </div>
+        <div class="vgrid">
+            <h2 class="vstate vstate-title" data-txt-html="vpState">
+                拍下来，<span class="cn">腐朽</span>就赢不了。<br>
+                <em>SEE IT — BEFORE IT RUSTS.</em>
+            </h2>
+            <p class="vcopy">
+                <span class="mono">( THE REASON )</span>
+                <span data-txt="vpCopy">曲会走音，弦会生锈，路上的光只亮那么一次。影像馆收留这些只发生一次的时刻——原创曲的第一次成型、翻弹时的手感、器材真实的声音、和路过就不再回头的风景。</span>
+            </p>
+        </div>
+        <div class="vmarquee" aria-hidden="true">
+            <span class="chunk" data-txt-html="vpMarquee">山川 <i>●</i> 湖海 <i>●</i> 琴弦 <i>●</i> 尘土 <i>●</i> 风 <i>●</i> 光 <i>●</i> 真琴实录 <i>●</i> 概不修音 <i>●</i>&nbsp;</span>
+            <span class="chunk" aria-hidden="true"></span>
+        </div>
+    </section>
+
+    <!-- ========== TC 01:24 · 三支主打（黑，隐式露底） ========== -->
+    <section class="vsec" id="featured">
+        <div class="tc">
+            <span data-txt="vpTc2">TC 01:24:07 — 三支主打 · FEATURED THREE</span>
+            <span>( 02 )</span>
+        </div>
+        <div class="vgrid">
+            <div class="vfeat-list" id="vFeatured"></div>
+        </div>
+    </section>
+
+    <!-- ========== TC 03:47 · 片库全集（纸色，硬切衔接） ========== -->
+    <section class="vsec on-cream" id="archive">
+        <div class="tc">
+            <span data-txt="vpTc3">TC 03:47:52 — 片库全集 · THE ARCHIVE</span>
+            <span id="vCount">( 00 FILMS )</span>
+        </div>
+        <div class="vgrid">
+            <div class="vchips" id="vChips">
+                <button class="vchip active" data-filter="all">ALL 全部</button>
+                <button class="vchip" data-filter="original">原创</button>
+                <button class="vchip" data-filter="cover">翻弹</button>
+                <button class="vchip" data-filter="gear">器材</button>
+                <button class="vchip" data-filter="travel">旅行</button>
+            </div>
+            <div class="varchive" id="vArchive"></div>
+        </div>
+    </section>
+
+    <!-- ========== 尾声（黑）：巨字 + 去处 ========== -->
+    <footer class="vsec vend" id="end">
+        <div class="tc">
+            <span data-txt="vpTcEnd">TC — 尾声 · END CREDITS</span>
+            <span class="rec">STILL ROLLING</span>
+        </div>
+        <div class="vend-giant" data-txt-html="vpGiant">路即天涯<i>。</i></div>
+        <div class="vend-links">
+            <a href="index.html">← 回声音实验室 SOUND LAB</a>
+            <a href="journal.html">去旅人手账 JOURNAL →</a>
+            <a href="https://space.bilibili.com/107127158" target="_blank" rel="noopener">BILIBILI 全集 ↗</a>
+        </div>
+        <div class="vend-meta">
+            <span data-txt="footNote">© 2026 路即天涯® — 真琴实录，概不修音</span>
+            <span>THE FILM VAULT — SHOT ON THE ROAD</span>
+        </div>
+    </footer>
+
+    </main>
+
+    <!-- 视频弹层 -->
+    <div class="video-modal" id="videoModal" aria-hidden="true">
+        <button class="vm-close" id="vmClose" aria-label="关闭">✕</button>
+        <div class="vm-frame" id="vmFrame"></div>
+    </div>
+
+    <!-- libs -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <!-- site -->
+    <script src="videos.js"></script>
+    <script src="fluid.js"></script>
+</body>
+</html>

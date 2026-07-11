@@ -1,0 +1,243 @@
+/* ============================================================
+   palette.css — 全站配色体系（三页共用）
+   九套配色：天涯本色（默认，无 data-palette 属性 = 各页原生变量）
+   + 八套取自 cloudstudio.es 的原版色值（bg/paper/暗底逐一对应）。
+   机制：html[data-palette="x"] 覆盖 CSS 变量，切换零性能开销。
+   每套同时给出 白天(--purple) / 暗房(夜间强调色) 两态。
+   变量对应关系：
+     --paper-bg  主页白天底色       ← 主题 bg
+     --dark-bg   主页暗房底色       ← 主题 org-b（同系深夜色）
+     --purple    强调色(白天，加深保证对比度)
+     --parch/--parch-deep  手账羊皮纸 ← 主题 paper
+     视频子页读取同一批变量，自动联动。
+   ============================================================ */
+
+html[data-palette="amarillo"] {
+    --paper-bg: #FFF48D;
+    --dark-bg: #131309;
+    --purple: #9c7c12;
+    --pal-night-accent: #FFF48D;
+    --pal-night-ink: #d8dfae;
+    --parch: #faf7ea;
+    --parch-deep: #efe9d3;
+}
+html[data-palette="cielo"] {
+    --paper-bg: #8ED8FF;
+    --dark-bg: #0a1216;
+    --purple: #0f7ec2;
+    --pal-night-accent: #8ED8FF;
+    --pal-night-ink: #bfe2ef;
+    --parch: #eef5fa;
+    --parch-deep: #dfeaf3;
+}
+html[data-palette="electrico"] {
+    --paper-bg: #A3B1FF;
+    --dark-bg: #0c0d16;
+    --purple: #4653d8;
+    --pal-night-accent: #A3B1FF;
+    --pal-night-ink: #c9d1f2;
+    --parch: #f0f1fa;
+    --parch-deep: #e2e4f3;
+}
+html[data-palette="coral"] {
+    --paper-bg: #FFAFA3;
+    --dark-bg: #160b0a;
+    --purple: #d84a34;
+    --pal-night-accent: #FFAFA3;
+    --pal-night-ink: #f2cdc5;
+    --parch: #faf0ec;
+    --parch-deep: #f0e1da;
+}
+html[data-palette="menta"] {
+    --paper-bg: #A9E8AE;
+    --dark-bg: #0b130d;
+    --purple: #1f9e50;
+    --pal-night-accent: #A9E8AE;
+    --pal-night-ink: #cdeed0;
+    --parch: #eef8ef;
+    --parch-deep: #ddefdf;
+}
+html[data-palette="rosa"] {
+    --paper-bg: #FFC0DD;
+    --dark-bg: #130a10;
+    --purple: #d64f96;
+    --pal-night-accent: #FFC0DD;
+    --pal-night-ink: #f2d3e3;
+    --parch: #fbf0f5;
+    --parch-deep: #f1e0e9;
+}
+html[data-palette="melocoton"] {
+    --paper-bg: #FFD9A0;
+    --dark-bg: #13100a;
+    --purple: #d88718;
+    --pal-night-accent: #FFD9A0;
+    --pal-night-ink: #f2e2c6;
+    --parch: #fbf4e9;
+    --parch-deep: #f2e7d2;
+}
+html[data-palette="hielo"] {
+    --paper-bg: #C9E9F6;
+    --dark-bg: #0a1318;
+    --purple: #1a8ec4;
+    --pal-night-accent: #79C6E8;
+    --pal-night-ink: #bfe0ee;
+    --parch: #f2f8fb;
+    --parch-deep: #e2eef4;
+}
+
+/* 暗房（黑夜）两态：主题色系里的夜间强调/夜间墨色 */
+html[data-palette] body[data-theme="dark"] {
+    --purple: var(--pal-night-accent);
+    --black: var(--pal-night-ink);
+    --indaco: color-mix(in srgb, var(--pal-night-ink) 45%, #565a72);
+}
+
+/* ============================================================
+   常驻切换入口：右下角「墨碟」——网站卖点，全程可换色
+   纯 CSS 渲染（径向渐层唱片），无 canvas / 无逐帧动画
+   ============================================================ */
+.pd-fab {
+    position: fixed; right: 22px; bottom: 22px; z-index: 1200;
+    width: 52px; height: 52px; border-radius: 50%;
+    border: 1px solid rgba(120, 120, 120, .35);
+    cursor: pointer; padding: 0;
+    background:
+        radial-gradient(circle at 50% 50%,
+            var(--pd-c1, #6a15ff) 0 22%,
+            var(--pd-c2, #0a0a0c) 23% 44%,
+            var(--pd-c3, #f4f3eb) 45% 62%,
+            var(--pd-c2, #0a0a0c) 63% 100%);
+    box-shadow: 0 6px 24px -8px rgba(0, 0, 0, .5);
+    transition: transform .5s cubic-bezier(.16, 1, .3, 1), box-shadow .3s;
+}
+.pd-fab::after { /* 唱片中孔 */
+    content: ""; position: absolute; inset: 0; margin: auto;
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #fff; opacity: .9;
+}
+.pd-fab:hover { transform: rotate(120deg) scale(1.08); }
+.pd-fab:focus-visible { outline: 2px solid var(--purple, #6a15ff); outline-offset: 3px; }
+
+.pd-dock {
+    position: fixed; right: 22px; bottom: 86px; z-index: 1200;
+    display: flex; flex-direction: column; gap: 6px;
+    padding: 14px;
+    background: color-mix(in srgb, var(--dark-bg, #0a0a0c) 92%, transparent);
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 14px;
+    box-shadow: 0 18px 48px -16px rgba(0, 0, 0, .6);
+    opacity: 0; transform: translateY(10px) scale(.96);
+    pointer-events: none;
+    transition: opacity .28s, transform .28s cubic-bezier(.16, 1, .3, 1);
+}
+.pd-dock.open { opacity: 1; transform: none; pointer-events: auto; }
+.pd-dock-title {
+    font: 500 10px/1 "IBM Plex Mono", monospace;
+    letter-spacing: .22em; color: rgba(255, 255, 255, .55);
+    margin: 2px 2px 6px;
+}
+.pd-item {
+    display: flex; align-items: center; gap: 10px;
+    border: 0; background: transparent; cursor: pointer;
+    padding: 5px 8px 5px 5px; border-radius: 9px;
+    color: #eee; font: 400 12.5px/1.2 "Noto Sans SC", sans-serif;
+    transition: background .2s;
+}
+.pd-item:hover { background: rgba(255, 255, 255, .09); }
+.pd-item.cur { background: rgba(255, 255, 255, .14); }
+.pd-item .sw {
+    width: 26px; height: 26px; border-radius: 50%; flex: none;
+    background:
+        radial-gradient(circle at 50% 50%,
+            var(--sw1) 0 24%, var(--sw2) 25% 48%, var(--sw3) 49% 68%, var(--sw2) 69% 100%);
+    border: 1px solid rgba(255, 255, 255, .25);
+}
+.pd-item .en { opacity: .45; font-size: 10px; font-family: "IBM Plex Mono", monospace; letter-spacing: .08em; margin-left: auto; padding-left: 10px; }
+
+/* ============================================================
+   进站配色引导（首访一次）——「路上的天色，由你定」
+   轻量实现：纯 CSS 渐层与过渡，无 WebGL / 无粒子 / 无逐帧循环
+   ============================================================ */
+.pgate {
+    position: fixed; inset: 0; z-index: 3000;
+    display: grid; place-items: center;
+    background: var(--paper-bg, #f4f3eb);
+    color: #101012;
+    transition: background .5s ease, opacity .6s ease, visibility .6s;
+    overflow: hidden;
+}
+.pgate.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+.pgate::before { /* 纸纹颗粒，静态，无动画 */
+    content: ""; position: absolute; inset: 0; opacity: .05; pointer-events: none;
+    background-image: radial-gradient(rgba(0,0,0,.6) 1px, transparent 1.4px);
+    background-size: 22px 22px;
+}
+.pgate-bar {
+    position: absolute; top: 0; left: 0; right: 0;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px clamp(18px, 4vw, 44px);
+    font: 500 11px/1 "IBM Plex Mono", monospace; letter-spacing: .18em;
+}
+.pgate-bar .brand { font-family: var(--font-brush, "LogoBrush", serif); font-size: 22px; letter-spacing: .08em; -webkit-text-stroke: var(--brush-stroke, 0px) currentColor; }
+.pgate-bar .live { display: flex; align-items: center; gap: 8px; opacity: .7; }
+.pgate-bar .live i { width: 7px; height: 7px; border-radius: 50%; background: #c43a22; display: inline-block; }
+.pgate-core { text-align: center; padding: 0 20px; max-width: 860px; position: relative; }
+.pgate-eyebrow { font: 500 11px/1 "IBM Plex Mono", monospace; letter-spacing: .3em; opacity: .6; margin-bottom: 26px; }
+.pgate-title {
+    font-family: var(--font-brush, "LogoBrush", serif); font-weight: 400;
+    font-size: clamp(34px, 6.4vw, 76px); line-height: 1.15; letter-spacing: .04em;
+    -webkit-text-stroke: var(--brush-stroke, 0px) currentColor;
+}
+.pgate-sub { margin-top: 14px; font: 400 clamp(13px, 1.6vw, 16px)/1.7 "Noto Sans SC", sans-serif; opacity: .72; }
+.pgate-sub em { font-style: italic; font-family: Georgia, serif; opacity: .85; }
+.pgate-stage { margin: 34px auto 10px; height: 118px; display: grid; place-items: center; }
+.pgate-disc {
+    width: 108px; height: 108px; border-radius: 50%;
+    background:
+        radial-gradient(circle at 50% 50%,
+            var(--gd1, #6a15ff) 0 22%, var(--gd2, #0a0a0c) 23% 46%, var(--gd3, #f4f3eb) 47% 64%, var(--gd2, #0a0a0c) 65% 100%);
+    border: 1px solid rgba(0, 0, 0, .3);
+    box-shadow: 0 16px 44px -14px rgba(0, 0, 0, .45);
+    transition: transform .6s cubic-bezier(.16, 1, .3, 1), background .4s;
+}
+.pgate:not(.hide) .pgate-disc:hover { transform: rotate(140deg); }
+.pgate-name { margin-top: 16px; font: 700 15px/1 "Noto Sans SC", sans-serif; letter-spacing: .1em; }
+.pgate-name .en { font: italic 400 12px/1 Georgia, serif; opacity: .55; margin-left: 8px; letter-spacing: .05em; }
+.pgate-dock { margin-top: 26px; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.pgate-slot {
+    width: 34px; height: 34px; border-radius: 50%; border: 2px solid transparent;
+    cursor: pointer; padding: 0; flex: none;
+    background:
+        radial-gradient(circle at 50% 50%,
+            var(--sw1) 0 24%, var(--sw2) 25% 48%, var(--sw3) 49% 68%, var(--sw2) 69% 100%);
+    outline: 1px solid rgba(0, 0, 0, .22);
+    transition: transform .25s cubic-bezier(.16, 1, .3, 1), border-color .2s;
+}
+.pgate-slot:hover { transform: translateY(-4px); }
+.pgate-slot.cur { border-color: #101012; transform: translateY(-4px) scale(1.12); }
+.pgate-actions { margin-top: 34px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.pgate-go {
+    border: 0; cursor: pointer;
+    background: #101012; color: var(--paper-bg, #f4f3eb);
+    font: 600 14px/1 "Noto Sans SC", sans-serif; letter-spacing: .12em;
+    padding: 15px 34px; border-radius: 999px;
+    transition: transform .3s cubic-bezier(.16, 1, .3, 1), background .3s;
+}
+.pgate-go:hover { transform: translateY(-2px); }
+.pgate-skip {
+    border: 0; background: transparent; cursor: pointer;
+    font: 400 12px/1 "IBM Plex Mono", monospace; letter-spacing: .12em;
+    color: inherit; opacity: .6; text-decoration: underline; text-underline-offset: 4px;
+}
+.pgate-skip:hover { opacity: 1; }
+.pgate-hint { position: absolute; bottom: 18px; left: 0; right: 0; text-align: center; font: 400 10.5px/1.6 "IBM Plex Mono", monospace; letter-spacing: .1em; opacity: .45; padding: 0 20px; }
+
+@media (max-width: 640px) {
+    .pd-fab { right: 14px; bottom: 14px; width: 46px; height: 46px; }
+    .pd-dock { right: 14px; bottom: 70px; max-height: 62vh; overflow: auto; }
+    .pgate-stage { height: 92px; }
+    .pgate-disc { width: 84px; height: 84px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .pd-fab, .pd-dock, .pgate, .pgate-disc, .pgate-slot, .pgate-go { transition: none; }
+}
