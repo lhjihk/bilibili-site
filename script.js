@@ -600,8 +600,12 @@
         // ============ 视频弹层 ============
         const videoModal = $('videoModal'), vmFrame = $('vmFrame');
         window.openVideo = function (bvid) {
+            // 手机浏览器放不了电脑版外链播放器，换 B站手机 H5 播放器（内嵌直播，不跳APP）
+            const biliSrc = window.matchMedia('(hover: none)').matches
+                ? `https://www.bilibili.com/blackboard/html5mobileplayer.html?bvid=${bvid}&page=1&high_quality=1&danmaku=0&posterFirst=1`
+                : `https://player.bilibili.com/player.html?bvid=${bvid}&autoplay=1&danmaku=0&high_quality=1`;
             vmFrame.innerHTML = `
-                <iframe src="https://player.bilibili.com/player.html?bvid=${bvid}&autoplay=1&danmaku=0&high_quality=1"
+                <iframe src="${biliSrc}"
                     allow="autoplay; fullscreen" allowfullscreen scrolling="no"></iframe>
                 <a class="vm-outlink" href="https://www.bilibili.com/video/${bvid}" target="_blank" rel="noopener">在 BILIBILI 打开 ↗</a>`;
             videoModal.classList.add('open');

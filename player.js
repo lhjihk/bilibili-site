@@ -224,7 +224,11 @@
                 if (btnVideo) btnVideo.style.display = '';
             } else if (t.type === 'bilibili') {
                 mode = 'embed'; embedOn = true;
-                deckEmbed.innerHTML = `<iframe src="https://player.bilibili.com/player.html?bvid=${t.bvid}&autoplay=1&danmaku=0"
+                // 手机浏览器放不了电脑版外链播放器，换 B站手机 H5 播放器（内嵌直播，不跳APP）
+                const biliSrc = TOUCH
+                    ? `https://www.bilibili.com/blackboard/html5mobileplayer.html?bvid=${t.bvid}&page=1&high_quality=1&danmaku=0&posterFirst=1`
+                    : `https://player.bilibili.com/player.html?bvid=${t.bvid}&autoplay=1&danmaku=0`;
+                deckEmbed.innerHTML = `<iframe src="${biliSrc}"
                     frameborder="no" allow="autoplay; fullscreen" allowfullscreen scrolling="no"></iframe>`;
                 deckEmbed.classList.add('on'); // 默认隐藏画面（CSS 控制），只出声
                 btnPlay.textContent = '■';
