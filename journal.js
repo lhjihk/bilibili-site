@@ -170,23 +170,29 @@
                 tTitle.textContent = TR[cur].title;
                 tNote.textContent = (TR[cur].note || '') + (TR[cur].year ? ' · ' + TR[cur].year : '');
             }
+            const TOUCH = window.matchMedia('(hover: none)').matches; // 手机：隐藏 iframe 出不了声
             function stop() {
                 playing = false;
                 tEmbed.innerHTML = '';
-                tape.classList.remove('playing');
+                tape.classList.remove('playing', 'showplayer');
                 tStatus.textContent = 'STOPPED';
                 $('tapePlay').textContent = '▶ PLAY';
             }
             function playTape() {
                 const t = TR[cur];
                 tEmbed.innerHTML = t.type === 'bilibili'
-                    ? `<iframe src="https://player.bilibili.com/player.html?bvid=${t.bvid}&autoplay=1&danmaku=0" allow="autoplay"></iframe>`
+                    ? `<iframe src="https://player.bilibili.com/player.html?bvid=${t.bvid}&autoplay=1&danmaku=0" allow="autoplay; fullscreen"></iframe>`
                     : t.type === '163'
-                        ? `<iframe src="https://music.163.com/outchain/player?type=2&id=${t.id}&auto=1&height=66"></iframe>`
+                        ? `<iframe src="https://music.163.com/outchain/player?type=2&id=${t.id}&auto=1&height=66" allow="autoplay"></iframe>`
                         : `<audio src="${t.src}" autoplay></audio>`;
                 playing = true;
                 tape.classList.add('playing');
-                tStatus.textContent = 'PLAYING — 声音来自B站';
+                if (TOUCH) { // 手机：亮出播放器让人点
+                    tape.classList.add('showplayer');
+                    tStatus.textContent = 'TAP ▶ — 在下方播放器点播放';
+                } else {
+                    tStatus.textContent = 'PLAYING — 声音来自B站';
+                }
                 $('tapePlay').textContent = '■ STOP';
             }
             $('tapePlay').addEventListener('click', () => playing ? stop() : playTape());

@@ -26,6 +26,7 @@
         if (!listEl || !waveCanvas) return;
 
         const tracks = (window.SITE.tracks || []).slice();
+        const TOUCH = window.matchMedia('(hover: none)').matches; // 手机：隐藏 iframe 不允许自动出声
         let current = -1;
         let mode = 'idle';           // idle | audio | embed
         let embedOn = false;         // embed 是否在"播放"（点击后即视为在播）
@@ -216,7 +217,7 @@
             } else if (t.type === '163') {
                 mode = 'embed'; embedOn = true;
                 deckEmbed.innerHTML = `<iframe frameborder="no" marginwidth="0" marginheight="0" width="100%" height="86"
-                    src="https://music.163.com/outchain/player?type=2&id=${t.id}&auto=1&height=66"></iframe>`;
+                    allow="autoplay" src="https://music.163.com/outchain/player?type=2&id=${t.id}&auto=1&height=66"></iframe>`;
                 deckEmbed.classList.add('on');
                 btnPlay.textContent = '■';
                 deckTime.textContent = 'B站 / 外链播放中';
@@ -224,11 +225,17 @@
             } else if (t.type === 'bilibili') {
                 mode = 'embed'; embedOn = true;
                 deckEmbed.innerHTML = `<iframe src="https://player.bilibili.com/player.html?bvid=${t.bvid}&autoplay=1&danmaku=0"
-                    frameborder="no" allowfullscreen scrolling="no"></iframe>`;
+                    frameborder="no" allow="autoplay; fullscreen" allowfullscreen scrolling="no"></iframe>`;
                 deckEmbed.classList.add('on'); // 默认隐藏画面（CSS 控制），只出声
                 btnPlay.textContent = '■';
                 deckTime.textContent = '声音来自 B站 · 点「画面」看视频';
                 if (btnVideo) btnVideo.style.display = '';
+            }
+            // 手机：隐藏播放器出不了声，直接把播放器亮出来让人点
+            if (mode === 'embed' && TOUCH) {
+                deckEmbed.classList.add('show');
+                btnVideo?.classList.add('active');
+                deckTime.textContent = '在播放器里点 ▶ 开始';
             }
             wakeWave();
             render();

@@ -465,6 +465,14 @@ body.at-night .jheader a, body.at-night .jheader div { color: #e9e2cf; }
 .jt-play:hover { background: var(--ink); border-color: var(--ink); }
 .jtape-embed { position: absolute; width: 1px; height: 1px; opacity: 0.01; overflow: hidden; pointer-events: none; }
 .jtape-embed iframe { width: 320px; height: 180px; border: 0; }
+/* 手机：隐藏播放器出不了声，播放时亮出一个可点的小播放器 */
+.jtape.showplayer .jtape-embed {
+    position: static; width: 100%; max-width: 480px; height: auto;
+    opacity: 1; pointer-events: auto; overflow: visible;
+    border: 1.5px solid var(--ink-soft); border-radius: 10px;
+    background: #000;
+}
+.jtape.showplayer .jtape-embed iframe { display: block; width: 100%; aspect-ratio: 16 / 9; height: auto; }
 
 /* ============ 卷尾 ============ */
 .jfooter {
