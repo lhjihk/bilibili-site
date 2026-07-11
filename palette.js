@@ -10,7 +10,7 @@
     'use strict';
 
     var KEY = 'ljty-palette';        // 访客自选
-    var GATE_AT = 'ljty-gate-at';    // 上次看引导的时间戳（限时重现）
+    var GATE_AT = 'ljty-gate2-at';   // 上次看引导的时间戳（v3改版换键，全员重看一次）
     var gateHours = 24;              // 引导重现间隔，后台 settings.gateHours 可调，0=每次都弹
 
     // 水墨简笔图标（静态 SVG，stroke 跟随色块墨色）
@@ -157,33 +157,35 @@
         gate.setAttribute('role', 'dialog');
         gate.setAttribute('aria-label', '选择网站配色');
         gate.innerHTML =
-            '<span class="pgate-aur a" aria-hidden="true"></span>' +
-            '<span class="pgate-aur b" aria-hidden="true"></span>' +
             '<div class="pgate-bar">' +
-            '  <span class="brand">路即天涯</span>' +
-            '  <span class="live"><i></i>在路上 · ON THE ROAD</span>' +
+            '  <div class="pgb-brand">' +
+            '    <span class="brand">路即天涯</span>' +
+            '    <span class="pgate-eyebrow mono-like">' + T('pgEyebrow', '( 选一种行色 · CHOOSE YOUR COLOR )') + '</span>' +
+            '  </div>' +
+            '  <div class="pgb-mid">' +
+            '    <h2 class="pgate-title">' + T('pgTitle', '路上的天色，由你定。') + '</h2>' +
+            '    <p class="pgate-sub">' + T('pgSub', '点一块颜色即刻出发，右下角的色卡随时可换。<em>Pick a sky — change it anytime.</em>') + '</p>' +
+            '  </div>' +
+            '  <div class="pgb-right">' +
+            '    <button class="pgate-skip" id="pgSkip">' + T('pgSkip', '先逛逛，用默认色 · SKIP →') + '</button>' +
+            '    <span class="pgate-hint">' + T('pgHint', '偏好只存在你自己的设备里 · ON-DEVICE ONLY') + '</span>' +
+            '  </div>' +
             '</div>' +
-            '<div class="pgate-head">' +
-            '  <p class="pgate-eyebrow">' + T('pgEyebrow', '( 选一种行色 · CHOOSE YOUR COLOR )') + '</p>' +
-            '  <h2 class="pgate-title">' + T('pgTitle', '路上的天色，由你定。') + '</h2>' +
-            '  <p class="pgate-sub">' + T('pgSub', '点一块颜色即刻出发，右下角的色卡随时可换。<em>Pick a sky — change it anytime.</em>') + '</p>' +
-            '</div>' +
-            '<div class="pgate-grid" id="pgGrid"></div>' +
-            '<div class="pgate-foot">' +
-            '  <button class="pgate-skip" id="pgSkip">' + T('pgSkip', '先逛逛，用默认色 · Skip →') + '</button>' +
-            '  <p class="pgate-hint">' + T('pgHint', '偏好只存在你自己的设备里 · SAVED ON YOUR DEVICE ONLY') + '</p>' +
-            '</div>';
+            '<div class="pgate-grid" id="pgGrid"></div>';
 
         var grid = gate.querySelector('#pgGrid');
         var cur = current();
 
-        PALETTES.forEach(function (p) {
+        PALETTES.forEach(function (p, idx) {
             var cell = document.createElement('button');
             cell.className = 'pgate-cell' + (p.id === cur ? ' cur' : '');
             cell.style.background = p.sw[2];
-            cell.innerHTML = p.icon +
+            cell.innerHTML =
+                '<span class="cd tl"></span><span class="cd tr"></span><span class="cd bl"></span><span class="cd br"></span>' +
+                '<span class="ix">( 0' + (idx + 1) + ' )</span>' +
+                '<span class="en">' + p.en + '</span>' +
+                p.icon +
                 '<span class="nm">' + p.cn + '</span>' +
-                '<span class="nm-en">' + p.en + '</span>' +
                 '<span class="tag">' + p.tag + '</span>';
             // 悬停整页实时预览（CSS 变量切换，零开销）；点击选定并出发
             cell.addEventListener('mouseenter', function () { setAttr(p.id); });

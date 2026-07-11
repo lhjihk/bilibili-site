@@ -165,129 +165,126 @@ html.pal-instant *, html.pal-instant *::before, html.pal-instant *::after { tran
 .pd-item .en { opacity: .42; font-size: 9.5px; font-family: "IBM Plex Mono", monospace; letter-spacing: .08em; margin-left: auto; padding-left: 12px; }
 
 /* ============================================================
-   进站行色引导：九宫色块（cloudstudio 的方块矩阵骨架 ×
-   路即天涯的水墨简笔图标）。发丝黑缝分隔，纯 CSS/SVG。
+   进站行色引导 v3：宣纸拼色大幕
+   不用玻璃不用极光——直接用主页自己的设计语言：
+   满屏铺满的平涂色块 + 发丝墨缝 + mono括号眉标 + 毛笔色名
+   + 悬停浮现印泥红角点 + 纸纹颗粒。块面即页面，占比拉满。
    ============================================================ */
 .pgate {
     position: fixed; inset: 0; z-index: 3000;
-    display: flex; flex-direction: column;
+    display: grid; grid-template-rows: auto 1fr;
     background: var(--paper-bg, #f4f3eb);
     color: #141416;
     transition: background .45s ease, opacity .55s ease, visibility .55s;
     overflow: hidden auto;
 }
 .pgate.hide { opacity: 0; visibility: hidden; pointer-events: none; }
-/* 极光底霭：两团主题色柔光缓慢漂移。模糊只栅格化一次、动画只动 transform，
-   加上磨砂玻璃只在引导页存续期间存在——观感国际范，代价可忽略 */
-.pgate-aur {
-    position: absolute; border-radius: 50%; pointer-events: none;
-    filter: blur(72px); will-change: transform;
+.pgate::before { /* 纸纹颗粒（主页同款质感），静态无动画 */
+    content: ""; position: absolute; inset: 0; opacity: .05; pointer-events: none; z-index: 2;
+    background-image: radial-gradient(rgba(0,0,0,.6) 1px, transparent 1.4px);
+    background-size: 22px 22px;
 }
-.pgate-aur.a {
-    width: 46vw; height: 46vw; left: -12vw; top: -14vw;
-    background: var(--purple, #6a15ff); opacity: .38;
-    animation: pgdrift 18s ease-in-out infinite alternate;
-}
-.pgate-aur.b {
-    width: 40vw; height: 40vw; right: -10vw; bottom: -12vw;
-    background: #ffffff; opacity: .5;
-    animation: pgdrift 24s ease-in-out infinite alternate-reverse;
-}
-@keyframes pgdrift { to { transform: translate(7vw, 5vh) scale(1.14); } }
-.pgate-bar, .pgate-head, .pgate-foot { position: relative; z-index: 1; }
+
+/* ---------- 顶带：品牌 · 标题 · 出口（sec-head 语言） ---------- */
 .pgate-bar {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 16px clamp(18px, 4vw, 44px) 6px;
-    font: 500 11px/1 "IBM Plex Mono", monospace; letter-spacing: .18em;
-    flex: none;
+    display: flex; justify-content: space-between; align-items: center; gap: 24px;
+    padding: 14px clamp(16px, 3vw, 44px) 12px;
+    border-bottom: 1px solid #141416;
 }
-.pgate-bar .brand { font-family: var(--font-brush, "LogoBrush", serif); font-size: 22px; letter-spacing: .08em; -webkit-text-stroke: var(--brush-stroke, 0px) currentColor; }
-.pgate-bar .live { display: flex; align-items: center; gap: 8px; opacity: .7; }
-.pgate-bar .live i { width: 7px; height: 7px; border-radius: 50%; background: #c43a22; display: inline-block; }
-.pgate-head { text-align: center; padding: clamp(8px, 2vh, 22px) 20px 0; flex: none; }
-.pgate-eyebrow { font: 500 10.5px/1 "IBM Plex Mono", monospace; letter-spacing: .3em; opacity: .58; }
-.pgate-title {
-    margin-top: 12px;
-    font-family: var(--font-brush, "LogoBrush", serif); font-weight: 400;
-    font-size: clamp(28px, 4.6vw, 54px); line-height: 1.15; letter-spacing: .04em;
+.pgb-brand { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.pgate-bar .brand {
+    font-family: var(--font-brush, "LogoBrush", serif); font-size: clamp(20px, 2vw, 27px);
+    letter-spacing: .08em; line-height: 1;
     -webkit-text-stroke: var(--brush-stroke, 0px) currentColor;
 }
-.pgate-sub { margin-top: 8px; font: 400 clamp(12px, 1.35vw, 14.5px)/1.75 "Noto Sans SC", sans-serif; opacity: .7; }
+.pgate-eyebrow, .pgate-hint {
+    font: 500 10px/1.5 "IBM Plex Mono", monospace;
+    letter-spacing: .22em; text-transform: uppercase; opacity: .55;
+}
+.pgb-mid { text-align: center; min-width: 0; }
+.pgate-title {
+    font-family: var(--font-brush, "LogoBrush", serif); font-weight: 400;
+    font-size: clamp(20px, 2.6vw, 34px); line-height: 1.2; letter-spacing: .04em;
+    -webkit-text-stroke: var(--brush-stroke, 0px) currentColor;
+    white-space: nowrap;
+}
+.pgate-sub { margin-top: 3px; font: 400 clamp(11px, 1vw, 13px)/1.6 "Noto Sans SC", sans-serif; opacity: .62; }
 .pgate-sub em { font-style: italic; font-family: Georgia, serif; }
+.pgb-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex: none; }
+.pgate-skip {
+    border: 1px solid #141416; background: transparent; cursor: pointer; color: inherit;
+    font: 500 11.5px/1 "IBM Plex Mono", monospace; letter-spacing: .14em; text-transform: uppercase;
+    padding: 10px 20px; border-radius: 999px;
+    transition: background .2s, color .2s;
+}
+.pgate-skip:hover { background: #141416; color: var(--paper-bg, #f4f3eb); }
 
+/* ---------- 大幕：满屏铺满的九宫色块 ---------- */
 .pgate-grid {
-    position: relative; z-index: 1;
-    flex: none;
-    width: min(1060px, calc(100vw - clamp(24px, 6vw, 88px)));
-    margin: clamp(14px, 2.6vh, 30px) auto 0;
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 2px; padding: 2px;
-    background: rgba(20, 20, 22, .82);     /* 发丝黑缝，衬玻璃外框 */
-    border-radius: 18px;
-    /* 磨砂玻璃外框：映出身后漂移的极光 */
-    border: 1px solid rgba(255, 255, 255, .45);
-    outline: 6px solid rgba(255, 255, 255, .22);
-    outline-offset: 0;
-    -webkit-backdrop-filter: blur(14px) saturate(1.25);
-    backdrop-filter: blur(14px) saturate(1.25);
-    box-shadow: 0 34px 80px -30px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 255, 255, .35);
-    overflow: hidden;
+    display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr;
+    gap: 1px; background: #141416;   /* 发丝墨缝 */
+    min-height: 0;
 }
 .pgate-cell {
     position: relative;
-    border: 0; cursor: pointer; padding: clamp(14px, 2vh, 24px) 12px;
-    min-height: clamp(118px, 17.5vh, 170px);
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px;
+    border: 0; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(6px, 1vh, 10px);
+    padding: clamp(14px, 2.2vh, 26px) 14px;
     color: #17171a;
-    transition: filter .2s;
+    overflow: hidden;
+    transition: filter .18s;
 }
-/* 每块色板的玻璃顶光：左上斜射的高光面，像琉璃砖 */
-.pgate-cell::before {
-    content: ""; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(158deg, rgba(255, 255, 255, .5) 0%, rgba(255, 255, 255, .12) 34%, rgba(255, 255, 255, 0) 52%, rgba(0, 0, 0, .05) 100%);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .28);
+.pgate-cell:hover, .pgate-cell:focus-visible { filter: brightness(1.05) saturate(1.07); }
+.pgate-cell:focus-visible { outline: 2px solid #141416; outline-offset: -5px; }
+/* 悬停浮现印泥红四角点（主页检票口同款语言） */
+.pgate-cell .cd {
+    position: absolute; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--seal-red, #b3402a);
+    opacity: 0; transform: scale(.4);
+    transition: opacity .22s, transform .3s cubic-bezier(.16, 1, .3, 1);
 }
-.pgate-cell > * { position: relative; }
-.pgate-cell:hover, .pgate-cell:focus-visible { filter: brightness(1.06) saturate(1.08); }
-.pgate-cell:focus-visible { outline: 2px solid #141416; outline-offset: -4px; }
-.pgate-cell.cur::after {
-    content: "✓"; position: absolute; top: 8px; right: 10px;
-    width: 20px; height: 20px; border-radius: 50%;
-    background: #141416; color: #f4f3eb;
-    font-size: 11px; display: grid; place-items: center;
+.pgate-cell .cd.tl { top: 10px; left: 10px; } .pgate-cell .cd.tr { top: 10px; right: 10px; }
+.pgate-cell .cd.bl { bottom: 10px; left: 10px; } .pgate-cell .cd.br { bottom: 10px; right: 10px; }
+.pgate-cell:hover .cd, .pgate-cell.cur .cd { opacity: 1; transform: none; }
+/* 角标编号 / 英文名：mono 括号语言 */
+.pgate-cell .ix, .pgate-cell .en {
+    position: absolute; top: 12px;
+    font: 500 10px/1 "IBM Plex Mono", monospace; letter-spacing: .18em; opacity: .58;
 }
-.pgate-cell svg { width: clamp(30px, 4.6vh, 44px); height: auto; display: block; }
-.pgate-cell .nm { font: 700 clamp(14px, 1.9vh, 17px)/1.2 "Noto Sans SC", sans-serif; letter-spacing: .14em; }
-.pgate-cell .nm-en { font: 500 9.5px/1 "IBM Plex Mono", monospace; letter-spacing: .26em; opacity: .72; }
-.pgate-cell .tag { font: 400 clamp(10.5px, 1.5vh, 12px)/1.5 "Noto Sans SC", sans-serif; opacity: .62; }
+.pgate-cell .ix { left: 26px; }
+.pgate-cell .en { right: 26px; }
+.pgate-cell svg { width: clamp(34px, 6vh, 60px); height: auto; display: block; transition: transform .35s cubic-bezier(.16, 1, .3, 1); }
+.pgate-cell:hover svg { transform: translateY(-3px) scale(1.08); }
+/* 色名：毛笔字，跟随后台所选书法字体 —— 引导页与全站同一血脉 */
+.pgate-cell .nm {
+    font-family: var(--font-brush, "LogoBrush", serif); font-weight: 400;
+    font-size: clamp(22px, 3.4vh, 34px); line-height: 1.15; letter-spacing: .12em;
+    -webkit-text-stroke: var(--brush-stroke, 0px) currentColor;
+}
+.pgate-cell .tag { font: 400 clamp(10.5px, 1.5vh, 12.5px)/1.5 "Noto Sans SC", sans-serif; opacity: .6; }
 .pgate-cell .tag em { font-style: italic; font-family: Georgia, serif; letter-spacing: .02em; }
-
-.pgate-foot {
-    text-align: center; padding: clamp(12px, 2.4vh, 26px) 20px calc(clamp(14px, 2.6vh, 26px) + env(safe-area-inset-bottom, 0px));
-    flex: none;
+/* 当前所选：印泥红斜盖小方章 */
+.pgate-cell.cur::after {
+    content: "现"; position: absolute; top: 30px; right: 22px;
+    width: 26px; height: 26px; display: grid; place-items: center;
+    border: 2px solid var(--seal-red, #b3402a); color: var(--seal-red, #b3402a);
+    font: 700 13px/1 "Noto Sans SC", sans-serif;
+    transform: rotate(-6deg);
 }
-.pgate-skip {
-    border: 1px solid rgba(255, 255, 255, .55);
-    background: rgba(255, 255, 255, .3);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    cursor: pointer; color: inherit;
-    font: 500 12px/1 "Noto Sans SC", sans-serif; letter-spacing: .12em;
-    padding: 11px 26px; border-radius: 999px;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .4), 0 8px 24px -12px rgba(0, 0, 0, .35);
-    transition: background .2s, color .2s;
-}
-.pgate-skip:hover { background: #141416; color: #f4f3eb; }
-.pgate-hint { margin-top: 10px; font: 400 10px/1.7 "IBM Plex Mono", monospace; letter-spacing: .1em; opacity: .42; }
 
 @media (max-width: 760px) {
-    .pgate-grid { grid-template-columns: repeat(2, 1fr); width: calc(100vw - 28px); }
+    .pgate { overflow-y: auto; }
+    .pgate-bar { flex-wrap: wrap; row-gap: 10px; padding-bottom: 12px; }
+    .pgb-mid { order: 3; width: 100%; }
+    .pgate-title { white-space: normal; }
+    .pgb-right { flex-direction: row; align-items: center; gap: 12px; }
+    .pgate-hint { display: none; }
+    .pgate-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: minmax(128px, auto); }
     .pgate-cell:last-child { grid-column: 1 / -1; }
-    .pgate-cell { min-height: 108px; }
+    .pgate-cell .ix { left: 14px; } .pgate-cell .en { right: 14px; }
     .pd-fab { right: 14px; }
     .pd-dock { right: 14px; max-height: 60vh; overflow: auto; }
 }
 @media (prefers-reduced-motion: reduce) {
-    .pd-fab, .pd-fab .pf, .pd-dock, .pgate, .pgate-cell { transition: none; }
-    .pgate-aur { animation: none; }
+    .pd-fab, .pd-fab .pf, .pd-dock, .pgate, .pgate-cell, .pgate-cell svg, .pgate-cell .cd { transition: none; }
 }
