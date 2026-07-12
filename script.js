@@ -300,19 +300,26 @@
         });
 
         // ============ 昼夜双主题 ============
-        const themeBtn = $('themeBtn');
+        const themeBtn = $('themeBtn'), mmThemeBtn = $('mmThemeBtn');
         function applyThemeBtn() {
             const dark = document.body.dataset.theme === 'dark';
-            if (themeBtn) themeBtn.textContent = dark ? '☀ 纸面' : '● 暗房';
+            const label = dark ? '☀ 纸面' : '● 暗房';
+            if (themeBtn) themeBtn.textContent = label;
+            if (mmThemeBtn) mmThemeBtn.textContent = label;   // 手机菜单里的开关同步文字
             if (window.__fluidTheme) window.__fluidTheme(dark);
         }
-        themeBtn?.addEventListener('click', (e) => {
+        function toggleTheme(x, y) {
             const toDark = document.body.dataset.theme !== 'dark';
-            inkTransition(e.clientX || innerWidth - 60, e.clientY || 40, () => {
+            inkTransition(x, y, () => {
                 document.body.dataset.theme = toDark ? 'dark' : 'paper';
                 localStorage.setItem('ttd-theme', toDark ? 'dark' : 'paper');
                 applyThemeBtn();
             });
+        }
+        themeBtn?.addEventListener('click', (e) => toggleTheme(e.clientX || innerWidth - 60, e.clientY || 40));
+        mmThemeBtn?.addEventListener('click', (e) => {   // 手机版：先收起菜单再切主题
+            mmenuClose();
+            toggleTheme(e.clientX || innerWidth / 2, e.clientY || 40);
         });
         applyThemeBtn();
 
