@@ -349,13 +349,14 @@
         // ============ 随乐呼吸（音乐驱动全站） ============
         // 原版只挑了几个小字号元素、幅度又小，肉眼基本看不见；现在提亮并给 LOGO/唱片一起呼吸
         if (!reduced) {
+            // k = 呼吸幅度系数（scale 走合成层，调大不增加任何每帧开销）。导航 LOGO 保守以免挤到导航栏
             const PULSE = [
-                { sel: '.nav-logo-cn', k: 0.09, origin: 'left center' },
-                { sel: '.deck-mini', k: 0.22 },
-                { sel: '.ds-index b', k: 0.55 },
-                { sel: '.np-label', k: 0.55 },
-                { sel: '.hero-sub .mosaic', k: 0.7 },
-                { sel: '.marquee-chunk b', k: 0.7 },
+                { sel: '.nav-logo-cn', k: 0.13, origin: 'left center' },
+                { sel: '.deck-mini', k: 0.34 },
+                { sel: '.ds-index b', k: 0.72 },
+                { sel: '.np-label', k: 0.72 },
+                { sel: '.hero-sub .mosaic', k: 1.0 },
+                { sel: '.marquee-chunk b', k: 1.0 },
             ];
             const collect = () => PULSE.flatMap(({ sel, k, origin }) =>
                 Array.from(document.querySelectorAll(sel)).map((el) => {
@@ -364,7 +365,7 @@
                 }));
             let cached = null, cacheT = 0;
             gsap.ticker.add((t) => {
-                const lv = Math.min((window.__level || 0) * 2.2, 1);
+                const lv = Math.min((window.__level || 0) * 2.6, 1);
                 if (lv < 0.02) { // 没在放歌：归位一次后彻底歇着
                     if (cached) {
                         cached.forEach(({ el }) => { el.style.transform = ''; });
