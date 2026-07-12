@@ -197,7 +197,7 @@
                 // 手机浏览器放不了电脑版外链播放器，换 B站手机 H5 播放器（内嵌直播，不跳APP）
                 const biliSrc = (TOUCH || isAppleSafari)
                     ? `https://www.bilibili.com/blackboard/html5mobileplayer.html?bvid=${t.bvid}&page=1&high_quality=1&danmaku=0&posterFirst=1`
-                    : `https://player.bilibili.com/player.html?bvid=${t.bvid}&autoplay=1&danmaku=0`;
+                    : `https://player.bilibili.com/player.html?bvid=${t.bvid}&autoplay=1&danmaku=0&high_quality=1`;
                 tEmbed.innerHTML = t.type === 'bilibili'
                     ? `<iframe src="${biliSrc}" allow="autoplay; fullscreen" allowfullscreen></iframe>`
                     : t.type === '163'
