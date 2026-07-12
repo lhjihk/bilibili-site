@@ -22,7 +22,7 @@
       "heroHint": "[ MOVE MOUSE — INK REACTS · 往下滚 ]",
       "hfTL": "THE ROAD IS THE HORIZON — EST.2017",
       "hfTR": "[ 个人空间 ]",
-      "mq1": "原创小曲 <i>ORIGINAL METAL</i> 旅行影像 <i>ROAD FILM</i> 随笔日记有空慢慢添加 <i>TRAVEL NOTES</i> <b class=\"mosaic\">★</b> ",
+      "mq1": "原创小曲 <i>ORIGINAL METAL</i> 旅行影像 <i>ROAD FILM</i> 随笔日记 <i>TRAVEL NOTES</i> <b class=\"mosaic\">★</b> ",
       "mq2": "点击试听 <i>LISTEN FIRST</i> 路上随身听 <i>REAL TAKES ONLY</i> 你自己拖个 MP3 进来也行 <b class=\"mosaic\">♫</b> ",
       "mqFoot": "弦上流年 <i>STRINGS OVER YEARS</i> 今昔山河 <i>WHEELS OVER LAND</i> <b class=\"mosaic\">♪</b> ",
       "sec01Eyebrow": "(01) — MANIFESTO",
@@ -61,7 +61,12 @@
       "jQuote2": "窗外景飞驰  几许故路归 ",
       "jQuote3": "多少得失过往 皆不可得    可又如此让人感动",
       "jfLine": "WAYFARER'S JOURNAL — 弦上流年 · 此心山河",
-      "heroColophon": "回首向來蕭瑟處 也無風雨也無晴"
+      "heroColophon": "回首向来潇洒处 也无风雨也无晴",
+      "hfBR": "V.2026 — Mount Emei",
+      "vpSub": "发点生活音乐类视频，随缘更新 合作邮箱：nijingchongsheng@gmail.com",
+      "vpState": "拍下来，<span class=\"cn\">腐朽</span>就赢不了。<br>\n                <em>SEE IT — BEFORE IT RUSTS.</em>",
+      "vpCopy": "有时候不知道该录点什么，科技越来越发达，AI和器材的进步似乎一切都唾手可得，现在却反而不想去记录那些毫无意义的东西，第一次学吉他时候父母买的那把木吉他的兴奋，刚开始学习录音录时候的那台破电脑录的东西，现在回看反而却无比怀念",
+      "vpMarquee": "故曲如风 <i>●</i> 随顺而已 <i>●</i> 九州同 <i>●</i> 过去心 <i>●</i> Schecter Ravendark V 试听 <i>●</i> 翻弹 Suicide Silence <i>●</i> 孤灯照剑 <i>●</i> METAL 金属段落编曲 2018.4.16 <i>●</i>&nbsp;"
     },
     "lyrics": [
       "九州同一声吼，山河都回头",
@@ -166,13 +171,31 @@
   ],
   "featured": [
     {
-      "bvid": "BV1tkvSB6E6U",
-      "title": "故曲如风",
-      "en": "OLD SONG, NEW WIND",
-      "year": "2025",
-      "cover": "https://i2.hdslb.com/bfs/archive/d29b90cc25e5e887545fdbb539a8de4bb72f6a0a.jpg",
-      "flavor": "旋律是旧的，风是新的。前奏那段空间声，是在黄河边对着风录的。适合一个人骑夜路的时候听。",
-      "spec": "编曲版二 · 前奏带真风声"
+      "title": "Trivium Ampknob Bundle 演奏试听",
+      "en": "Metal Trivium Ampknob Bundle: Review and Demo",
+      "bvid": "BV1GzeWePEzJ",
+      "year": "2024",
+      "cover": "https://i1.hdslb.com/bfs/archive/6e016569e588b543edeea5959b2c1caeb41eedea.jpg",
+      "flavor": "Bogren Digital公司2024最新推出的 金属利器 Trivium乐队签名款吉他效果器Trivium Ampknob Bundle试听\n",
+      "spec": "Trivium Ampknob Bund"
+    },
+    {
+      "title": "孤灯照剑 · Demo",
+      "en": "Solitary Lamp Illuminates the Sword · Demo",
+      "bvid": "BV1EP4y1J7zb",
+      "year": "2021",
+      "cover": "https://i1.hdslb.com/bfs/archive/38cad7b794fc53498d71a3d9cd78dde2c15b0ade.jpg",
+      "flavor": "2023年的一首曲子，也不算完美，主要是当时的境况与心境现在已无法复制，将就听之\n2023.6",
+      "spec": "Demo 2023  LOGIC工程演示 "
+    },
+    {
+      "title": "随顺而已 ·Demo  UADspark混音",
+      "en": "Just Going with the Flow · Demo (UAD Spark Mix)",
+      "bvid": "BV1zc411y7gr",
+      "year": "2023",
+      "cover": "https://i1.hdslb.com/bfs/archive/50fdacfd6417b74ba5da8b7016659bac51fbbef9.jpg",
+      "flavor": "2019年写的一首曲子，当时想表达的也许是思乡之情，也许只是一念无源之思，今年重新填词怀念之录一录吧\n\n八月生日所作小诗节选\n\n意中驹 仰首绝尘旧道奔 不平尽 心观乾坤 尘染归路为有情 \n烟影事 忽明忽现随风去 曲渐明 万物并作 抽刀断梦梦是真  \n\n词曲： 余\n制作/混音/母带：余\n2023.12",
+      "spec": "原创音乐 混音 LOGIC工程演示 UADSPARK"
     },
     {
       "bvid": "BV1ypetehEe4",
@@ -180,17 +203,17 @@
       "en": "NINE PROVINCES, ONE ROAR",
       "year": "2024",
       "cover": "https://i1.hdslb.com/bfs/archive/6e016569e588b543edeea5959b2c1caeb41eedea.jpg",
-      "flavor": "致悟空，致这个时代的年轻人。失真拧满，鼓点像马蹄。慢板那段的动机来自海拔五千二的垭口。",
-      "spec": "重失真 · 含高原动机"
+      "flavor": "2024年生日礼物",
+      "spec": "吉他 · 生日"
     },
     {
-      "bvid": "BV1pA411X7wr",
-      "title": "相忘于天涯",
-      "en": "FORGOTTEN AT WORLD'S END",
-      "year": "2022",
-      "cover": "https://i0.hdslb.com/bfs/archive/ba2f2d54fe7f8fe609c6562d8ed0c0c831f4726a.jpg",
-      "flavor": "写给所有走散在路上的人。清音开场，后半段才上失真——像旅行，出发时都体面，走远了才见真章。",
-      "spec": "清音转失真 · 慢热型"
+      "bvid": "BV1tkvSB6E6U",
+      "title": "故曲如风",
+      "en": "OLD SONG, NEW WIND",
+      "year": "2025",
+      "cover": "https://i2.hdslb.com/bfs/archive/d29b90cc25e5e887545fdbb539a8de4bb72f6a0a.jpg",
+      "flavor": "这首2024年写的曲子\n\n这个编曲版本是当时最初的版本\n\n现在找出来重新混音了一下\n\n器乐新加入了萨克斯，和声唱还没有录，有没有高手帮忙写个不错的和声\n\n2025已结束，以作留念\n",
+      "spec": "编曲版二 "
     }
   ],
   "videos": [
