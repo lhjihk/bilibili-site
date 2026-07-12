@@ -168,6 +168,7 @@ img { display: block; max-width: 100%; }
 .cursor {
     position: fixed; left: 0; top: 0; z-index: 999;
     pointer-events: none;
+    will-change: transform;   /* 提到合成层，跟随更跟手不卡 */
 }
 .cursor-dot {
     position: absolute; left: -5px; top: -5px;
@@ -372,7 +373,7 @@ img { display: block; max-width: 100%; }
 .marquee-chunk b { color: var(--purple); font-weight: 400; }
 .mq-purple { background: var(--purple); color: var(--beige); border-color: var(--purple); }
 .mq-purple .marquee-chunk i { -webkit-text-stroke: 1px var(--beige); }
-.mq-purple .marquee-chunk b { color: var(--yellow); }
+.mq-purple .marquee-chunk b { color: var(--beige); }   /* 原来单独染黄色太突兀，改成与紫底条其它文字一致的米白 */
 .mq-foot { border-bottom: none; }
 
 /* ============ (01) 宣言 ============ */

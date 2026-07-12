@@ -76,7 +76,7 @@
                 scrollVelocity = e.velocity || 0;
                 ScrollTrigger.update();
             });
-            gsap.ticker.add((t) => lenis.raf(t * 1000));
+            gsap.ticker.add((t) => { if (lenis) lenis.raf(t * 1000); }); // 降级后 lenis 置空，必须判空，否则抛错会中断 ticker 后续回调(光标/跑马灯全卡死)
             gsap.ticker.lagSmoothing(0);
 
             // ---- 自适应保险：撑不住丝滑滚动的设备自动退回原生滚动，健康设备无感 ----
@@ -197,9 +197,9 @@
             const pos = { x: -100, y: -100 }, target = { x: -100, y: -100 };
             window.addEventListener('pointermove', (e) => { target.x = e.clientX; target.y = e.clientY; }, { passive: true });
             gsap.ticker.add(() => {
-                pos.x += (target.x - pos.x) * 0.22;
-                pos.y += (target.y - pos.y) * 0.22;
-                cursor.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
+                pos.x += (target.x - pos.x) * 0.32;
+                pos.y += (target.y - pos.y) * 0.32;
+                cursor.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
             });
             document.addEventListener('mouseover', (e) => {
                 const t = e.target.closest('[data-cursor]');
