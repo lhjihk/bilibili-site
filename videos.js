@@ -10,6 +10,8 @@
     var $ = function (id) { return document.getElementById(id); };
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var TOUCH = window.matchMedia('(hover: none)').matches;
+    // 桌面 Safari 也用 B站 H5 播放器（player.bilibili.com 外链在 macOS Safari 卡缓存）；只认 Apple Safari，其他浏览器/手机端不变
+    var isAppleSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor) && !/Chrome|CriOS|Chromium|Edg|OPR|FxiOS/.test(navigator.userAgent);
 
     // ---------- 数据 ----------
     fetch('data/content.json?t=' + Date.now())
@@ -131,7 +133,7 @@
         document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeVideo(); });
     }
     function openVideo(bvid) {
-        var src = TOUCH
+        var src = (TOUCH || isAppleSafari)
             ? 'https://www.bilibili.com/blackboard/html5mobileplayer.html?bvid=' + bvid + '&page=1&high_quality=1&danmaku=0&posterFirst=1'
             : 'https://player.bilibili.com/player.html?bvid=' + bvid + '&autoplay=1&danmaku=0&high_quality=1';
         frame.innerHTML = '<iframe src="' + src + '" allow="autoplay; fullscreen" allowfullscreen scrolling="no"></iframe>' +

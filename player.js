@@ -27,6 +27,8 @@
 
         const tracks = (window.SITE.tracks || []).slice();
         const TOUCH = window.matchMedia('(hover: none)').matches; // 手机：隐藏 iframe 不允许自动出声
+        // 桌面 Safari 也用 B站 H5 播放器（外链在 macOS Safari 卡缓存）；只认 Apple Safari，其他浏览器/手机端不变
+        const isAppleSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor) && !/Chrome|CriOS|Chromium|Edg|OPR|FxiOS/.test(navigator.userAgent);
         let current = -1;
         let mode = 'idle';           // idle | audio | embed
         let embedOn = false;         // embed 是否在"播放"（点击后即视为在播）
@@ -225,7 +227,7 @@
             } else if (t.type === 'bilibili') {
                 mode = 'embed'; embedOn = true;
                 // 手机浏览器放不了电脑版外链播放器，换 B站手机 H5 播放器（内嵌直播，不跳APP）
-                const biliSrc = TOUCH
+                const biliSrc = (TOUCH || isAppleSafari)
                     ? `https://www.bilibili.com/blackboard/html5mobileplayer.html?bvid=${t.bvid}&page=1&high_quality=1&danmaku=0&posterFirst=1`
                     : `https://player.bilibili.com/player.html?bvid=${t.bvid}&autoplay=1&danmaku=0`;
                 deckEmbed.innerHTML = `<iframe src="${biliSrc}"

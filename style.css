@@ -243,17 +243,6 @@ img { display: block; max-width: 100%; }
     padding: 8px 0;
 }
 .mmenu a .mono { color: var(--purple); }
-/* 移动端菜单里的暗房开关（桌面版 .theme-btn 的手机替身，桌面隐藏时靠它） */
-.mmenu .mm-theme {
-    order: 10;   /* 导航项会被 content.json 拖动排序重排(appendChild)，用 flex order 保证开关始终排在最后 */
-    align-self: flex-start; margin-top: 22px;
-    font-family: var(--font-mono); font-size: 15px; letter-spacing: .08em;
-    color: var(--beige); background: transparent;
-    border: 1px solid rgba(244, 243, 235, .4); border-radius: 999px;
-    padding: 12px 22px; white-space: nowrap;
-    transition: background .3s, color .3s;
-}
-.mmenu .mm-theme:hover { background: var(--beige); color: var(--black); }
 
 /* ============ 章节公共 ============ */
 .section { position: relative; padding: clamp(80px, 12vh, 160px) var(--gutter); }
@@ -331,8 +320,10 @@ img { display: block; max-width: 100%; }
     font-family: var(--font-brush); font-weight: 400;
     font-size: .74em; letter-spacing: .04em;
     -webkit-text-stroke: var(--brush-stroke, 0px) currentColor;
-    /* 与上一行英文(HORIZON)拉开间距：line-height .94 太紧，毛笔字的高笔画会被英文压住顶部 */
-    margin-top: .07em;
+    /* line-height .94 太紧，毛笔字的高笔画会顶出行框被 .ht-line 的 overflow:hidden 裁掉顶端；
+       用 padding-top 把裁切边界抬上去留出余量，顺带与上一行 HORIZON 拉开距离 */
+    line-height: 1.02;
+    padding-top: .14em;
 }
 .ht-cn i { font-style: normal; color: var(--purple); }
 .ht-cn .hc { display: inline-block; }
@@ -942,8 +933,10 @@ img { display: block; max-width: 100%; }
     .nav-meta { display: none; }
 }
 @media (max-width: 900px) {
-    .nav-links, .nav-cta, .theme-btn { display: none; }
-    .nav-burger { display: flex; margin-left: auto; }
+    .nav-links, .nav-cta { display: none; }
+    /* 暗房开关移到顶栏汉堡按钮左边，进站不用展开菜单就能看见 */
+    .theme-btn { display: inline-flex; align-items: center; margin-left: auto; padding: 8px 13px; font-size: 13px; }
+    .nav-burger { display: flex; margin-left: 12px; }
     .listen-layout { grid-template-columns: 1fr; }
     .ds-card { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1.4fr) auto; }
     .ds-stage { height: auto; min-height: 480px; }

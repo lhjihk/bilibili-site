@@ -10,6 +10,10 @@
     const $ = (id) => document.getElementById(id);
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const canHover = window.matchMedia('(hover: hover)').matches;
+    // 桌面 Safari(macOS 自带浏览器)放不动 player.bilibili.com 外链播放器（一直卡缓存），
+    // 跟手机端一样改用 B站 H5 播放器。只认 Apple 自家 Safari，排除 Chrome/Edge/Firefox 等，
+    // 手机端与其他浏览器行为完全不变。
+    const isAppleSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor) && !/Chrome|CriOS|Chromium|Edg|OPR|FxiOS/.test(navigator.userAgent);
 
     document.addEventListener('site:ready', () => {
         gsap.registerPlugin(ScrollTrigger);
@@ -300,26 +304,19 @@
         });
 
         // ============ 昼夜双主题 ============
-        const themeBtn = $('themeBtn'), mmThemeBtn = $('mmThemeBtn');
+        const themeBtn = $('themeBtn');   // 桌面在右上；手机版同一颗按钮移到汉堡左侧显示
         function applyThemeBtn() {
             const dark = document.body.dataset.theme === 'dark';
-            const label = dark ? '☀ 纸面' : '● 暗房';
-            if (themeBtn) themeBtn.textContent = label;
-            if (mmThemeBtn) mmThemeBtn.textContent = label;   // 手机菜单里的开关同步文字
+            if (themeBtn) themeBtn.textContent = dark ? '☀ 纸面' : '● 暗房';
             if (window.__fluidTheme) window.__fluidTheme(dark);
         }
-        function toggleTheme(x, y) {
+        themeBtn?.addEventListener('click', (e) => {
             const toDark = document.body.dataset.theme !== 'dark';
-            inkTransition(x, y, () => {
+            inkTransition(e.clientX || innerWidth - 60, e.clientY || 40, () => {
                 document.body.dataset.theme = toDark ? 'dark' : 'paper';
                 localStorage.setItem('ttd-theme', toDark ? 'dark' : 'paper');
                 applyThemeBtn();
             });
-        }
-        themeBtn?.addEventListener('click', (e) => toggleTheme(e.clientX || innerWidth - 60, e.clientY || 40));
-        mmThemeBtn?.addEventListener('click', (e) => {   // 手机版：先收起菜单再切主题
-            mmenuClose();
-            toggleTheme(e.clientX || innerWidth / 2, e.clientY || 40);
         });
         applyThemeBtn();
 
@@ -631,7 +628,7 @@
         const videoModal = $('videoModal'), vmFrame = $('vmFrame');
         window.openVideo = function (bvid) {
             // 手机浏览器放不了电脑版外链播放器，换 B站手机 H5 播放器（内嵌直播，不跳APP）
-            const biliSrc = window.matchMedia('(hover: none)').matches
+            const biliSrc = (window.matchMedia('(hover: none)').matches || isAppleSafari)
                 ? `https://www.bilibili.com/blackboard/html5mobileplayer.html?bvid=${bvid}&page=1&high_quality=1&danmaku=0&posterFirst=1`
                 : `https://player.bilibili.com/player.html?bvid=${bvid}&autoplay=1&danmaku=0&high_quality=1`;
             vmFrame.innerHTML = `
