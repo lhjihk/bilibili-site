@@ -49,6 +49,20 @@
             if (TEXTS[key] != null && TEXTS[key] !== '') el.innerHTML = TEXTS[key];
         });
 
+        // 板块排序（后台「板块管理 · 影像子页」拖动的顺序；section id 与后台清单一致）
+        // 早于 animate()/ScrollTrigger 建立，触发位置才算得准
+        try {
+            var VMODS = S.videoModules || [];
+            if (VMODS.length) {
+                var vsecs = VMODS.map(function (m) { return document.getElementById(m.id); }).filter(Boolean);
+                var vanchors = vsecs.map(function (sec) { var a = document.createComment('mod'); sec.parentNode.insertBefore(a, sec); return a; });
+                vanchors.sort(function (a, b) { return (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING) ? -1 : 1; });
+                var vordered = VMODS.map(function (m) { return document.getElementById(m.id); }).filter(Boolean);
+                vordered.forEach(function (sec, i) { vanchors[i].parentNode.insertBefore(sec, vanchors[i]); });
+                VMODS.forEach(function (m) { var sec = document.getElementById(m.id); if (sec && m.show === false) sec.style.display = 'none'; });
+            }
+        } catch (e) { console.warn('影像板块排序失败', e); }
+
         // 跑马灯：把首块内容复制到第二块，实现无缝循环
         var chunks = document.querySelectorAll('.vmarquee .chunk');
         if (chunks.length > 1) chunks[1].innerHTML = chunks[0].innerHTML;

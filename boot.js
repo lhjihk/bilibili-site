@@ -62,6 +62,8 @@
             applyColors(s.colors);
             applyBrush(s.logoFont || '');
             applyTexts(s.texts);
+            // 浏览器标签页标题：后台填了 docTitle 就用它（留空 = 用 HTML 里写死的默认标题）
+            if (s.texts && s.texts.docTitle) document.title = s.texts.docTitle;
             applyBackgrounds(s.backgrounds);
             document.dispatchEvent(new CustomEvent('site:ready', { detail: data }));
         })

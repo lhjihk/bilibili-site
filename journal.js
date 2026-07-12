@@ -53,6 +53,39 @@
             }
         } catch (e) { /* localStorage 不可用不影响本页 */ }
 
+        // ===== 板块排序（后台「板块管理 · 手账子页」拖动的顺序；section id 与后台清单一致）=====
+        // 在各 section 现位置放锚点，再按配置顺序填回——早于 ScrollTrigger 建立，触发位置才算得准
+        try {
+            const MODS = (SITE.settings && SITE.settings.journalModules) || [];
+            if (MODS.length) {
+                const secs = MODS.map((m) => document.getElementById(m.id)).filter(Boolean);
+                const anchors = secs.map((sec) => { const a = document.createComment('mod'); sec.parentNode.insertBefore(a, sec); return a; });
+                anchors.sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING) ? -1 : 1);
+                const ordered = MODS.map((m) => document.getElementById(m.id)).filter(Boolean);
+                ordered.forEach((sec, i) => anchors[i].parentNode.insertBefore(sec, anchors[i]));
+                MODS.forEach((m) => { const sec = document.getElementById(m.id); if (sec && m.show === false) sec.style.display = 'none'; });
+            }
+        } catch (e) { console.warn('手账板块排序失败', e); }
+
+        // ===== 暗房昼夜开关（与主页共用 ttd-theme；本页用 html[data-theme] 避免闪白）=====
+        (function () {
+            const btn = $('jThemeBtn');
+            // html 上的标记防首屏闪白（默认「天涯本色」无 palette 时靠 journal.css 的 html[data-theme]）；
+            // body 上的标记与主页/palette.css 同一约定（有配色主题时靠 palette.css 的 body[data-theme] 出夜色）
+            const apply = (dark) => {
+                if (dark) { document.documentElement.dataset.theme = 'dark'; document.body.dataset.theme = 'dark'; }
+                else { delete document.documentElement.dataset.theme; delete document.body.dataset.theme; }
+                if (btn) btn.textContent = dark ? '○ 白昼' : '● 暗房';
+            };
+            let dark = document.documentElement.dataset.theme === 'dark';
+            apply(dark);
+            if (btn) btn.addEventListener('click', () => {
+                dark = !dark;
+                try { localStorage.setItem('ttd-theme', dark ? 'dark' : 'light'); } catch (e) { /* 隐私模式 */ }
+                apply(dark);
+            });
+        })();
+
         const J = (SITE.settings && SITE.settings.journal) || {};
         const ARTICLES = SITE.articles || [];
         const PASS_HASH = J.passHash || '';
@@ -76,6 +109,10 @@
                 starCanvas.style.backgroundImage = `url("${bg}")`;
                 starCanvas.style.backgroundSize = 'cover';
             }
+            // 开篇照片层（雪山云海那张）：后台上传了就覆盖 CSS 里写死的默认图，位置/滤镜仍走 CSS
+            const photoBg = (SITE.settings.backgrounds || {}).journalPhoto || '';
+            const jnPhoto = document.querySelector('.jn-photo');
+            if (jnPhoto && photoBg) jnPhoto.style.backgroundImage = `url("${photoBg}")`;
             function resize() {
                 const dpr = Math.min(devicePixelRatio || 1, 2);
                 W = starCanvas.width = starCanvas.clientWidth * dpr;

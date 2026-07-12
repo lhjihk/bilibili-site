@@ -128,9 +128,12 @@
             <button class="addbtn" data-add="videos">＋ 加一个视频</button>
         </div>
         <div class="panel" id="p-articles">
-            <p class="panel-tip">手账文章。① 在「传文件」里上传 .md（Obsidian 笔记直接传，双链/高亮语法都认）→ ② 回这里加一条记录，file 填 <code>articles/文件名.md</code>。<b>锁定</b>勾上就封存（读者要口令）；bucket 是分桶（旅行/乐记/随笔…随你定，页面自动生成筛选按钮）。</p>
+            <p class="panel-tip">手账文章，两种写法任选：<b>① 直接写</b>——点下面「✍️ 写新笔记」当场写正文（自动建好文件，插图也能直接传，最省事）；<b>② 传 Obsidian 笔记</b>——在「传文件」里上传 .md（双链/高亮语法都认）再回这里的记录里把 file 对上。<b>锁定</b>勾上就封存（读者要口令）；bucket 是分桶（旅行/乐记/随笔…随你定，页面自动生成筛选按钮）。改完都要点右上角「保存并发布」。</p>
             <div id="list-articles"></div>
-            <button class="addbtn" data-add="articles">＋ 加一篇文章</button>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <button id="btnNewNote" class="addbtn primary" style="flex:1;min-width:220px">✍️ 写新笔记（直接写，不用传文件）</button>
+                <button class="addbtn" data-add="articles" style="flex:1;min-width:180px">＋ 只加一条空记录</button>
+            </div>
         </div>
         <div class="panel" id="p-texts">
             <p class="panel-tip">网站上每一处文字都在这里。标注「HTML」的可以用标签（如 &lt;em&gt;强调&lt;/em&gt;、&lt;br&gt;换行、&lt;i&gt;斜体英文&lt;/i&gt;），其余填纯文字即可。改完点右上角保存。</p>
@@ -152,14 +155,31 @@
                 <label class="uploader" style="margin-top:12px"><input type="file" id="upBgSky" accept="image/*">上传星空底图</label>
             </div>
             <div class="setgroup">
+                <h3>🏔 手账开篇照片层（星空下沿那张雪山云海，叠在星空之上）</h3>
+                <div class="grid"><div class="wide" style="grid-column:1/-1"><label>图片路径</label><input data-set="backgrounds.journalPhoto" placeholder="留空 = 用默认 assets/bg/jn-ridge.jpg"></div></div>
+                <label class="uploader" style="margin-top:12px"><input type="file" id="upBgJnPhoto" accept="image/*">上传开篇照片层</label>
+                <p style="font-size:12px;opacity:.6;margin-top:8px">说明：手账开篇其实是「星空底图 + 这张照片层」两层叠出来的，不是三张同时显示。这张会自动去色降调融进夜色。</p>
+            </div>
+            <div class="setgroup">
                 <h3>👤 关于页照片</h3>
                 <div class="grid"><div class="wide" style="grid-column:1/-1"><label>图片路径</label><input data-set="backgrounds.aboutPhoto"></div></div>
                 <label class="uploader" style="margin-top:12px"><input type="file" id="upBgAbout" accept="image/*">上传关于页照片</label>
             </div>
         </div>
         <div class="panel" id="p-modules">
-            <p class="panel-tip">给首页板块排顺序、开关显示。取消勾选 = 整个板块隐藏（内容还在，随时可以再打开）。</p>
-            <div id="list-modules"></div>
+            <p class="panel-tip">给各页板块排顺序、开关显示。↑↓ 或拖动排序；取消勾选 = 整个板块隐藏（内容还在，随时再打开）。改完点右上角「保存并发布」。</p>
+            <div class="setgroup">
+                <h3>🏠 首页板块</h3>
+                <div id="list-modules"></div>
+            </div>
+            <div class="setgroup">
+                <h3>📓 手账子页板块（可把「随身听」挪到地图和笔记之间等）</h3>
+                <div id="list-journalmods"></div>
+            </div>
+            <div class="setgroup">
+                <h3>🎬 影像子页板块</h3>
+                <div id="list-videomods"></div>
+            </div>
         </div>
         <div class="panel" id="p-site">
             <div class="setgroup">
@@ -268,6 +288,6 @@
             <textarea id="mdEditorBox" style="flex:1;resize:none;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.8"></textarea>
         </div>
     </div>
-    <script src="admin.js?v=20260713a"></script>
+    <script src="admin.js?v=20260713b"></script>
 </body>
 </html>

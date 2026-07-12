@@ -6,9 +6,10 @@
     <meta name="referrer" content="no-referrer">
     <title>旅人手账 — 路即天涯® / WAYFARER'S JOURNAL</title>
     <meta name="description" content="路即天涯的旅行手账：征途、笔记与印章。">
-    <script>/* 书法字体秒开：先用上次记住的选择，content.json 到位后以后台设置为准 */
-    (function(){try{var b=localStorage.getItem('ljty-brush');if(b)document.documentElement.dataset.brush=b;}catch(e){}})();</script>
-    <link rel="stylesheet" href="journal.css?v=20260712l">
+    <script>/* 书法字体 & 暗房主题秒开：先用上次记住的，content.json/后台设置到位后再校准 */
+    (function(){try{var b=localStorage.getItem('ljty-brush');if(b)document.documentElement.dataset.brush=b;
+    if(localStorage.getItem('ttd-theme')==='dark')document.documentElement.dataset.theme='dark';}catch(e){}})();</script>
+    <link rel="stylesheet" href="journal.css?v=20260713a">
     <link rel="stylesheet" href="palette.css?v=20260712l">
     <script src="palette.js?v=20260712l"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,21 +32,22 @@
                     <text x="70" y="94" text-anchor="middle" font-size="26" font-weight="900" fill="currentColor">存</text>
                 </svg>
             </div>
-            <h1 class="gate-title">此账已封存</h1>
-            <p class="gate-sub">THE JOURNAL IS SEALED — 报上口令，方可启封</p>
+            <h1 class="gate-title" data-txt="jGateTitle">此账已封存</h1>
+            <p class="gate-sub" data-txt="jGateSub">THE JOURNAL IS SEALED — 报上口令，方可启封</p>
             <div class="gate-form">
                 <input type="password" id="gatePass" placeholder="口令 / PASSPHRASE" autocomplete="off">
-                <button id="gateBtn">启封</button>
+                <button id="gateBtn" data-txt="jGateBtn">启封</button>
             </div>
             <p class="gate-err" id="gateErr"></p>
-            <a class="gate-back" href="index.html">← 退回实验室</a>
+            <a class="gate-back" href="index.html" data-txt="jGateBack">← 退回实验室</a>
         </div>
     </div>
 
     <!-- ========== 页头 ========== -->
     <header class="jheader">
-        <a class="jback mono" href="index.html" id="backLink">← 声音实验室</a>
+        <a class="jback mono" href="index.html" id="backLink" data-txt="jBackLab">← 声音实验室</a>
         <div class="jbrand mono">THE ROAD IS THE HORIZON — EST.2017</div>
+        <button class="jtheme mono" id="jThemeBtn" aria-label="切换昼夜">● 暗房</button>
     </header>
 
     <main id="jmain">
@@ -76,14 +78,14 @@
             <div class="jn-quote" id="jnQuote2"><span data-txt="jQuote2">没人冬天骑车进藏。加油站师傅说我疯了，然后给我倒了杯热水。</span></div>
             <div class="jn-quote" id="jnQuote3"><span data-txt="jQuote3">每一刻悲喜共存的路途，本身就是终点。</span></div>
             <div class="jn-dawn" id="jnDawn" aria-hidden="true"></div>
-            <div class="jn-scrollhint mono" aria-hidden="true">往下滚 — 天就亮了 ↓</div>
+            <div class="jn-scrollhint mono" aria-hidden="true" data-txt="jScrollHint">往下滚 — 天就亮了 ↓</div>
         </div>
     </section>
 
     <!-- ========== 征途图 ========== -->
-    <section class="jmap-wrap">
+    <section class="jmap-wrap" id="jmap-sec">
         <div class="jmap-head mono">
-            <span>ROUTE CHART — 征途图</span>
+            <span data-txt="jMapHead">ROUTE CHART — 征途图</span>
             <span id="mapRange"></span>
         </div>
         <div class="jmap" id="jmap">
@@ -111,15 +113,15 @@
     </section>
 
     <!-- ========== 分桶 + 时间轴 ========== -->
-    <section class="jarchive">
+    <section class="jarchive" id="jarchive-sec">
         <div class="jbuckets mono" id="jbuckets"></div>
         <div class="jtimeline" id="jtimeline"></div>
     </section>
 
     <!-- ========== 路上的随身听 ========== -->
-    <section class="jtape-wrap">
+    <section class="jtape-wrap" id="jtape-sec">
         <div class="jmap-head mono">
-            <span>ROAD WALKMAN — 路上的随身听</span>
+            <span data-txt="jTapeHead">ROAD WALKMAN — 路上的随身听</span>
             <span id="tapeStatus">STOPPED</span>
         </div>
         <div class="jtape" id="jtape">
@@ -160,7 +162,7 @@
     <footer class="jfooter">
         <div class="jf-seal" aria-hidden="true">路即天涯</div>
         <p class="mono" data-txt="jfLine">WAYFARER'S JOURNAL — 弦上流年 · 车轮山河</p>
-        <a href="index.html" id="footBack">← 回声音实验室</a>
+        <a href="index.html" id="footBack" data-txt="jFootBack">← 回声音实验室</a>
     </footer>
 
     </main>
@@ -197,6 +199,6 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
-    <script src="journal.js?v=20260712l"></script>
+    <script src="journal.js?v=20260713a"></script>
 </body>
 </html>

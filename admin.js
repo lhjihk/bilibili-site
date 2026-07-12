@@ -72,6 +72,8 @@
 
     // ---------- 全站文案清单（key → 人话说明） ----------
     const TEXT_SCHEMA = [
+        ['— 浏览器标签页 —'],
+        ['docTitle', '主页浏览器标签标题（顶栏那行字，留空 = 用默认「路即天涯® / THE ROAD IS THE HORIZON」）'],
         ['— 导航 —'],
         ['nav1', '导航 · 第1项'], ['nav2', '导航 · 第2项'], ['nav3', '导航 · 第3项'],
         ['nav4', '导航 · 第4项'], ['nav5', '导航 · 第5项'], ['nav6', '导航 · 第6项'],
@@ -104,8 +106,19 @@
         ['footGiant', '巨字'], ['footNote', '版权行'],
         ['— 手账 · 夜航开篇 —'],
         ['jhEyebrow', '眉题'], ['jhTitle', '碑铭大字'], ['jhEn', '英文斜体'], ['jhSub', '副标题（HTML）', 1],
+        ['jhSideL', '标题左侧竖排字'], ['jhSideR', '标题右侧竖排字'],
         ['jQuote1', '滚动引言 · 一'], ['jQuote2', '滚动引言 · 二'], ['jQuote3', '滚动引言 · 三'],
         ['jfLine', '手账卷尾一行'],
+        ['— 手账 · 返回按钮与小标题 —'],
+        ['jBackLab', '顶栏返回链接（← 声音实验室）'],
+        ['jFootBack', '卷尾返回链接（← 回声音实验室）'],
+        ['jGateBack', '封存页返回链接（← 退回实验室）'],
+        ['jMapHead', '征途图小标题（ROUTE CHART — 征途图）'],
+        ['jTapeHead', '随身听小标题（ROAD WALKMAN — 路上的随身听）'],
+        ['jScrollHint', '开篇滚动提示（往下滚 — 天就亮了 ↓）'],
+        ['jGateTitle', '封存页大字（此账已封存）'],
+        ['jGateSub', '封存页副题（HTML）', 1],
+        ['jGateBtn', '封存页启封按钮字'],
         ['— 影像馆子页 —'],
         ['vpBrand', '导航标题（默认：踏破腐朽）'],
         ['vpTitle', '开场巨字（HTML）', 1],
@@ -115,7 +128,9 @@
         ['vpMarquee', '跑马灯词组（词间用 <i>●</i> 分隔）', 1],
         ['vpGiant', '尾声巨字（HTML）', 1],
         ['vpTcHero', '时间码 · 开场'], ['vpTc1', '时间码 · 为什么拍'],
-        ['vpTc2', '时间码 · 三支主打'], ['vpTc3', '时间码 · 片库'], ['vpTcEnd', '时间码 · 尾声'],
+        ['vpTc2', '时间码 · 三支主打（就是「三支主打」四个字所在处）'], ['vpTc3', '时间码 · 片库'], ['vpTcEnd', '时间码 · 尾声'],
+        ['vNavLab', '顶栏返回链接（← 声音实验室）'], ['vNavJournal', '顶栏手账链接（旅人手账）'],
+        ['vEndLab', '尾声返回链接（← 回声音实验室 SOUND LAB）'], ['vEndJournal', '尾声手账链接（去旅人手账 JOURNAL →）'],
         ['— 主页影像区入口 —'],
         ['fvCtaCn', '入口 · 毛笔大字'], ['fvCtaEn', '入口 · 英文行'],
         ['— 行色引导（进站配色选择页） —'],
@@ -157,11 +172,28 @@
         });
     }
 
-    // ---------- 板块管理 ----------
-    function renderModules() {
-        const wrap = $('list-modules');
+    // ---------- 板块管理（主页 + 手账/影像子页共用同一套 UI） ----------
+    // 子页板块的默认清单（content.json 里没有时用它初始化；id 必须与子页 HTML 里 section 的 id 一致）
+    const MODULE_DEFAULTS = {
+        journalModules: [
+            { id: 'jnight', name: '夜航开篇（星空 · 碑铭）', show: true },
+            { id: 'jmap-sec', name: '征途图（地图）', show: true },
+            { id: 'jarchive-sec', name: '笔记列表（分桶 + 时间轴）', show: true },
+            { id: 'jtape-sec', name: '路上的随身听（播放器）', show: true },
+        ],
+        videoModules: [
+            { id: 'why', name: '为什么拍', show: true },
+            { id: 'featured', name: '三支主打', show: true },
+            { id: 'archive', name: '片库（全部影像）', show: true },
+        ],
+    };
+    function renderModules(key, wrapId) {
+        const wrap = $(wrapId);
         if (!wrap) return;
-        const mods = DATA.settings.modules ||= [];
+        if ((!DATA.settings[key] || !DATA.settings[key].length) && MODULE_DEFAULTS[key]) {
+            DATA.settings[key] = JSON.parse(JSON.stringify(MODULE_DEFAULTS[key]));
+        }
+        const mods = DATA.settings[key] ||= [];
         wrap.innerHTML = '';
         mods.forEach((m, i) => {
             const card = document.createElement('div');
@@ -195,14 +227,14 @@
                 const [moved] = mods.splice(from, 1);
                 mods.splice(i, 0, moved);
                 markDirty();
-                renderModules();
+                renderModules(key, wrapId);
             });
-            card.querySelector('input').addEventListener('change', (e) => { m.show = e.target.checked; });
+            card.querySelector('input').addEventListener('change', (e) => { m.show = e.target.checked; markDirty(); });
             card.querySelector('[data-op=up]').addEventListener('click', () => {
-                if (i === 0) return; [mods[i - 1], mods[i]] = [mods[i], mods[i - 1]]; renderModules();
+                if (i === 0) return; [mods[i - 1], mods[i]] = [mods[i], mods[i - 1]]; markDirty(); renderModules(key, wrapId);
             });
             card.querySelector('[data-op=down]').addEventListener('click', () => {
-                if (i === mods.length - 1) return; [mods[i + 1], mods[i]] = [mods[i], mods[i + 1]]; renderModules();
+                if (i === mods.length - 1) return; [mods[i + 1], mods[i]] = [mods[i], mods[i + 1]]; markDirty(); renderModules(key, wrapId);
             });
             wrap.appendChild(card);
         });
@@ -437,7 +469,7 @@
         fetch(article.file + '?t=' + Date.now())
             .then((r) => { if (!r.ok) throw new Error(r.status); return r.text(); })
             .then((t) => { $('mdEditorBox').value = t; })
-            .catch(() => { $('mdEditorBox').value = ''; status('原文加载失败（可能是新文件），可直接写入', 'err'); });
+            .catch(() => { $('mdEditorBox').value = ''; status('空白新笔记，直接在这里写正文即可', ''); });
     }
     // 正文里「插入图片」：压缩 → 提交 assets/notes/<文章id>/ → 光标处插入 markdown
     // （渲染时自动套 .jr-body img 的居中/拉伸/拍立得美化样式）
@@ -474,18 +506,38 @@
             $('mdEditor').style.display = 'none';
         } catch (e) { status('保存失败：' + e.message, 'err'); }
     });
+    // 造一条空白文章记录（自动分配 id 和 md 文件路径，建好即可直接写正文）
+    function newArticleRecord() {
+        const blank = {};
+        SCHEMAS.articles.fields.forEach((f) => { blank[f.k] = f.type === 'checkbox' ? false : ''; });
+        blank.bucket = '随笔';
+        blank.id = 'note-' + Date.now().toString(36);
+        blank.year = String(new Date().getFullYear());
+        blank.file = 'articles/' + blank.id + '.md';
+        return blank;
+    }
     document.querySelectorAll('[data-add]').forEach((btn) => {
         btn.addEventListener('click', () => {
             const key = btn.dataset.add;
+            if (key === 'articles') { DATA.articles.unshift(newArticleRecord()); markDirty(); renderList('articles'); return; }
             const blank = {};
             SCHEMAS[key].fields.forEach((f) => { blank[f.k] = f.type === 'checkbox' ? false : ''; });
             if (key === 'tracks') blank.type = 'bilibili';
             if (key === 'videos') blank.category = 'original';
-            if (key === 'articles') { blank.bucket = '旅行'; blank.id = 'note-' + Date.now().toString(36); }
             DATA[key].unshift(blank);
             markDirty();
             renderList(key);
         });
+    });
+    // 「写新笔记」：直接建一条并立刻打开正文编辑器写（无需先上传 md 文件）
+    $('btnNewNote')?.addEventListener('click', () => {
+        const art = newArticleRecord();
+        art.title = '未命名笔记';
+        DATA.articles.unshift(art);
+        markDirty();
+        renderList('articles');
+        openMdEditor(art);
+        status('新笔记已建好：填标题/日期，写完点「保存正文并发布」，再点右上角「保存并发布」让它出现在手账里', 'ok');
     });
 
     // ---------- 站点设置绑定 ----------
@@ -596,6 +648,7 @@
     }
     bindBgUpload('upBgHero', 'backgrounds.hero', 2200);
     bindBgUpload('upBgSky', 'backgrounds.journalSky', 2200);
+    bindBgUpload('upBgJnPhoto', 'backgrounds.journalPhoto', 2000);
     bindBgUpload('upBgAbout', 'backgrounds.aboutPhoto', 1200);
     bindUpload('upMd', 'articles/', (path, f) => {
         // 传完 md 自动帮你把文章记录建好
@@ -722,7 +775,9 @@
         DATA.settings ||= {};
         ['tracks', 'featured', 'videos', 'articles', 'platformLinks'].forEach(renderList);
         renderTexts();
-        renderModules();
+        renderModules('modules', 'list-modules');
+        renderModules('journalModules', 'list-journalmods');
+        renderModules('videoModules', 'list-videomods');
         bindSettings();
         status(SOURCE_NOTE);
     })();

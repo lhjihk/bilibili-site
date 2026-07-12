@@ -45,6 +45,18 @@ html[data-brush="dongfang"] { --font-brush: "BrushDongfang", var(--serif); --bru
     --gutter: clamp(18px, 4vw, 64px);
 }
 
+/* 暗房主题：把羊皮纸换成暖色夜纸、字反相（与主页同一套逻辑——只换变量、不改结构，
+   走暖棕夜色而非死黑，保持手账的复古纸感不突兀）。
+   同时挂 html 与 body 两个选择器：html 上防首屏闪白（默认无 palette 时）；
+   body 上用「就近覆盖」压过 palette.css 给 html 设的浅色 --parch（有配色主题时也能变暗）。 */
+html[data-theme="dark"], body[data-theme="dark"] {
+    --parch: #1b150e;
+    --parch-deep: #251f17;
+    --ink: #ece3cf;
+    --ink-soft: #b7a888;
+    --route: #7d94b3;
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
@@ -53,6 +65,7 @@ body {
     font-family: var(--serif);
     line-height: 1.9;
     overflow-x: clip;
+    transition: background .4s, color .4s;
 }
 /* 纸纹 + 陈年渍 */
 body::before {
@@ -131,6 +144,14 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 .jback { opacity: .7; transition: opacity .3s, letter-spacing .3s; }
 .jback:hover { opacity: 1; letter-spacing: .18em; color: var(--seal); }
 .jbrand { opacity: .5; }
+.jtheme {
+    background: none; border: 1px solid color-mix(in srgb, var(--ink) 45%, transparent);
+    color: var(--ink); font-size: 10px; letter-spacing: .12em;
+    padding: 5px 12px; border-radius: 999px; cursor: pointer;
+    opacity: .72; transition: opacity .2s, background .2s, color .2s, border-color .5s;
+}
+.jtheme:hover { opacity: 1; }
+body.at-night .jtheme { border-color: color-mix(in srgb, var(--ink) 30%, transparent); }
 
 /* ============ 夜航开篇 ============ */
 .jnight {
