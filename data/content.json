@@ -61,12 +61,13 @@
       "jQuote2": "窗外景飞驰  几许故路归 ",
       "jQuote3": "多少得失过往 皆不可得    可又如此让人感动",
       "jfLine": "WAYFARER'S JOURNAL — 弦上流年 · 此心山河",
-      "heroColophon": "回首向来潇洒处 也无风雨也无晴",
+      "heroColophon": "回首向来萧瑟处 也无风雨也无晴",
       "hfBR": "V.2026 — Mount Emei",
       "vpSub": "发点生活音乐类视频，随缘更新 合作邮箱：nijingchongsheng@gmail.com",
-      "vpState": "当下现在，<span class=\"cn\">就是</span>最好的时刻。<br>\n                <em>SEE IT — BEFORE IT RUSTS.</em>",
+      "vpState": "当下现在，<span class=\"cn\">就是</span>最好的时刻<br>\n                <em>THE HERE AND NOW — THIS IS THE BEST MOMENT.</em>",
       "vpCopy": "有时候不知道该录点什么，科技越来越发达，AI和器材的进步似乎一切都唾手可得，现在却反而不想去记录那些毫无意义的东西，第一次学吉他时得到父母买的那把木吉他的兴奋，才学习录音的时那台破电脑录的东西，现在回看反而却无比怀念，有时候我太过追求一件事物的完美，可是天下难有完美之事，不完美可能更好，或许以后还是该多去记录，当下现在就是最好的时候，10年20年后可能再看今天的自己又会去怀念现在的时刻 -2026.7",
-      "vpMarquee": "故曲如风 <i>●</i> 随顺而已 <i>●</i> 九州同 <i>●</i> 过去心 <i>●</i> Schecter Ravendark V 试听 <i>●</i> 翻弹 Suicide Silence <i>●</i> 孤灯照剑 <i>●</i> METAL 金属段落编曲 2018.4.16 <i>●</i>&nbsp;"
+      "vpMarquee": "故曲如风 <i>●</i> 随顺而已 <i>●</i> 九州同 <i>●</i> 过去心 <i>●</i> Schecter Ravendark V 试听 <i>●</i> 翻弹 Suicide Silence <i>●</i> 孤灯照剑 <i>●</i> METAL 金属段落编曲 2018.4.16 <i>●</i>&nbsp;",
+      "fvCtaEn": "ENTER THE FILM VAULT — 视频区主页由此进入 →"
     },
     "lyrics": [
       "九州同一声吼，山河都回头",
@@ -175,7 +176,7 @@
       "en": "Metal Trivium Ampknob Bundle: Review and Demo",
       "bvid": "BV1GzeWePEzJ",
       "year": "2024",
-      "cover": "https://i2.hdslb.com/bfs/archive/ffce5e4ff291ae16c67bc754b8930be489b44ad9.jpg",
+      "cover": "assets/covers/截屏2024-08-14_下午9_45_12-mrid8x6q.jpg",
       "flavor": "Bogren Digital公司2024最新推出的 金属利器 Trivium乐队签名款吉他效果器Trivium Ampknob Bundle试听\n",
       "spec": "Trivium Ampknob Bund"
     },
@@ -193,7 +194,7 @@
       "en": "Just Going with the Flow · Demo (UAD Spark Mix)",
       "bvid": "BV1zc411y7gr",
       "year": "2023",
-      "cover": "https://i1.hdslb.com/bfs/archive/50fdacfd6417b74ba5da8b7016659bac51fbbef9.jpg",
+      "cover": "assets/covers/截屏2023-12-19_下午5_37_00-mridaz6m.jpg",
       "flavor": "2019年写的一首曲子，当时想表达的也许是思乡之情，也许只是一念无源之思，今年重新填词怀念之录一录吧\n\n八月生日所作小诗节选\n\n意中驹 仰首绝尘旧道奔 不平尽 心观乾坤 尘染归路为有情 \n烟影事 忽明忽现随风去 曲渐明 万物并作 抽刀断梦梦是真  \n\n词曲： 余\n制作/混音/母带：余\n2023.12",
       "spec": "原创音乐 混音 LOGIC工程演示 UADSPARK"
     },
@@ -468,6 +469,18 @@
   ],
   "articles": [
     {
+      "title": "窗外景飞驰  几许故路归 ",
+      "id": "note-mridmlzp",
+      "bucket": "旅行",
+      "year": "2025",
+      "date": "2025·1·26  冬",
+      "place": "湖南岳阳",
+      "coord": "",
+      "file": "",
+      "locked": false,
+      "excerpt": "旧曲伴我半生漂泊 \n多少得失过往 皆不可得   \n可又如此让人感动"
+    },
+    {
       "id": "十三年峨眉",
       "title": "十三年峨眉",
       "date": "2026-05-12",
@@ -475,7 +488,7 @@
       "place": "四川 · 峨眉山",
       "coord": "29.52°N 103.33°E",
       "bucket": "修行",
-      "locked": false,
+      "locked": true,
       "excerpt": "2013年第一次上峨眉，想在这里学道学佛；十三年后骑车再来，山还是那座山，人已走过千山。",
       "file": "articles/十三年峨眉.md"
     },
@@ -487,7 +500,7 @@
       "place": "贵州 · 入川道上",
       "coord": "27.70°N 106.92°E",
       "bucket": "旅行",
-      "locked": false,
+      "locked": true,
       "excerpt": "又一次离家。前路终归何方？或许每一刻悲喜共存的路途，本身就是终点。",
       "file": "articles/2026年出发的起点.md"
     },
@@ -499,21 +512,9 @@
       "place": "路上",
       "coord": "",
       "bucket": "旅行",
-      "locked": false,
+      "locked": true,
       "excerpt": "路过被岁月冲刷的庙宇，想起一段被折断的历史——物质的破坏有限，精神的断层难愈。",
       "file": "articles/文革旅行思考.md"
-    },
-    {
-      "id": "要玩就玩真的-要弹就弹真琴",
-      "title": "要玩就玩真的，要弹就弹真琴",
-      "date": "2024-11-08",
-      "year": "2024",
-      "place": "北京 · 朝阳",
-      "coord": "",
-      "bucket": "乐记",
-      "locked": false,
-      "excerpt": "十五年吉他老店，北京朝阳集装箱工作室。要玩就玩真的，要弹就弹真琴。",
-      "file": "articles/要玩就玩真的-要弹就弹真琴.md"
     },
     {
       "id": "晨暮雨中-滴落着种种的思绪",
@@ -523,7 +524,7 @@
       "place": "",
       "coord": "",
       "bucket": "诗集",
-      "locked": false,
+      "locked": true,
       "excerpt": "窗外天空似故乡的风。你问我为何执迷着苦苦寻觅，你问我为何以天地为寄。",
       "file": "articles/晨暮雨中-滴落着种种的思绪.md"
     },
@@ -535,129 +536,33 @@
       "place": "",
       "coord": "",
       "bucket": "诗集",
-      "locked": false,
+      "locked": true,
       "excerpt": "烈马狂奔脚力劲，此情必成追忆时。今夜作别祝安平。",
       "file": "articles/此刻虽悲心似火.md"
     },
     {
       "id": "fenglingdu",
-      "title": "风陵渡口，黄河替我按了暂停键",
+      "title": "风陵渡口",
       "date": "2022 · 冬",
       "year": "2022",
       "place": "山西 · 风陵渡",
       "coord": "34.60°N 110.30°E",
       "bucket": "旅行",
-      "locked": false,
+      "locked": true,
       "excerpt": "从北京出发的第三天，我在风陵渡口停了车。黄河在这里拐了个九十度的弯，我也是。",
       "file": "articles/fenglingdu.md"
     },
     {
-      "id": "lhasa-winter",
-      "title": "冬天进藏的人，都在还愿",
-      "date": "2022 · 冬",
-      "year": "2022",
-      "place": "西藏 · 拉萨",
-      "coord": "29.65°N 91.14°E",
-      "bucket": "旅行",
-      "locked": false,
-      "excerpt": "没人冬天骑车进藏。加油站的师傅说我疯了，然后给我倒了杯热水。",
-      "file": "articles/lhasa-winter.md"
-    },
-    {
-      "id": "策马扬鞭-此刻即为好",
-      "title": "策马扬鞭 此刻即为好",
-      "date": "2022-01-13",
-      "year": "2021",
-      "place": "",
-      "coord": "",
-      "bucket": "诗集",
-      "locked": false,
-      "excerpt": "正邪眼前过，此神静观。前路何求，随遇善存。",
-      "file": "articles/策马扬鞭-此刻即为好.md"
-    },
-    {
-      "id": "不为财迷-心见天真",
-      "title": "不为财迷 心见天真",
-      "date": "2021-10-26",
-      "year": "2021",
-      "place": "",
-      "coord": "",
-      "bucket": "修行",
-      "locked": false,
-      "excerpt": "见性见天真，此刻即巅峰。无论何境何物，来即迎之。",
-      "file": "articles/不为财迷-心见天真.md"
-    },
-    {
-      "id": "静正现-勿急勿迷",
-      "title": "静正现 勿急勿迷",
-      "date": "2021-11-05",
-      "year": "2021",
-      "place": "",
-      "coord": "",
-      "bucket": "诗集",
-      "locked": false,
-      "excerpt": "静正现，勿急勿迷。何需证，何需妄。浩气证古今。",
-      "file": "articles/静正现-勿急勿迷.md"
-    },
-    {
       "id": "信仰之义-疫中所思",
-      "title": "信仰之义 疫中所思",
+      "title": "疫中所思",
       "date": "2020-01-29",
       "year": "2021",
       "place": "",
       "coord": "",
       "bucket": "修行",
-      "locked": false,
+      "locked": true,
       "excerpt": "有信仰是好，但终究还得靠我们自己：怀正念，敬众生，尽人事。",
       "file": "articles/信仰之义-疫中所思.md"
-    },
-    {
-      "id": "搬空昆明-一行无悔",
-      "title": "搬空昆明 一行无悔",
-      "date": "2020-02-25",
-      "year": "2020",
-      "place": "云南 · 昆明",
-      "coord": "25.04°N 102.71°E",
-      "bucket": "乐记",
-      "locked": false,
-      "excerpt": "凌晨两点搬完琴行。世间难得双全法，选择随心，就要交出安逸。感恩那间与世隔绝的小店。",
-      "file": "articles/搬空昆明-一行无悔.md"
-    },
-    {
-      "id": "北漂一年-心路小记",
-      "title": "北漂一年 心路小记",
-      "date": "2020-05-29",
-      "year": "2020",
-      "place": "北京",
-      "coord": "39.90°N 116.40°E",
-      "bucket": "生活",
-      "locked": false,
-      "excerpt": "来京一年有余。所谓北漂只是个过程，人生在世谁无漂泊，只是换一种方式生活而已。",
-      "file": "articles/北漂一年-心路小记.md"
-    },
-    {
-      "id": "老歌用心-不取巧妙",
-      "title": "老歌用心 不取巧妙",
-      "date": "2019-07-25",
-      "year": "2019",
-      "place": "",
-      "coord": "",
-      "bucket": "乐记",
-      "locked": false,
-      "excerpt": "从不追星，不关心虚幻的流量。老歌写得用心，巧妙小聪明抵不住无常。",
-      "file": "articles/老歌用心-不取巧妙.md"
-    },
-    {
-      "id": "bangkok-huahin",
-      "title": "曼谷到华欣，一把吉他绑在后座",
-      "date": "2017 · 夏",
-      "year": "2017",
-      "place": "泰国 · 华欣",
-      "coord": "12.57°N 99.96°E",
-      "bucket": "旅行",
-      "locked": false,
-      "excerpt": "鑫源400在东南亚的国道上不算快，但吉他没散架，人也没有。",
-      "file": "articles/bangkok-huahin.md"
     },
     {
       "id": "春节西山-龙门拥挤",
@@ -667,21 +572,9 @@
       "place": "昆明 · 西山龙门",
       "coord": "24.96°N 102.63°E",
       "bucket": "生活",
-      "locked": false,
+      "locked": true,
       "excerpt": "初五爬西山，第一次去龙门。山不高，父母爬起来还是不容易。",
       "file": "articles/春节西山-龙门拥挤.md"
-    },
-    {
-      "id": "曾识风华正茂时-寻寻觅觅渡浮沉",
-      "title": "曾识风华正茂时 寻寻觅觅渡浮沉",
-      "date": "2017-09-11",
-      "year": "2017",
-      "place": "",
-      "coord": "",
-      "bucket": "诗集",
-      "locked": false,
-      "excerpt": "曾识风华正茂时，寻寻觅觅渡浮沉。共演命运犹悲歌。",
-      "file": "articles/曾识风华正茂时-寻寻觅觅渡浮沉.md"
     }
   ]
 }
