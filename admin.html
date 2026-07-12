@@ -63,6 +63,17 @@
         .uploader:hover { border-color: var(--purple); background: rgba(106,21,255,.05); }
         .uploader input { display: none; }
         code { background: rgba(0,0,0,.06); padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+        /* 图片字段旁的小上传按钮 */
+        .mini-up { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 12px; opacity: 1; color: var(--purple); border: 1px solid var(--purple); border-radius: 999px; padding: 4px 12px; cursor: pointer; width: auto; }
+        .mini-up:hover { background: rgba(106,21,255,.08); }
+        .mini-up input { display: none; }
+        /* 图片管理网格 */
+        .imgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+        .imgcell { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+        .imgcell img { width: 100%; height: 110px; object-fit: cover; border-radius: 4px; background: #eee; }
+        .imgcell .imgpath { font-size: 10px; word-break: break-all; opacity: .7; line-height: 1.4; text-transform: none; }
+        .imgcell .imgmeta { font-size: 11px; opacity: .5; }
+        .imgcell .imgdel { padding: 4px 10px; font-size: 12px; }
     </style>
 </head>
 <body>
@@ -97,6 +108,7 @@
         <button class="tab" data-p="modules">🧩 板块管理</button>
         <button class="tab" data-p="site">⚙️ 站点设置</button>
         <button class="tab" data-p="files">📦 传文件</button>
+        <button class="tab" data-p="images">🗂 图片管理</button>
     </div>
 
     <main>
@@ -106,12 +118,12 @@
             <button class="addbtn" data-add="tracks">＋ 加一首</button>
         </div>
         <div class="panel" id="p-featured">
-            <p class="panel-tip">首页「选你的武器」三张大卡 + 影像馆子页「三支主打」共用这份数据，改一处两页同步。cover 填封面图链接（B站封面右键复制图片地址），换视频后封面/毛笔字标题自动跟着变；标题常用字都有毛笔字形，无需担心缺字。</p>
+            <p class="panel-tip">首页「选你的武器」三张大卡 + 影像馆子页「三支主打」共用这份数据，改一处两页同步。封面可填外链（B站封面右键复制图片地址），也可点封面下方「⬆ 上传本地图片」直接传本机图（自动压缩上传、自动填好路径）。换视频后封面/毛笔字标题自动跟着变。</p>
             <div id="list-featured"></div>
             <button class="addbtn" data-add="featured">＋ 加一张主打卡</button>
         </div>
         <div class="panel" id="p-videos">
-            <p class="panel-tip">影像档案网格。category 可选：original(原创) / cover(翻弹) / gear(器材) / travel(旅行)。</p>
+            <p class="panel-tip">影像档案网格。category 可选：original(原创) / cover(翻弹) / gear(器材) / travel(旅行)。封面可填外链，也可点封面下方「⬆ 上传本地图片」传本机图。</p>
             <div id="list-videos"></div>
             <button class="addbtn" data-add="videos">＋ 加一个视频</button>
         </div>
@@ -235,6 +247,11 @@
                 <div id="upLog" class="mono" style="text-transform:none;line-height:2"></div>
             </div>
         </div>
+        <div class="panel" id="p-images">
+            <p class="panel-tip">仓库里所有上传的图片都在这里（主打/影像封面 <code>assets/covers/</code>、笔记插图 <code>assets/notes/</code>、背景图 <code>assets/bg/</code>）。删除即时提交仓库、约1分钟线上生效。<b>注意</b>：删掉仍被引用的图，页面上会显示裂图；删错了也能从 git 历史找回。切到本页会自动刷新，也可手动点下面按钮。</p>
+            <div style="margin-bottom:14px"><button id="btnImgRefresh">↻ 刷新图片清单</button></div>
+            <div id="list-images"></div>
+        </div>
     </main>
 
     <div id="mdEditor" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.5);align-items:center;justify-content:center;padding:24px">
@@ -242,14 +259,15 @@
             <div style="display:flex;justify-content:space-between;align-items:center">
                 <b id="mdEditorTitle">编辑正文</b>
                 <div style="display:flex;gap:10px">
+                    <label class="mini-up" style="margin:0" title="从本机选图，压缩上传并在光标处插入">⬆ 插入图片<input type="file" id="mdImgUp" accept="image/*"></label>
                     <button id="mdEditorClose">取消</button>
                     <button id="mdEditorSave" class="primary">保存正文并发布</button>
                 </div>
             </div>
-            <p style="font-size:12px;opacity:.6;margin:0">Markdown 格式，支持 Obsidian 双链/高亮语法。图片引用 assets/notes/... 路径。保存直接提交仓库。</p>
+            <p style="font-size:12px;opacity:.6;margin:0">Markdown 格式，支持 Obsidian 双链/高亮语法。点「插入图片」直接传本机图（自动压缩、自动插入、网站上自动居中拉伸美化）。保存直接提交仓库。</p>
             <textarea id="mdEditorBox" style="flex:1;resize:none;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.8"></textarea>
         </div>
     </div>
-    <script src="admin.js?v=20260712l"></script>
+    <script src="admin.js?v=20260713a"></script>
 </body>
 </html>

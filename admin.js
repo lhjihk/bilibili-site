@@ -30,7 +30,7 @@
                 { k: 'en', label: '英文副标题' },
                 { k: 'bvid', label: 'BV号' },
                 { k: 'year', label: '年份' },
-                { k: 'cover', label: '封面图链接', wide: true },
+                { k: 'cover', label: '封面图链接', wide: true, img: true },
                 { k: 'flavor', label: '风味介绍', type: 'textarea', wide: true },
                 { k: 'spec', label: '规格标签（如：重失真 · 含高原动机）', wide: true },
             ],
@@ -43,7 +43,7 @@
                 { k: 'date', label: '年份' },
                 { k: 'category', label: '分类', type: 'select', options: ['original', 'cover', 'gear', 'travel'] },
                 { k: 'tag', label: '角标文字（原创/翻弹/器材/旅行）' },
-                { k: 'cover', label: '封面图链接', wide: true },
+                { k: 'cover', label: '封面图链接', wide: true, img: true },
             ],
         },
         articles: {
@@ -144,7 +144,9 @@
             }
             const [key, label, isHtml] = row;
             const div = document.createElement('div');
-            const v = DATA.settings.texts[key] ?? '';
+            // content.json 有非空值就用它；否则回填网站 HTML 里的默认文字（让空白字段显示「网站所见」）
+            const saved = DATA.settings.texts[key];
+            const v = (saved != null && saved !== '') ? saved : (TEXT_DEFAULTS[key] || '');
             div.innerHTML = isHtml
                 ? `<label>${label}</label><textarea rows="2" data-tk="${key}"></textarea>`
                 : `<label>${label}</label><input type="text" data-tk="${key}">`;
@@ -315,6 +317,13 @@
     function toB64(str) {
         return btoa(unescape(encodeURIComponent(str)));
     }
+    function fromB64(b64) {
+        return decodeURIComponent(escape(atob((b64 || '').replace(/\s/g, ''))));
+    }
+    // 统一的安全文件名：去后缀 → 清洗非法字符 → 加短时间戳（避免重名覆盖导致 CDN 缓存旧图）
+    function safeName(name) {
+        return (name || 'img').replace(/\.[^.]+$/, '').replace(/[^\w一-鿿-]/g, '_') + '-' + Date.now().toString(36);
+    }
     function fileToB64(file) {
         return new Promise((res, rej) => {
             const fr = new FileReader();
@@ -346,6 +355,11 @@
                 if (f.type === 'checkbox') {
                     return `<div${cls}><label>${f.label}</label><input type="checkbox" data-k="${f.k}"${val ? ' checked' : ''}></div>`;
                 }
+                if (f.img) {
+                    return `<div${cls}><label>${f.label}（可填外链，或用下面按钮传本机图）</label>
+                        <input type="text" data-k="${f.k}" value="${String(val).replace(/"/g, '&quot;')}">
+                        <label class="mini-up" title="从本机选图，自动压缩上传并填好路径">⬆ 上传本地图片<input type="file" accept="image/*" data-imgk="${f.k}"></label></div>`;
+                }
                 return `<div${cls}><label>${f.label}</label><input type="text" data-k="${f.k}" value="${String(val).replace(/"/g, '&quot;')}"></div>`;
             }).join('');
             card.innerHTML = `
@@ -363,6 +377,29 @@
                 inp.addEventListener('input', () => {
                     obj[inp.dataset.k] = inp.type === 'checkbox' ? inp.checked : inp.value;
                     card.querySelector('.card-head b').textContent = `${i + 1}. ${schema.title(obj)}`;
+                });
+            });
+            // 封面「上传本地图片」：压缩 → 提交 assets/covers/ → 自动回填路径
+            card.querySelectorAll('[data-imgk]').forEach((fi) => {
+                fi.addEventListener('change', async (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    if (!token()) { status('先连接 GitHub token 才能上传', 'err'); e.target.value = ''; return; }
+                    const k = fi.dataset.imgk;
+                    status('压缩上传封面中…');
+                    try {
+                        const b64 = await compressImage(file, 1400);
+                        if (!b64) throw new Error('图片读取失败');
+                        const path = 'assets/covers/' + safeName(file.name) + '.jpg';
+                        await commitFile(path, b64, '上传封面 ' + path);
+                        obj[k] = path;
+                        const textInp = card.querySelector(`[data-k="${k}"]`);
+                        if (textInp) textInp.value = path;
+                        markDirty();
+                        status('✓ 封面已上传并填好路径，记得点「保存并发布」', 'ok');
+                        logUp('✓ ' + path + `（${(file.size / 1024).toFixed(0)}KB）`, true);
+                    } catch (err) { status('上传失败：' + err.message, 'err'); }
+                    e.target.value = '';
                 });
             });
             card.querySelector('[data-op=del]').addEventListener('click', () => {
@@ -402,6 +439,30 @@
             .then((t) => { $('mdEditorBox').value = t; })
             .catch(() => { $('mdEditorBox').value = ''; status('原文加载失败（可能是新文件），可直接写入', 'err'); });
     }
+    // 正文里「插入图片」：压缩 → 提交 assets/notes/<文章id>/ → 光标处插入 markdown
+    // （渲染时自动套 .jr-body img 的居中/拉伸/拍立得美化样式）
+    $('mdImgUp')?.addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        if (!token()) { status('先连接 GitHub token 才能传图', 'err'); e.target.value = ''; return; }
+        if (!mdTarget) { e.target.value = ''; return; }
+        const id = (mdTarget.id || 'note').replace(/[^\w-]/g, '-');
+        status('压缩上传插图中…');
+        try {
+            const b64 = await compressImage(file, 1600);
+            if (!b64) throw new Error('图片读取失败');
+            const path = 'assets/notes/' + id + '/' + safeName(file.name) + '.jpg';
+            await commitFile(path, b64, '上传笔记插图 ' + path);
+            const box = $('mdEditorBox');
+            const pos = box.selectionStart ?? box.value.length;
+            const snippet = '\n\n![](' + path + ')\n\n';
+            box.value = box.value.slice(0, pos) + snippet + box.value.slice(pos);
+            box.focus();
+            status('✓ 插图已插入正文，别忘了点「保存正文并发布」', 'ok');
+            logUp('✓ ' + path + `（${(file.size / 1024).toFixed(0)}KB）`, true);
+        } catch (err) { status('上传失败：' + err.message, 'err'); }
+        e.target.value = '';
+    });
     $('mdEditorClose')?.addEventListener('click', () => { $('mdEditor').style.display = 'none'; mdTarget = null; });
     $('mdEditorSave')?.addEventListener('click', async () => {
         if (!mdTarget) return;
@@ -471,7 +532,7 @@
         try {
             const json = await collectData();
             await commitFile('data/content.json', toB64(json), '编辑台更新内容 ' + new Date().toLocaleString('zh-CN'));
-            status('✓ 已发布！GitHub Pages 约 1 分钟后生效', 'ok');
+            status('✓ 已发布！约 1 分钟后线上生效（Cloudflare 自动部署）', 'ok');
             DIRTY = false;
             $('btnSave').textContent = '保存并发布 ↗';
         } catch (e) { status('发布失败：' + e.message, 'err'); }
@@ -573,19 +634,96 @@
         document.querySelectorAll('.panel').forEach((p) => p.classList.remove('active'));
         tab.classList.add('active');
         $('p-' + tab.dataset.p).classList.add('active');
+        if (tab.dataset.p === 'images') loadImageManager();
     });
 
+    // ---------- 网站现有默认文案（HTML 里写死的那份，用于回填空白字段） ----------
+    // content.json 里为空/缺失的文案键，网站显示的是 HTML 里的默认文字（boot.js 不覆盖空值）。
+    // 这里把三张页面的 data-txt 默认文字解析出来，让编辑台空白字段直接显示「网站所见」。
+    let TEXT_DEFAULTS = {};
+    async function loadTextDefaults() {
+        for (const f of ['index.html', 'journal.html', 'videos.html']) {
+            try {
+                const html = await (await fetch(f + '?t=' + Date.now())).text();
+                const doc = new DOMParser().parseFromString(html, 'text/html');
+                doc.querySelectorAll('[data-txt], [data-txt-html]').forEach((el) => {
+                    const key = el.dataset.txt || el.dataset.txtHtml;
+                    const val = el.innerHTML.trim();
+                    if (key && val && TEXT_DEFAULTS[key] == null) TEXT_DEFAULTS[key] = val;
+                });
+            } catch (e) { /* 某页取不到不致命 */ }
+        }
+    }
+
+    // ---------- 图片管理（列出 + 删除仓库里上传的图片） ----------
+    async function loadImageManager() {
+        const wrap = $('list-images');
+        if (!wrap) return;
+        if (!token()) { wrap.innerHTML = '<p style="opacity:.6">先在上方连接 GitHub token，才能列出和管理图片。</p>'; return; }
+        wrap.innerHTML = '<p style="opacity:.6">正在读取仓库图片清单…</p>';
+        try {
+            const tree = await gh(`/repos/${OWNER}/${REPO}/git/trees/${BRANCH}?recursive=1&t=${Date.now()}`);
+            const imgs = (tree.tree || []).filter((n) =>
+                n.type === 'blob' &&
+                /^(assets\/covers\/|assets\/notes\/|assets\/bg\/|articles\/assets\/)/.test(n.path) &&
+                /\.(jpe?g|png|gif|webp|avif)$/i.test(n.path));
+            if (!imgs.length) { wrap.innerHTML = '<p style="opacity:.6">仓库里还没有上传的图片。</p>'; return; }
+            wrap.innerHTML = '<div class="imgrid"></div>';
+            const grid = wrap.querySelector('.imgrid');
+            imgs.forEach((n) => {
+                const kb = (n.size / 1024).toFixed(0);
+                const cell = document.createElement('div');
+                cell.className = 'imgcell';
+                cell.innerHTML =
+                    `<img loading="lazy" src="${n.path}?t=${Date.now()}" alt="">
+                     <div class="imgpath mono">${n.path}</div>
+                     <div class="imgmeta">${kb}KB</div>
+                     <button class="danger imgdel">删除</button>`;
+                cell.querySelector('img').addEventListener('error', (ev) => { ev.target.style.opacity = '.2'; });
+                cell.querySelector('.imgdel').addEventListener('click', async () => {
+                    if (!confirm('确定删除这张图片？\n' + n.path + '\n\n⚠️ 若还有主打封面 / 文章正文在引用它，页面上会显示裂图。\n删除后 git 历史里仍能找回。')) return;
+                    status('删除中…');
+                    try {
+                        await gh(`/repos/${OWNER}/${REPO}/contents/${encodeURIComponent(n.path)}`, {
+                            method: 'DELETE',
+                            body: JSON.stringify({ message: '删除图片 ' + n.path, sha: n.sha, branch: BRANCH }),
+                        });
+                        cell.remove();
+                        status('✓ 已删除 ' + n.path, 'ok');
+                        logUp('🗑 删除 ' + n.path, true);
+                    } catch (err) { status('删除失败：' + err.message, 'err'); }
+                });
+                grid.appendChild(cell);
+            });
+            status(`共 ${imgs.length} 张图片`, 'ok');
+        } catch (e) { wrap.innerHTML = '<p style="color:var(--red)">读取失败：' + e.message + '</p>'; }
+    }
+    $('btnImgRefresh')?.addEventListener('click', loadImageManager);
+
     // ---------- 启动 ----------
-    fetch('data/content.json?t=' + Date.now())
-        .then((r) => r.json())
-        .then((d) => {
-            DATA = d;
-            DATA.settings ||= {};
-            ['tracks', 'featured', 'videos', 'articles', 'platformLinks'].forEach(renderList);
-            renderTexts();
-            renderModules();
-            bindSettings();
-            status('内容已载入，改完点「保存并发布」');
-        })
-        .catch((e) => status('content.json 加载失败：' + e.message, 'err'));
+    let SOURCE_NOTE = '内容已载入，改完点「保存并发布」';
+    async function loadData() {
+        // 有 token 时直接从 GitHub 读「源头」，保证永远是最新版
+        // （修复：过去从已部署站点读 content.json，部署有滞后 → 刷新后回退旧内容）
+        if (token()) {
+            try {
+                const r = await gh(`/repos/${OWNER}/${REPO}/contents/data/content.json?ref=${BRANCH}&t=${Date.now()}`);
+                SOURCE_NOTE = '内容已从 GitHub 载入（最新版），改完点「保存并发布」';
+                return JSON.parse(fromB64(r.content));
+            } catch (e) { /* token 无效等情况，落回公开 fetch */ }
+        }
+        return (await fetch('data/content.json?t=' + Date.now())).json();
+    }
+    (async () => {
+        await loadTextDefaults();
+        try {
+            DATA = await loadData();
+        } catch (e) { status('content.json 加载失败：' + e.message, 'err'); return; }
+        DATA.settings ||= {};
+        ['tracks', 'featured', 'videos', 'articles', 'platformLinks'].forEach(renderList);
+        renderTexts();
+        renderModules();
+        bindSettings();
+        status(SOURCE_NOTE);
+    })();
 })();
