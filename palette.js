@@ -10,7 +10,7 @@
     'use strict';
 
     var KEY = 'ljty-palette';        // 访客自选
-    var GATE_AT = 'ljty-gate2-at';   // 上次看引导的时间戳（v3改版换键，全员重看一次）
+    var GATE_AT = 'ljty-gate3-at';   // 上次看引导的时间戳（换键=全员临时重置一次引导，24h间隔逻辑不变；上次是 gate2）
     var gateHours = 24;              // 引导重现间隔，后台 settings.gateHours 可调，0=每次都弹
 
     // 水墨简笔图标（静态 SVG，stroke 跟随色块墨色）
