@@ -27,7 +27,7 @@
       "mqFoot": "弦上流年 <i>STRINGS OVER YEARS</i> 今昔山河 <i>WHEELS OVER LAND</i> <b class=\"mosaic\">♪</b> ",
       "sec01Eyebrow": "(01) — MANIFESTO",
       "sec01Note": "2026 / 07",
-      "mfCopy": "网站刚建立，各位随便一逛，笔记音乐等内容添加是个大工程，未来抽空慢慢完善，欢迎光临",
+      "mfCopy": "网站刚建立，各位随便一逛，笔记音乐内容添加是个大工程，未来抽空慢慢完善，欢迎光临",
       "sec02Eyebrow": "(02) — FEATURED TRACKS",
       "sec02Note": "视频推荐 / 选你最爱",
       "sec02Title": "<span class=\"st-line\"><span>选你的</span></span><span class=\"st-line\"><span><em>武器</em> <i class=\"st-en\">WEAPONS</i></span></span>",
@@ -57,15 +57,15 @@
       "jhTitle": "旅人手账",
       "jhEn": "Wayfarer's Journal",
       "jhSub": "发现那些该记录的事 <br><em>Every road below was ridden, every word was lived.</em>",
-      "jQuote1": "回首向来潇洒处 也无风雨也无晴",
-      "jQuote2": "窗外景飞驰  几许故路归 ",
+      "jQuote1": "众里寻他千百度 蓦然回首 那人却在 灯火阑珊处",
+      "jQuote2": "窗外景飞驰 ",
       "jQuote3": "多少得失过往 皆不可得    可又如此让人感动",
       "jfLine": "WAYFARER'S JOURNAL — 弦上流年 · 此心山河",
-      "heroColophon": "回首向来萧瑟处 也无风雨也无晴",
+      "heroColophon": "众里寻他千百度 蓦然回首 那人却在 灯火阑珊处",
       "hfBR": "V.2026 — Mount Emei",
       "vpSub": "发点生活音乐类视频，随缘更新 合作邮箱：nijingchongsheng@gmail.com",
-      "vpState": "当下现在，<span class=\"cn\">就是</span>最好的时刻<br>\n                <em>THE HERE AND NOW — THIS IS THE BEST MOMENT.</em>",
-      "vpCopy": "有时候不知道该录点什么，科技越来越发达，AI和器材的进步似乎一切都唾手可得，现在却反而不想去记录那些毫无意义的东西，第一次学吉他时得到父母买的那把木吉他的兴奋，才学习录音的时那台破电脑录的东西，现在回看反而却无比怀念，有时候我太过追求一件事物的完美，可是天下难有完美之事，不完美可能更好，或许以后还是该多去记录，当下现在就是最好的时候，10年20年后可能再看今天的自己又会去怀念现在的时刻 -2026.7",
+      "vpState": "现在，当下，<span class=\"cn\">就是</span>最好的时刻<br>\n                <em>THE HERE AND NOW — THIS IS THE BEST MOMENT.</em>",
+      "vpCopy": "有时候，不知道该录点什么\n科技越来越发达，AI和器材的进步好像让一切都唾手可得，现在却反而不想去记录那些毫无意义的东西\n\n第一次拿到父母买的那把木吉他时的兴奋，开始学录音用那台破电脑录下的老火录音，如今再听，竟无比怀念\n\n我总是太过追求完美，可天下难有完美之事，不完美也许才更好。一段路，常常因为诸多不满而闷闷不乐，却忘了每一天结束之后，就再也不会复返 \n\n当下，现在，就是最好的时候\n十年、二十年后，再回看今天的自己，大概也会像现在怀念过去那样，怀念此刻吧\n\n——2026.7\n",
       "vpMarquee": "故曲如风 <i>●</i> 随顺而已 <i>●</i> 九州同 <i>●</i> 过去心 <i>●</i> Schecter Ravendark V 试听 <i>●</i> 翻弹 Suicide Silence <i>●</i> 孤灯照剑 <i>●</i> METAL 金属段落编曲 2018.4.16 <i>●</i>&nbsp;",
       "fvCtaEn": "ENTER THE FILM VAULT — 视频区主页由此进入 →",
       "jhSideL": "一人 · 一琴 · 一路",
@@ -90,7 +90,7 @@
       "heroFilter": "duotone",
       "journalSky": "",
       "aboutPhoto": "https://i2.hdslb.com/bfs/face/055258520bb074cb7f476712aace1d37c8cb1f8d.jpg",
-      "journalPhoto": "assets/bg/IMG_6101.jpg"
+      "journalPhoto": "assets/bg/jn-milkyway.jpg"
     },
     "modules": [
       {
@@ -203,9 +203,9 @@
     },
     {
       "type": "bilibili",
-      "bvid": "BV1pA411X7wr",
-      "title": "相忘于天涯",
-      "year": "2022",
+      "bvid": "BV1zc411y7gr",
+      "title": "随顺而已",
+      "year": "2023",
       "note": "原创"
     },
     {
