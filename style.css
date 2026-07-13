@@ -509,7 +509,7 @@ img { display: block; max-width: 100%; }
 .btn-video { width: auto; padding: 0 16px; border-radius: 999px; font-size: 11px; }
 .btn-video.active { background: var(--purple); color: #fff; border-color: var(--purple); }
 .deck-console { padding: 18px 20px 20px; border-top: 1px solid var(--black); }
-.deck-np { display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px; flex-wrap: wrap; }
+.deck-np { display: flex; align-items: baseline; gap: 22px; margin-bottom: 14px; flex-wrap: wrap; }
 .np-label { color: var(--purple); }
 .np-title { font-family: var(--font-cn); font-weight: 700; font-size: 18px; }
 .deck-time { margin-left: auto; opacity: .55; font-variant-numeric: tabular-nums; }
@@ -525,6 +525,10 @@ img { display: block; max-width: 100%; }
 .btn-video { width: 42px; height: 42px; padding: 0; border-radius: 50%; display: grid; place-items: center; font-size: 15px; line-height: 1; }
 .ctrl-play { background: var(--purple); color: var(--beige); border-color: var(--purple); }
 .ctrl-play:hover { background: var(--black); border-color: var(--black); }
+/* 单曲循环圆钮：默认同其它控制钮，开启时紫底高亮（与「画」钮一致的语言） */
+.ctrl-loop svg { display: block; }
+.ctrl-loop.active { background: var(--purple); color: var(--beige); border-color: var(--purple); }
+.ctrl-loop.active:hover { background: var(--black); border-color: var(--black); }
 .deck-seek {
     flex: 1; height: 32px; position: relative; cursor: pointer;
     background: linear-gradient(to bottom, transparent calc(50% - .5px), var(--black) calc(50% - .5px), var(--black) calc(50% + .5px), transparent calc(50% + .5px));

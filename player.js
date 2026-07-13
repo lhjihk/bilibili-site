@@ -17,6 +17,7 @@
         const btnPrev = $('btnPrev');
         const btnNext = $('btnNext');
         const btnVideo = $('btnVideo');
+        const btnLoop = $('btnLoop');
         const deckTime = $('deckTime');
         const seekEl = $('deckSeek');
         const seekFill = $('deckSeekFill');
@@ -32,6 +33,7 @@
         let current = -1;
         let mode = 'idle';           // idle | audio | embed
         let embedOn = false;         // embed 是否在"播放"（点击后即视为在播）
+        let loopOne = false;         // 单曲循环开关
         window.__level = 0;
 
         // ---------- audio 引擎 ----------
@@ -265,7 +267,17 @@
         });
         btnPrev.addEventListener('click', () => { if (tracks.length) play((current - 1 + tracks.length) % tracks.length); });
         btnNext.addEventListener('click', () => { if (tracks.length) play((current + 1) % tracks.length); });
-        audio.addEventListener('ended', () => { if (tracks.length) play((current + 1) % tracks.length); });
+        audio.addEventListener('ended', () => {
+            if (loopOne) { audio.currentTime = 0; ensureAnalyser(); audio.play().catch(() => {}); return; } // 单曲循环：从头再放
+            if (tracks.length) play((current + 1) % tracks.length);                                          // 否则自动跳下一首
+        });
+
+        // 「单曲循环」开关
+        btnLoop?.addEventListener('click', () => {
+            loopOne = !loopOne;
+            btnLoop.classList.toggle('active', loopOne);
+            btnLoop.setAttribute('aria-pressed', loopOne ? 'true' : 'false');
+        });
 
         // 「画面」开关：隐藏/显示 B站视频
         btnVideo?.addEventListener('click', () => {
