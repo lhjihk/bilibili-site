@@ -242,12 +242,8 @@
                         : `<audio src="${t.src}" autoplay></audio>`;
                 playing = true;
                 tape.classList.add('playing');
-                if (TOUCH) { // 手机：亮出播放器让人点
-                    tape.classList.add('showplayer');
-                    tStatus.textContent = 'TAP ▶ — 在下方播放器点播放';
-                } else {
-                    tStatus.textContent = 'PLAYING — 声音来自B站';
-                }
+                // 手账随身听保持隐形幽灵播放（桌面/手机一致），播放器不显示任何画面，手机端不再跳出视频
+                tStatus.textContent = 'PLAYING — 声音来自B站';
                 $('tapePlay').textContent = '■ STOP';
             }
             $('tapePlay').addEventListener('click', () => playing ? stop() : playTape());
