@@ -18,11 +18,11 @@
       "heroT1": "THE ROAD",
       "heroT2": "<em>IS THE</em> HORIZON<sup>®</sup>",
       "heroT3": "<span class=\"hc\">路</span><i class=\"hc\">即</i><span class=\"hc\">天</span><i class=\"hc\">涯</i>",
-      "heroSub": "发点生活音乐类视频，随缘更新  <br>吉他手 / 旅行者—— 合作邮箱：nijingchongsheng@gmail.com",
+      "heroSub": "发点生活音乐类视频，随缘更新  <br>合作邮箱：nijingchongsheng@gmail.com",
       "heroHint": "[ MOVE MOUSE — INK REACTS · 往下滚 ]",
       "hfTL": "THE ROAD IS THE HORIZON — EST.2017",
       "hfTR": "[ 个人空间 ]",
-      "mq1": "原创小曲 <i>ORIGINAL METAL</i> 旅行影像 <i>ROAD FILM</i> 随笔日记 <i>TRAVEL NOTES</i> <b class=\"mosaic\">★</b> ",
+      "mq1": "原创曲 <i>ORIGINAL METAL</i> 旅行影像 <i>ROAD FILM</i> 随笔日记 <i>TRAVEL NOTES</i> <b class=\"mosaic\">★</b> ",
       "mq2": "点击试听 <i>LISTEN FIRST</i> 路上随身听 <i>REAL TAKES ONLY</i> 你自己拖个 MP3 进来也行 <b class=\"mosaic\">♫</b> ",
       "mqFoot": "弦上流年 <i>STRINGS OVER YEARS</i> 今昔山河 <i>WHEELS OVER LAND</i> <b class=\"mosaic\">♪</b> ",
       "sec01Eyebrow": "(01) — MANIFESTO",
@@ -35,14 +35,14 @@
       "sec03Note": "全部曲目 / 本地音频不上传，只在本页播",
       "sec03Title": "<span class=\"st-line\"><span>试听<em>台</em> <i class=\"st-en\">LISTEN</i></span></span>",
       "sec04Eyebrow": "(04) — FILM ARCHIVE",
-      "sec04Note": "影像档案 / 上架的都是真货",
+      "sec04Note": "影像档案 / 发布视频收录",
       "sec04Title": "<span class=\"st-line\"><span>影像<em>档案</em> <i class=\"st-en\">FILM</i></span></span>",
       "sec05Eyebrow": "(05) — WAYFARER'S JOURNAL",
       "sec05Note": "旅人笔记 / 一整个世界在另一页",
       "sec05Title": "<span class=\"st-line\"><span>路上写的<em>字</em> <i class=\"st-en\">JOURNAL</i></span></span>",
       "jpPortal": "进入旅人笔记",
       "sec06Eyebrow": "(06) — THE HUMAN",
-      "sec06Note": "关于这个人 / EST.2017 ON THE ROAD",
+      "sec06Note": "关于这个人 / ABOUT THIS PERSON",
       "sec06Title": "<span class=\"st-line\"><span>关于<em>这个人</em></span></span>",
       "aboutP1": "85 后，发点生活音乐类视频，随缘更新",
       "aboutP2": "这家伙很懒，也不知道该写点啥 哈哈哈",
@@ -67,14 +67,18 @@
       "vpState": "当下现在，<span class=\"cn\">就是</span>最好的时刻<br>\n                <em>THE HERE AND NOW — THIS IS THE BEST MOMENT.</em>",
       "vpCopy": "有时候不知道该录点什么，科技越来越发达，AI和器材的进步似乎一切都唾手可得，现在却反而不想去记录那些毫无意义的东西，第一次学吉他时得到父母买的那把木吉他的兴奋，才学习录音的时那台破电脑录的东西，现在回看反而却无比怀念，有时候我太过追求一件事物的完美，可是天下难有完美之事，不完美可能更好，或许以后还是该多去记录，当下现在就是最好的时候，10年20年后可能再看今天的自己又会去怀念现在的时刻 -2026.7",
       "vpMarquee": "故曲如风 <i>●</i> 随顺而已 <i>●</i> 九州同 <i>●</i> 过去心 <i>●</i> Schecter Ravendark V 试听 <i>●</i> 翻弹 Suicide Silence <i>●</i> 孤灯照剑 <i>●</i> METAL 金属段落编曲 2018.4.16 <i>●</i>&nbsp;",
-      "fvCtaEn": "ENTER THE FILM VAULT — 视频区主页由此进入 →"
+      "fvCtaEn": "ENTER THE FILM VAULT — 视频区主页由此进入 →",
+      "jhSideL": "一人 · 一琴 · 一路",
+      "jBackLab": "← 主页",
+      "jFootBack": "← 回主页",
+      "jGateBack": "← 退回主页",
+      "vpTc2": "TC 01:24:07 — 推荐视频 · FEATURED THREE",
+      "vpTc1": "TC 00:32:11 — 此刻开始 · WHY FILM",
+      "vNavLab": "← 主页",
+      "vEndLab": "← 回主页 SOUND LAB"
     },
     "lyrics": [
-      "九州同一声吼，山河都回头",
-      "故曲如风，吹旧了少年",
-      "相忘于天涯，各自赶路",
-      "孤灯照剑，夜路无人也要走",
-      "真琴实录，概不修音"
+      "九州同一声吼，山河行"
     ],
     "journal": {
       "lockAll": false,
@@ -85,7 +89,8 @@
       "hero": "",
       "heroFilter": "duotone",
       "journalSky": "",
-      "aboutPhoto": "https://i2.hdslb.com/bfs/face/055258520bb074cb7f476712aace1d37c8cb1f8d.jpg"
+      "aboutPhoto": "https://i2.hdslb.com/bfs/face/055258520bb074cb7f476712aace1d37c8cb1f8d.jpg",
+      "journalPhoto": "assets/bg/IMG_6604.jpg"
     },
     "modules": [
       {
@@ -116,6 +121,45 @@
       {
         "id": "about",
         "name": "(06) 关于",
+        "show": true
+      }
+    ],
+    "journalModules": [
+      {
+        "id": "jnight",
+        "name": "夜航开篇（星空 · 碑铭）",
+        "show": true
+      },
+      {
+        "id": "jmap-sec",
+        "name": "征途图（地图）",
+        "show": true
+      },
+      {
+        "id": "jtape-sec",
+        "name": "路上的随身听（播放器）",
+        "show": true
+      },
+      {
+        "id": "jarchive-sec",
+        "name": "笔记列表（分桶 + 时间轴）",
+        "show": true
+      }
+    ],
+    "videoModules": [
+      {
+        "id": "why",
+        "name": "为什么拍",
+        "show": true
+      },
+      {
+        "id": "featured",
+        "name": "三支主打",
+        "show": true
+      },
+      {
+        "id": "archive",
+        "name": "片库（全部影像）",
         "show": true
       }
     ]
@@ -469,7 +513,7 @@
   ],
   "articles": [
     {
-      "title": "窗外景飞驰  几许故路归 ",
+      "title": "窗外景飞驰  几许",
       "id": "note-mridmlzp",
       "bucket": "旅行",
       "year": "2025",
@@ -478,7 +522,7 @@
       "coord": "",
       "file": "",
       "locked": false,
-      "excerpt": "旧曲伴我半生漂泊 \n多少得失过往 皆不可得   \n可又如此让人感动"
+      "excerpt": "多少得失过往 皆不可得   \n可又如此让人感动"
     },
     {
       "id": "十三年峨眉",
@@ -493,18 +537,6 @@
       "file": "articles/十三年峨眉.md"
     },
     {
-      "id": "2026年出发的起点",
-      "title": "2026年出发的起点",
-      "date": "2026-05-12",
-      "year": "2026",
-      "place": "贵州 · 入川道上",
-      "coord": "27.70°N 106.92°E",
-      "bucket": "旅行",
-      "locked": true,
-      "excerpt": "又一次离家。前路终归何方？或许每一刻悲喜共存的路途，本身就是终点。",
-      "file": "articles/2026年出发的起点.md"
-    },
-    {
       "id": "文革旅行思考",
       "title": "文革旅行思考",
       "date": "2026-05-30",
@@ -515,30 +547,6 @@
       "locked": true,
       "excerpt": "路过被岁月冲刷的庙宇，想起一段被折断的历史——物质的破坏有限，精神的断层难愈。",
       "file": "articles/文革旅行思考.md"
-    },
-    {
-      "id": "晨暮雨中-滴落着种种的思绪",
-      "title": "晨暮雨中 滴落着种种的思绪",
-      "date": "2023-11-21",
-      "year": "2023",
-      "place": "",
-      "coord": "",
-      "bucket": "诗集",
-      "locked": true,
-      "excerpt": "窗外天空似故乡的风。你问我为何执迷着苦苦寻觅，你问我为何以天地为寄。",
-      "file": "articles/晨暮雨中-滴落着种种的思绪.md"
-    },
-    {
-      "id": "此刻虽悲心似火",
-      "title": "此刻虽悲心似火",
-      "date": "2023-09-04",
-      "year": "2023",
-      "place": "",
-      "coord": "",
-      "bucket": "诗集",
-      "locked": true,
-      "excerpt": "烈马狂奔脚力劲，此情必成追忆时。今夜作别祝安平。",
-      "file": "articles/此刻虽悲心似火.md"
     },
     {
       "id": "fenglingdu",
