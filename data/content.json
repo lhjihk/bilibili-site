@@ -90,7 +90,7 @@
       "heroFilter": "duotone",
       "journalSky": "",
       "aboutPhoto": "https://i2.hdslb.com/bfs/face/055258520bb074cb7f476712aace1d37c8cb1f8d.jpg",
-      "journalPhoto": "assets/bg/IMG_6604.jpg"
+      "journalPhoto": "assets/bg/IMG_6101.jpg"
     },
     "modules": [
       {
@@ -171,6 +171,15 @@
     }
   ],
   "tracks": [
+    {
+      "title": "一首我喜欢的80年代电影原声 Thief - Confrontation",
+      "type": "local",
+      "bvid": "",
+      "src": "电影原声_.mp3",
+      "id": "",
+      "year": "1984",
+      "note": "一首我喜欢的80年代电影原声 Thief - Confrontation"
+    },
     {
       "type": "bilibili",
       "bvid": "BV1tkvSB6E6U",
