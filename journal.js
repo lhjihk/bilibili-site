@@ -233,7 +233,7 @@
                 const t = TR[cur];
                 // 手机浏览器放不了电脑版外链播放器，换 B站手机 H5 播放器（内嵌直播，不跳APP）
                 const biliSrc = (TOUCH || isAppleSafari)
-                    ? `https://www.bilibili.com/blackboard/html5mobileplayer.html?bvid=${t.bvid}&page=1&high_quality=1&danmaku=0&posterFirst=1`
+                    ? `https://www.bilibili.com/blackboard/html5mobileplayer.html?bvid=${t.bvid}&page=1&autoplay=1&high_quality=1&danmaku=0&posterFirst=1`
                     : `https://player.bilibili.com/player.html?bvid=${t.bvid}&autoplay=1&danmaku=0&high_quality=1`;
                 tEmbed.innerHTML = t.type === 'bilibili'
                     ? `<iframe src="${biliSrc}" allow="autoplay; fullscreen" allowfullscreen></iframe>`
@@ -242,12 +242,9 @@
                         : `<audio src="${t.src}" autoplay></audio>`;
                 playing = true;
                 tape.classList.add('playing');
-                // 手账随身听始终隐形播放、不显示任何画面（桌面/手机一致，手机端不跳出视频）。
-                // 本地音频手机可隐形出声；B站/网易云是跨域外链，手机浏览器禁止隐藏播放器自动出声，给诚实提示避免看着像“坏了”。
-                const external = t.type !== 'local' && t.type !== 'file';
-                tStatus.textContent = (TOUCH && external)
-                    ? '此曲为 B站外链 · 手机端受限无声，请在桌面端收听'
-                    : 'PLAYING — 声音来自B站';
+                // 始终隐形播放、不显示任何画面（桌面/手机一致，手机端不跳出视频）。
+                // H5/外链播放器 URL 均带 autoplay=1 + allow="autoplay"，隐形也自动出声（桌面已验证；手机靠 autoplay 委派）。
+                tStatus.textContent = 'PLAYING — 声音来自B站';
                 $('tapePlay').textContent = '■ STOP';
             }
             $('tapePlay').addEventListener('click', () => playing ? stop() : playTape());
