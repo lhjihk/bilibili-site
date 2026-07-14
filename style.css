@@ -1009,7 +1009,13 @@ img { display: block; max-width: 100%; }
     font-size: 13px; line-height: 1;
     display: grid; place-items: center;
 }
-@media (max-width: 900px) { .hero-colophon { display: none; } }
+/* 手机端也显示右缘落款「挑灯夜观剑」+印章，缩小并贴右缘、下移避开巨字 */
+@media (max-width: 900px) {
+    .hero-colophon { right: 8px; top: 62%; gap: 12px; }
+    .colo-line { font-size: 13px; letter-spacing: .42em; }
+    .colo-seal { width: 32px; height: 32px; }
+    .colo-seal i { font-size: 11px; }
+}
 
 /* ============ 禅 · 毛笔笔触下划线（JS 注入到 .sec-title 后） ============ */
 .brush-line {

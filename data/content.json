@@ -101,7 +101,7 @@
       {
         "id": "weapon",
         "name": "(02) 三首主打",
-        "show": false
+        "show": true
       },
       {
         "id": "listen",
