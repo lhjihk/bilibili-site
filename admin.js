@@ -708,48 +708,77 @@
         }
     }
 
-    // ---------- 图片管理（列出 + 删除仓库里上传的图片） ----------
+    // ---------- 上传文件管理（列出 + 删除仓库里上传的 图片/音频/其他文件） ----------
     async function loadImageManager() {
         const wrap = $('list-images');
         if (!wrap) return;
-        if (!token()) { wrap.innerHTML = '<p style="opacity:.6">先在上方连接 GitHub token，才能列出和管理图片。</p>'; return; }
-        wrap.innerHTML = '<p style="opacity:.6">正在读取仓库图片清单…</p>';
+        if (!token()) { wrap.innerHTML = '<p style="opacity:.6">先在上方连接 GitHub token，才能列出和管理上传的文件。</p>'; return; }
+        wrap.innerHTML = '<p style="opacity:.6">正在读取上传文件清单…</p>';
+        // 只列「编辑台会上传到的目录」，避免误列字体/代码等仓库自带文件
+        const ROOTS = /^(audio\/|articles\/|assets\/covers\/|assets\/notes\/|assets\/bg\/)/;
+        const IMG = /\.(jpe?g|png|gif|webp|avif)$/i;
+        const AUD = /\.(mp3|wav|m4a|ogg|flac|aac)$/i;
         try {
             const tree = await gh(`/repos/${OWNER}/${REPO}/git/trees/${BRANCH}?recursive=1&t=${Date.now()}`);
-            const imgs = (tree.tree || []).filter((n) =>
-                n.type === 'blob' &&
-                /^(assets\/covers\/|assets\/notes\/|assets\/bg\/|articles\/assets\/)/.test(n.path) &&
-                /\.(jpe?g|png|gif|webp|avif)$/i.test(n.path));
-            if (!imgs.length) { wrap.innerHTML = '<p style="opacity:.6">仓库里还没有上传的图片。</p>'; return; }
-            wrap.innerHTML = '<div class="imgrid"></div>';
-            const grid = wrap.querySelector('.imgrid');
-            imgs.forEach((n) => {
-                const kb = (n.size / 1024).toFixed(0);
-                const cell = document.createElement('div');
-                cell.className = 'imgcell';
-                cell.innerHTML =
-                    `<img loading="lazy" src="${n.path}?t=${Date.now()}" alt="">
-                     <div class="imgpath mono">${n.path}</div>
-                     <div class="imgmeta">${kb}KB</div>
-                     <button class="danger imgdel">删除</button>`;
-                cell.querySelector('img').addEventListener('error', (ev) => { ev.target.style.opacity = '.2'; });
-                cell.querySelector('.imgdel').addEventListener('click', async () => {
-                    if (!confirm('确定删除这张图片？\n' + n.path + '\n\n⚠️ 若还有主打封面 / 文章正文在引用它，页面上会显示裂图。\n删除后 git 历史里仍能找回。')) return;
-                    status('删除中…');
-                    try {
-                        await gh(`/repos/${OWNER}/${REPO}/contents/${encodeURIComponent(n.path)}`, {
-                            method: 'DELETE',
-                            body: JSON.stringify({ message: '删除图片 ' + n.path, sha: n.sha, branch: BRANCH }),
-                        });
-                        cell.remove();
-                        status('✓ 已删除 ' + n.path, 'ok');
-                        logUp('🗑 删除 ' + n.path, true);
-                    } catch (err) { status('删除失败：' + err.message, 'err'); }
-                });
-                grid.appendChild(cell);
+            const files = (tree.tree || []).filter((n) => n.type === 'blob' && ROOTS.test(n.path));
+            const groups = {
+                image: { title: '🖼 图片', warn: '若还有主打封面 / 文章正文在引用它，页面上会显示裂图。', items: [] },
+                audio: { title: '🎧 音频', warn: '若还有试听曲目的 src 指向它，试听台会 404 放不出这首。', items: [] },
+                other: { title: '📄 其他文件（笔记 .md 等）', warn: '若还有文章在引用它，对应页面会受影响。', items: [] },
+            };
+            files.forEach((n) => {
+                const g = IMG.test(n.path) ? 'image' : AUD.test(n.path) ? 'audio' : 'other';
+                groups[g].items.push(n);
             });
-            status(`共 ${imgs.length} 张图片`, 'ok');
+            const total = files.length;
+            if (!total) { wrap.innerHTML = '<p style="opacity:.6">仓库里还没有上传的文件。</p>'; return; }
+            wrap.innerHTML = '';
+            ['image', 'audio', 'other'].forEach((key) => {
+                const g = groups[key];
+                if (!g.items.length) return;
+                const sec = document.createElement('div');
+                sec.style.marginBottom = '22px';
+                sec.innerHTML = `<h3 style="margin:0 0 10px">${g.title}（${g.items.length}）</h3><div class="imgrid"></div>`;
+                const grid = sec.querySelector('.imgrid');
+                g.items.forEach((n) => grid.appendChild(makeFileCell(n, key, g.warn)));
+                wrap.appendChild(sec);
+            });
+            status(`共 ${total} 个文件（图片 ${groups.image.items.length} / 音频 ${groups.audio.items.length} / 其他 ${groups.other.items.length}）`, 'ok');
         } catch (e) { wrap.innerHTML = '<p style="color:var(--red)">读取失败：' + e.message + '</p>'; }
+    }
+    function makeFileCell(n, kind, warn) {
+        const kb = (n.size / 1024).toFixed(0);
+        const cell = document.createElement('div');
+        cell.className = 'imgcell';
+        let preview;
+        if (kind === 'image') {
+            preview = `<img loading="lazy" src="${n.path}?t=${Date.now()}" alt="">`;
+        } else if (kind === 'audio') {
+            preview = `<audio controls preload="none" style="width:100%" src="${n.path}?t=${Date.now()}"></audio>`;
+        } else {
+            preview = `<div class="filetype">${(n.path.split('.').pop() || 'file').toUpperCase()}</div>`;
+        }
+        cell.innerHTML =
+            `${preview}
+             <div class="imgpath mono">${n.path}</div>
+             <div class="imgmeta">${kb}KB</div>
+             <button class="danger imgdel">删除</button>`;
+        const img = cell.querySelector('img');
+        if (img) img.addEventListener('error', (ev) => { ev.target.style.opacity = '.2'; });
+        cell.querySelector('.imgdel').addEventListener('click', async () => {
+            if (!confirm('确定删除这个文件？\n' + n.path + '\n\n⚠️ ' + warn + '\n删除后 git 历史里仍能找回。')) return;
+            status('删除中…');
+            try {
+                await gh(`/repos/${OWNER}/${REPO}/contents/${encodeURIComponent(n.path)}`, {
+                    method: 'DELETE',
+                    body: JSON.stringify({ message: '删除文件 ' + n.path, sha: n.sha, branch: BRANCH }),
+                });
+                cell.remove();
+                status('✓ 已删除 ' + n.path, 'ok');
+                logUp('🗑 删除 ' + n.path, true);
+            } catch (err) { status('删除失败：' + err.message, 'err'); }
+        });
+        return cell;
     }
     $('btnImgRefresh')?.addEventListener('click', loadImageManager);
 

@@ -74,6 +74,8 @@
         .imgcell .imgpath { font-size: 10px; word-break: break-all; opacity: .7; line-height: 1.4; text-transform: none; }
         .imgcell .imgmeta { font-size: 11px; opacity: .5; }
         .imgcell .imgdel { padding: 4px 10px; font-size: 12px; }
+        .imgcell audio { width: 100%; }
+        .imgcell .filetype { width: 100%; height: 110px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: #eee; font-size: 22px; letter-spacing: 1px; opacity: .5; }
     </style>
 </head>
 <body>
@@ -108,7 +110,7 @@
         <button class="tab" data-p="modules">🧩 板块管理</button>
         <button class="tab" data-p="site">⚙️ 站点设置</button>
         <button class="tab" data-p="files">📦 传文件</button>
-        <button class="tab" data-p="images">🗂 图片管理</button>
+        <button class="tab" data-p="images">🗂 上传文件管理</button>
     </div>
 
     <main>
@@ -268,8 +270,8 @@
             </div>
         </div>
         <div class="panel" id="p-images">
-            <p class="panel-tip">仓库里所有上传的图片都在这里（主打/影像封面 <code>assets/covers/</code>、笔记插图 <code>assets/notes/</code>、背景图 <code>assets/bg/</code>）。删除即时提交仓库、约1分钟线上生效。<b>注意</b>：删掉仍被引用的图，页面上会显示裂图；删错了也能从 git 历史找回。切到本页会自动刷新，也可手动点下面按钮。</p>
-            <div style="margin-bottom:14px"><button id="btnImgRefresh">↻ 刷新图片清单</button></div>
+            <p class="panel-tip">仓库里所有上传的文件都在这里，按 <b>图片</b>（封面 <code>assets/covers/</code>、插图 <code>assets/notes/</code>、背景 <code>assets/bg/</code>、笔记图 <code>articles/assets/</code>）、<b>音频</b>（<code>audio/</code>，可直接试听）、<b>其他文件</b>（笔记 <code>articles/*.md</code> 等）分组。删除即时提交仓库、约1分钟线上生效。<b>注意</b>：删掉仍被引用的文件，对应页面会显示裂图/放不出/缺内容；删错了也能从 git 历史找回。切到本页会自动刷新，也可手动点下面按钮。</p>
+            <div style="margin-bottom:14px"><button id="btnImgRefresh">↻ 刷新文件清单</button></div>
             <div id="list-images"></div>
         </div>
     </main>
