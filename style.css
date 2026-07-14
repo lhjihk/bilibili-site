@@ -27,10 +27,17 @@
     src: url("assets/fonts/dongfangdakai-site.woff2?v=3") format("woff2");
     font-display: swap;
 }
+/* LOGO「路即天涯」4字迷你子集（各约3KB，同款字形）：秒加载先把 LOGO 的毛笔字显示出来，
+   完整2.4MB字体照旧在后台下、供可编辑标题用。挂在各 --font-brush 最前，只对这4个字生效，其余字仍走完整版。
+   ★以后新增第5款毛笔字：记得也切一个「路即天涯」迷你版，并在对应 --font-brush 最前加上它（否则那款LOGO会退回慢加载，不会坏）。*/
+@font-face { font-family: "PangmenLogo";  src: url("assets/fonts/logo-pangmen.woff2?v=1") format("woff2");  font-display: swap; }
+@font-face { font-family: "XiaLogo";      src: url("assets/fonts/logo-xia.woff2?v=1") format("woff2");      font-display: swap; }
+@font-face { font-family: "HongleiLogo";  src: url("assets/fonts/logo-honglei.woff2?v=1") format("woff2");  font-display: swap; }
+@font-face { font-family: "DongfangLogo"; src: url("assets/fonts/logo-dongfang.woff2?v=1") format("woff2"); font-display: swap; }
 /* 行书类偏瘦：描边整体均匀加粗，四字同厚不突兀 */
-html[data-brush="xia"] { --font-brush: "BrushXia", "Noto Sans SC", sans-serif; --brush-stroke: .032em; }
-html[data-brush="honglei"] { --font-brush: "BrushHonglei", "Noto Sans SC", sans-serif; --brush-stroke: .03em; }
-html[data-brush="dongfang"] { --font-brush: "BrushDongfang", "Noto Sans SC", sans-serif; --brush-stroke: 0px; }
+html[data-brush="xia"] { --font-brush: "XiaLogo", "BrushXia", "Noto Sans SC", sans-serif; --brush-stroke: .032em; }
+html[data-brush="honglei"] { --font-brush: "HongleiLogo", "BrushHonglei", "Noto Sans SC", sans-serif; --brush-stroke: .03em; }
+html[data-brush="dongfang"] { --font-brush: "DongfangLogo", "BrushDongfang", "Noto Sans SC", sans-serif; --brush-stroke: 0px; }
 
 :root {
     --paper-bg: #f4f3eb;
@@ -46,7 +53,7 @@ html[data-brush="dongfang"] { --font-brush: "BrushDongfang", "Noto Sans SC", san
     --font-cn: "Noto Sans SC", "Hanken Grotesk", sans-serif;
     --font-mono: "IBM Plex Mono", "Noto Sans SC", monospace;
     --font-mosaic: "Palette Mosaic", monospace;
-    --font-brush: "LogoBrush", "Noto Sans SC", sans-serif;
+    --font-brush: "PangmenLogo", "LogoBrush", "Noto Sans SC", sans-serif;
     --font-serif-cn: "Noto Serif SC", serif;
     --ease-out: cubic-bezier(.16, 1, .3, 1);
     --ease-inout: cubic-bezier(.65, .05, .36, 1);
