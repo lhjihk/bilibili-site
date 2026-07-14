@@ -181,6 +181,15 @@
       "note": "一首我喜欢的80年代电影原声 Thief - Confrontation"
     },
     {
+      "title": "破军",
+      "type": "local",
+      "bvid": "",
+      "src": "audio/金属原创最终母带.mp3",
+      "id": "",
+      "year": "2024",
+      "note": "原创 Metal"
+    },
+    {
       "type": "local",
       "src": "audio/故曲如风_编曲版二.mp3",
       "title": "故曲如风 · 编曲版二",
@@ -199,14 +208,14 @@
       "src": "audio/故曲如风_初版.mp3",
       "title": "故曲如风 · 初版",
       "year": "2024",
-      "note": "原创 · 送给流逝的时光"
+      "note": "原创 "
     },
     {
       "type": "local",
       "src": "audio/随顺而已.mp3",
       "title": "随顺而已",
       "year": "2023",
-      "note": "原创"
+      "note": "原创 "
     },
     {
       "type": "local",
@@ -220,7 +229,7 @@
       "src": "audio/过去心.mp3",
       "title": "过去心",
       "year": "2018",
-      "note": "原创 · S.yairi yd25"
+      "note": "原创 "
     }
   ],
   "featured": [
