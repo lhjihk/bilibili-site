@@ -954,8 +954,17 @@ img { display: block; max-width: 100%; }
     .hf-tr { display: none; }
 }
 @media (max-width: 560px) {
-    .track { grid-template-columns: 28px minmax(0, 1fr) auto; }
-    .tk-note, .tk-year { display: none; }
+    /* 手机端试听台：标题占一行，创作说明+年份放第二行，和桌面同样的信息但不挤 */
+    .track {
+        grid-template-columns: 26px minmax(0, 1fr) auto;
+        column-gap: 10px; row-gap: 2px;
+    }
+    .tk-no    { grid-column: 1; grid-row: 1 / span 2; align-self: center; }
+    .tk-title { grid-column: 2; grid-row: 1; }
+    .tk-badge { grid-column: 3; grid-row: 1; align-self: center; }
+    .tk-note  { grid-column: 2; grid-row: 2; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .tk-year  { grid-column: 3; grid-row: 2; text-align: right; align-self: center; }
+    .tk-eq    { display: none; }
     .footer-giant { font-size: 21vw; }
 }
 @media (prefers-reduced-motion: reduce) {
