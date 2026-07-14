@@ -511,6 +511,8 @@
                     { xPercent: 0, rotateY: 0, opacity: 1, duration: 0.8, ease: 'expo.out' }, 0.22);
         }
         if (dsStage && FEATURED.length) {
+            const dsTotal = $('dsTotal');
+            if (dsTotal) dsTotal.textContent = String(FEATURED.length).padStart(2, '0'); // 总数跟随实际主打数量，不再写死 03
             FEATURED.forEach((_, i) => {
                 const dot = document.createElement('i');
                 dot.addEventListener('click', () => dsShow(i, i > dsCurrent ? 1 : -1));

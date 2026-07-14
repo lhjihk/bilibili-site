@@ -950,8 +950,10 @@ img { display: block; max-width: 100%; }
     .theme-btn { display: inline-flex; align-items: center; margin-left: auto; padding: 8px 13px; font-size: 13px; }
     .nav-burger { display: flex; margin-left: 12px; }
     .listen-layout { grid-template-columns: 1fr; }
-    .ds-card { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1.4fr) auto; }
-    .ds-stage { height: auto; min-height: 480px; }
+    /* 手机端封面固定高度，各卡一致（不再被右侧文字长短挤扁）；简介过长收敛3行，舞台留够高防止压到翻页控件 */
+    .ds-card { grid-template-columns: 1fr; grid-template-rows: clamp(188px, 52vw, 210px) auto; }
+    .ds-stage { height: auto; min-height: 500px; }
+    .ds-card-note { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
     .ds-card-info { padding-bottom: 0; }
     .about-grid { grid-template-columns: 1fr; }
     .article-row { grid-template-columns: 40px minmax(0, 1fr); }
