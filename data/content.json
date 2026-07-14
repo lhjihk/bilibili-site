@@ -181,20 +181,18 @@
       "note": "一首我喜欢的80年代电影原声 Thief - Confrontation"
     },
     {
-      "title": "破军",
       "type": "local",
-      "bvid": "",
-      "src": "audio/金属原创最终母带.mp3",
-      "id": "",
-      "year": "2024",
-      "note": "原创 Metal"
+      "src": "audio/孤灯照剑.mp3",
+      "title": "孤灯照剑",
+      "year": "2021",
+      "note": "原创 Demo"
     },
     {
       "type": "local",
-      "src": "audio/故曲如风_编曲版二.mp3",
-      "title": "故曲如风 · 编曲版二",
-      "year": "2025",
-      "note": "原创"
+      "src": "audio/随顺而已.mp3",
+      "title": "随顺而已",
+      "year": "2023",
+      "note": "原创 "
     },
     {
       "type": "local",
@@ -211,25 +209,20 @@
       "note": "原创 "
     },
     {
+      "title": "破军",
       "type": "local",
-      "src": "audio/随顺而已.mp3",
-      "title": "随顺而已",
-      "year": "2023",
-      "note": "原创 "
+      "bvid": "",
+      "src": "audio/金属原创最终母带.mp3",
+      "id": "",
+      "year": "2024",
+      "note": "原创 Metal"
     },
     {
       "type": "local",
-      "src": "audio/孤灯照剑.mp3",
-      "title": "孤灯照剑",
-      "year": "2021",
-      "note": "原创 Demo"
-    },
-    {
-      "type": "local",
-      "src": "audio/过去心.mp3",
-      "title": "过去心",
-      "year": "2018",
-      "note": "原创 "
+      "src": "audio/故曲如风_编曲版二.mp3",
+      "title": "故曲如风 · 编曲版二",
+      "year": "2025",
+      "note": "原创"
     }
   ],
   "featured": [
