@@ -27,13 +27,14 @@
     src: url("assets/fonts/dongfangdakai-site.woff2?v=3") format("woff2");
     font-display: swap;
 }
-/* LOGO「路即天涯」4字迷你子集（各约3KB，同款字形）：秒加载先把 LOGO 的毛笔字显示出来，
-   完整2.4MB字体照旧在后台下、供可编辑标题用。挂在各 --font-brush 最前，只对这4个字生效，其余字仍走完整版。
-   ★以后新增第5款毛笔字：记得也切一个「路即天涯」迷你版，并在对应 --font-brush 最前加上它（否则那款LOGO会退回慢加载，不会坏）。*/
-@font-face { font-family: "PangmenLogo";  src: url("assets/fonts/logo-pangmen.woff2?v=1") format("woff2");  font-display: swap; }
-@font-face { font-family: "XiaLogo";      src: url("assets/fonts/logo-xia.woff2?v=1") format("woff2");      font-display: swap; }
-@font-face { font-family: "HongleiLogo";  src: url("assets/fonts/logo-honglei.woff2?v=1") format("woff2");  font-display: swap; }
-@font-face { font-family: "DongfangLogo"; src: url("assets/fonts/logo-dongfang.woff2?v=1") format("woff2"); font-display: swap; }
+/* 毛笔迷你子集（各约5~9KB，同款字形）：含「路即天涯®」+ 右缘落款「挑灯夜观剑今昔影中」，
+   让 LOGO 和落款诗句秒出毛笔（Safari 冷加载也不等 2.4MB）；完整字体照旧在后台下供可编辑标题用。挂在各 --font-brush 最前。
+   ★注意：①后台改了落款 heroColophon 文案后，新字若不在此子集会退回等完整字体（不会坏）——需重切迷你（fontTools.subset --text="路即天涯®挑灯夜观剑今昔影中"）并把下方 ?v= 号+1。
+          ②以后新增第5款毛笔字：也切一个同样字集的迷你版，并在对应 --font-brush 最前加上它。*/
+@font-face { font-family: "PangmenLogo";  src: url("assets/fonts/logo-pangmen.woff2?v=2") format("woff2");  font-display: swap; }
+@font-face { font-family: "XiaLogo";      src: url("assets/fonts/logo-xia.woff2?v=2") format("woff2");      font-display: swap; }
+@font-face { font-family: "HongleiLogo";  src: url("assets/fonts/logo-honglei.woff2?v=2") format("woff2");  font-display: swap; }
+@font-face { font-family: "DongfangLogo"; src: url("assets/fonts/logo-dongfang.woff2?v=2") format("woff2"); font-display: swap; }
 /* 行书类偏瘦：描边整体均匀加粗，四字同厚不突兀 */
 html[data-brush="xia"] { --font-brush: "XiaLogo", "BrushXia", "Noto Sans SC", sans-serif; --brush-stroke: .032em; }
 html[data-brush="honglei"] { --font-brush: "HongleiLogo", "BrushHonglei", "Noto Sans SC", sans-serif; --brush-stroke: .03em; }
