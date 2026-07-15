@@ -15,6 +15,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+SC:wght@400;600;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* 防闪旧文案：content.json 注入前隐藏 data-txt 元素（布局占位不变），boot.js 注入后揭示；3秒保险丝兜底 */
+html:not(.txt-ready) [data-txt], html:not(.txt-ready) [data-txt-html] { visibility: hidden; }
+</style>
 </head>
 <body>
 

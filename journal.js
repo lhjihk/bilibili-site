@@ -96,6 +96,7 @@
             const key = el.dataset.txt || el.dataset.txtHtml;
             if (TEXTS[key] != null && TEXTS[key] !== '') el.innerHTML = TEXTS[key];
         });
+        document.documentElement.classList.add('txt-ready'); // 文案就位，揭示（防闪旧内容）
 
         // ===== 夜航开篇：星空 =====
         const starCanvas = $('starCanvas');
@@ -496,3 +497,6 @@
         }
     }
 })();
+
+// 防闪旧文案保险丝：注入失败也要3秒揭示
+setTimeout(() => document.documentElement.classList.add('txt-ready'), 3000);

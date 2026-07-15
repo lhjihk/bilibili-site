@@ -48,6 +48,7 @@
             var key = el.dataset.txt || el.dataset.txtHtml;
             if (TEXTS[key] != null && TEXTS[key] !== '') el.innerHTML = TEXTS[key];
         });
+        document.documentElement.classList.add('txt-ready'); // 文案就位，揭示（防闪旧内容）
 
         // 板块排序（后台「板块管理 · 影像子页」拖动的顺序；section id 与后台清单一致）
         // 早于 animate()/ScrollTrigger 建立，触发位置才算得准
@@ -253,3 +254,6 @@
         });
     }
 })();
+
+// 防闪旧文案保险丝：注入失败也要3秒揭示
+setTimeout(function(){ document.documentElement.classList.add('txt-ready'); }, 3000);

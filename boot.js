@@ -34,7 +34,7 @@
     }
 
     function applyTexts(texts) {
-        if (!texts) return;
+        if (!texts) { document.documentElement.classList.add('txt-ready'); return; }
         document.querySelectorAll('[data-txt], [data-txt-html]').forEach((el) => {
             const key = el.dataset.txt || el.dataset.txtHtml;
             if (texts[key] != null && texts[key] !== '') el.innerHTML = texts[key];
@@ -62,6 +62,7 @@
             applyColors(s.colors);
             applyBrush(s.logoFont || '');
             applyTexts(s.texts);
+            document.documentElement.classList.add('txt-ready'); // 文案就位，揭示（防闪旧内容）
             // 浏览器标签页标题：后台填了 docTitle 就用它（留空 = 用 HTML 里写死的默认标题）
             if (s.texts && s.texts.docTitle) document.title = s.texts.docTitle;
             applyBackgrounds(s.backgrounds);
@@ -69,7 +70,10 @@
         })
         .catch((err) => {
             console.error('content.json 加载失败', err);
+            document.documentElement.classList.add('txt-ready');
             window.SITE = { settings: {}, tracks: [], featured: [], videos: [], articles: [], platformLinks: [] };
             document.dispatchEvent(new CustomEvent('site:ready', { detail: window.SITE }));
         });
+    // 保险丝：任何异常导致注入没完成，3秒后也要把文字放出来
+    setTimeout(() => document.documentElement.classList.add('txt-ready'), 3000);
 })();
